@@ -7,6 +7,8 @@ import edu.berkeley.cs.jqf.fuzz.JQF
 import nextflow.cli.Launcher
 import org.junit.runner.RunWith
 
+import java.nio.file.Paths
+
 @RunWith(JQF.class)
 class NfTest {
 
@@ -24,12 +26,21 @@ class NfTest {
         var date = System.currentTimeMillis()
         date -= 1682000000000
 
+        File errorDirectory = Paths.get("generatedflows").toFile();
+        if (!errorDirectory.exists()) {
+            errorDirectory.mkdir();
+        }
+
         File file = new File("generatedflows/out" + date + ".nf")
         file.write inputFile
 
+        int status = 0
+        //classloader setzen?
+
         String[] args2 = ["run", file.path]
-        final status = new Launcher().command(args2).run()
-        println "launched nextflow"
+         status = new Launcher().command(args2).run()
+
+        println "launched nextflow, status:" + status
     }
 
     @Fuzz

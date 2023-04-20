@@ -32,11 +32,15 @@ public class NfGenerator extends Generator<String> {
 
     public NfGenerator() {
         super(String.class);
+        System.out.println("Generator - ctor");
         scripts = loadScriptFiles();
     }
 
     @Override
     public String generate(SourceOfRandomness sourceOfRandomness, GenerationStatus generationStatus) {
+
+        System.out.println("Generator - generate");
+
         try {
             file = getClass().getResourceAsStream("/bnfs/nextflow.bnf");
 
