@@ -14,7 +14,7 @@ class NfTest {
     static int iteration = 0;
 
     @Fuzz
-    void testNF(@From(NfGenerator.class) String inputFile) throws IOException {
+    public void testNF(@From(NfGenerator.class) String inputFile) throws IOException {
         var newline = System.getProperty("line.separator");
 
         inputFile = inputFile.replace("\\n", newline)
@@ -24,7 +24,7 @@ class NfTest {
         var date = System.currentTimeMillis()
         date -= 1682000000000
 
-        File file = new File("generatedflows/out"+date+".nf")
+        File file = new File("generatedflows/out" + date + ".nf")
         file.write inputFile
 
         String[] args2 = ["run", file.path]
@@ -33,7 +33,7 @@ class NfTest {
     }
 
     @Fuzz
-    void testSimple() {
+    public void testSimple() {
         var startTime = System.currentTimeMillis();
 
         File file = new File(getClass().getResource("/scripts/yesOrNo.nf").toURI())

@@ -60,35 +60,37 @@ public class NfGenerator extends Generator<String> {
     }
 
     private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
-        var filename = scripts.get(sourceOfRandomness.nextInt(scripts.size() ));
+        String replaced = testCase;
+        if (scripts.size() > 0) {
 
-
-        String replaced = testCase.replaceFirst(magicString, filename);
-        int count = replaced.split(magicString).length - 1;
-        for (int i = 0; i < count; i++) {
+            var filename = scripts.get(sourceOfRandomness.nextInt(scripts.size()));
             replaced = replaced.replaceFirst(magicString, filename);
+            int count = replaced.split(magicString).length - 1;
+            for (int i = 0; i < count; i++) {
+                replaced = replaced.replaceFirst(magicString, filename);
+            }
         }
 
-        String processcalls = String.join(" | " , collectProcessNames(replaced))+"";
+        String processcalls = String.join(" | ", collectProcessNames(replaced)) + "";
 
-        //todo reset workflow to actual processes
         replaced = replaced.replace("spaceholder", processcalls);
 
         return replaced;
     }
 
-    private List<String> collectProcessNames( String testcase) {
+    private List<String> collectProcessNames(String testcase) {
         List<String> processnames = new ArrayList<>();
 
         var split1 = testcase.split("process");
 
-        for (int i = 1; i <  split1.length; i++) {
-          processnames.add(  split1[i].split("\\{")[0]);
+        for (int i = 1; i < split1.length; i++) {
+            processnames.add(split1[i].split("\\{")[0]);
         }
 
         return processnames;
 
     }
+
     private List<String> loadScriptFiles() {
 
         List<String> filenames = new ArrayList<>();
