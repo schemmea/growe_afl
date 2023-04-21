@@ -7,13 +7,24 @@ import edu.berkeley.cs.jqf.fuzz.JQF
 import groovy.util.logging.Slf4j
 import org.junit.runner.RunWith
 
+import java.nio.file.Path
+import java.nio.file.Paths
+
 @RunWith(JQF.class)
 @Slf4j
 class SimpleTest {
 
     @Fuzz
-    void testNF(@From(UrlGenerator.class) String inputFile) throws IOException {
-        println inputFile
+    void testNF() throws IOException {
+        def appname = "nextflow"
+        def home = System.getenv('NXF_HOME')
+        def result = home ? Paths.get(home) : Paths.get(System.getProperty("user.home")).resolve(".$appname")
+
+        if (!result.exists() && !result.mkdir()) {
+            throw new IllegalStateException("Cannot create path '${result}' -- check file system access permission")
+        }
+
+
     }
 
 

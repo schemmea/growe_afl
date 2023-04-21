@@ -7,14 +7,17 @@ plugins {
 group 'de.schemmea.ma'
 version '1.0-SNAPSHOT'
 sourceCompatibility = '11'
-targetCompatibility  = '11'
+targetCompatibility = '11'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation( 'org.codehaus.groovy:groovy-all:3.0.15')
+    implementation('org.codehaus.groovy:groovy-all:3.0.15') {
+        exclude group: 'com.beust', module: 'jcommander'
+    }
+
     implementation 'edu.berkeley.cs.jqf:jqf-fuzz:1.9'
     implementation 'org.antlr:antlr4-runtime:4.12.0'
     implementation 'io.nextflow:nextflow:23.02.1-edge'
@@ -22,11 +25,11 @@ dependencies {
     // exclude group: 'org.slf4j', module: 'slf4j-api'
 
 
-   // implementation files('libs/gramtest-0.2.3-jar-with-dependencies.jar')
+    // implementation files('libs/gramtest-0.2.3-jar-with-dependencies.jar')
 
-   //     implementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9') {
-   //     exclude group: 'org.slf4j', module: 'slf4j-api'
-   // }
+    //     implementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9') {
+    //     exclude group: 'org.slf4j', module: 'slf4j-api'
+    // }
 
     //antlr 'org.antlr:antlr4:4.5'
 
@@ -34,9 +37,9 @@ dependencies {
     testImplementation 'org.codehaus.groovy:groovy-test-junit5:3.0.15'
     testImplementation 'edu.berkeley.cs.jqf:jqf-fuzz:1.9'
 
-   // testImplementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9') {
-   //     exclude group: 'org.slf4j', module: 'slf4j-api'
-   // }
+    // testImplementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9') {
+    //     exclude group: 'org.slf4j', module: 'slf4j-api'
+    // }
 
 }
 
@@ -59,7 +62,7 @@ sourceSets.main.groovy.srcDirs = ['src/main/groovy']
  //     }
  // }
  }
-**/
+ **/
 application {
     mainClass = 'de.schemmea.ma.TestExecutor'
 }

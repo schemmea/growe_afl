@@ -8,6 +8,7 @@ import nextflow.cli.Launcher
 import org.junit.runner.RunWith
 
 import java.nio.file.Paths
+import java.util.concurrent.CompletableFuture
 
 @RunWith(JQF.class)
 class NfTest {
@@ -24,7 +25,7 @@ class NfTest {
         println newline + "STARTING ITERATION " + (++iteration) + newline + inputFile
 
         var date = System.currentTimeMillis()
-        date -= 1682000000000
+        date -= 1680000000000
 
         File errorDirectory = Paths.get("generatedflows").toFile();
         if (!errorDirectory.exists()) {
@@ -34,13 +35,19 @@ class NfTest {
         File file = new File("generatedflows/out" + date + ".nf")
         file.write inputFile
 
-        int status = 0
+
         //classloader setzen?
 
         String[] args2 = ["run", file.path]
-         status = new Launcher().command(args2).run()
 
+        createFuture(args2).get();
         println "launched nextflow, status:" + status
+    }
+    static int status = 0
+
+    private static CompletableFuture<Void> createFuture(String[] args2) {
+
+        return CompletableFuture.runAsync(new Launcher().command(args2).run() as Runnable);
     }
 
     @Fuzz

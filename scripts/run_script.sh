@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
-#./scripts/run_jqf_script.sh /c/Users/Alena/source/repos/JQF-jqf-1.9/scripts/jqf-driver.sh /c/Users/Alena/source/repos/demo2/build/libs/demo2-1.0-SNAPSHOT.jar
+#./scripts/run_jqf_script.sh /c/Users/Alena/source/repos/demo2/build/libs/demo2-1.0-SNAPSHOT.jar
 # argument checking
-if [ $# -ne 2 ]; then
+if [ $# -ne 1 ]; then
   echo "Needs exactly 2 arguments: JQF Driver Path and Jar Path"
   exit 1
 fi
 
 # argument renaming
-DRIVER_PATH="$1"
-JAR_PATH="$2"
+JAR_PATH="$1"
 
 function log() {
   echo "$1" | tee -a "$LOGFILE"
@@ -45,10 +44,10 @@ function executeTest() {
     log ""
     # log "===== Executing $CURRENT_METHOD  ====="
     log "===== Executing  ====="
-    /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
+    /usr/bin/env bash -c "java -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
 
     # copy plot data
-    log "Saving Plot data..."
+    #log "Saving Plot data..."
     #savePlotData "plot_data"
 
    # log "Archiving working directory..."

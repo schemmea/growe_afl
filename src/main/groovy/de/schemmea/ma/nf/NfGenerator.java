@@ -6,12 +6,12 @@ import com.gramtest.bnfParser;
 import com.pholser.junit.quickcheck.generator.GenerationStatus;
 import com.pholser.junit.quickcheck.generator.Generator;
 import com.pholser.junit.quickcheck.random.SourceOfRandomness;
+import de.schemmea.ma.utils.FileResourcesUtils;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -95,22 +95,10 @@ public class NfGenerator extends Generator<String> {
 
     }
 
-    private List<String> loadScriptFiles() {
 
-        List<String> filenames = new ArrayList<>();
-
-        try (
-                InputStream in = getClass().getResourceAsStream("/scripts");
-                BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
-            String resource;
-
-            while ((resource = br.readLine()) != null) {
-                filenames.add(resource);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return filenames;
+    private List<String> loadScriptFiles(){
+       return new FileResourcesUtils().getResourceFiles("templates");
     }
+
+
 }
