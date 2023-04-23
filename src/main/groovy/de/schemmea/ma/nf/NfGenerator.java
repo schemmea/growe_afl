@@ -1,8 +1,8 @@
 package de.schemmea.ma.nf;
 
-import com.gramtest.GeneratorVisitor;
-import com.gramtest.bnfLexer;
-import com.gramtest.bnfParser;
+import com.sourceclear.gramtest.GeneratorVisitor;
+import com.sourceclear.gramtest.bnfLexer;
+import com.sourceclear.gramtest.bnfParser;
 import com.pholser.junit.quickcheck.generator.GenerationStatus;
 import com.pholser.junit.quickcheck.generator.Generator;
 import com.pholser.junit.quickcheck.random.SourceOfRandomness;

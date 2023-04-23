@@ -2,7 +2,7 @@
  * © Copyright 2015 -  SourceClear Inc
  */
 
-package com.gramtest;
+package com.sourceclear.gramtest;
 
 import java.util.*;
 

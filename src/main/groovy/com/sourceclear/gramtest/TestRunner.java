@@ -1,4 +1,4 @@
-package com.gramtest;
+package com.sourceclear.gramtest;
 
 import org.antlr.v4.runtime.*;
 

@@ -40,7 +40,8 @@ class NfTest {
 
         String[] args2 = ["run", file.path]
 
-        createFuture(args2).get();
+       status = new Launcher().command(args2).run();
+
         println "launched nextflow, status:" + status
     }
     static int status = 0

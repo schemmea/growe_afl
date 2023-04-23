@@ -18,9 +18,15 @@ class SimpleTest {
     void testNF() throws IOException {
         def appname = "nextflow"
         def home = System.getenv('NXF_HOME')
-        def result = home ? Paths.get(home) : Paths.get(System.getProperty("user.home")).resolve(".$appname")
+        Path result = home ? Paths.get(home) : Paths.get(System.getProperty("user.home")).resolve(".$appname")
 
+        //fails in jar
         if (!result.exists() && !result.mkdir()) {
+            throw new IllegalStateException("Cannot create path '${result}' -- check file system access permission")
+        }
+
+        //does not fail
+        if (!result.toFile().exists() && !result.mkdir()) {
             throw new IllegalStateException("Cannot create path '${result}' -- check file system access permission")
         }
 

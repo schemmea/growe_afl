@@ -1,5 +1,5 @@
 // Generated from com\sourceclear\gramtest\bnf.g4 by ANTLR 4.12.0
-package com.gramtest;
+package com.sourceclear.gramtest;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
