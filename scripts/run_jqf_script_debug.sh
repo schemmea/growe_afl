@@ -46,6 +46,10 @@ function executeTest() {
     # log "===== Executing $CURRENT_METHOD  ====="
     log "===== Executing  ====="
     export JVM_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005"
+    # no coverage with following env
+    # export JQF_DISABLE_INSTRUMENTATION="true"
+    export NXF_IGNORE_RESUME_HISTORY="true"
+
     /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
 
     # copy plot data

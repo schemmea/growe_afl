@@ -45,6 +45,7 @@ function executeTest() {
     log ""
     # log "===== Executing $CURRENT_METHOD  ====="
     log "===== Executing  ====="
+
     /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
 
     # copy plot data

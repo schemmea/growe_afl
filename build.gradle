@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 //buildscript {
 //    repositories {
 //        maven {
@@ -28,10 +29,13 @@ repositories {
 
 dependencies {
 
-   // shadow localGroovy()
-   // shadow gradleApi()
+    // shadow localGroovy()
+    // shadow gradleApi()
     implementation('org.codehaus.groovy:groovy-all:3.0.15') {
         exclude group: 'com.beust', module: 'jcommander'
+        exclude group: 'org.jline', module: 'jline'
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'info.picocli', module: 'picocli'
     }
 
     implementation 'edu.berkeley.cs.jqf:jqf-fuzz:1.9'
@@ -50,7 +54,7 @@ dependencies {
     //antlr 'org.antlr:antlr4:4.5'
 
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.15'
-    testImplementation 'org.codehaus.groovy:groovy-test-junit5:3.0.15'
+    //testImplementation 'org.codehaus.groovy:groovy-test-junit5:3.0.15'
     testImplementation 'edu.berkeley.cs.jqf:jqf-fuzz:1.9'
 
     // testImplementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9') {
