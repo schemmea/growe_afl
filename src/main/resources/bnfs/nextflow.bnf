@@ -13,7 +13,7 @@
 <processheader> ::= "process" <space> <identifier>
 <processbody> ::=  <space> <staticinput> <newline> <staticoutput> <script>
 <input> ::= "input:" <newline> <inputvar> <newline>
-<staticinput> ::= "input:" <newline> "val variable" <newline>
+<staticinput> ::= "input:" <newline> "val variable" <newline> "val variable2" <newline>
 <staticoutput> ::= "output:" <newline> "val variable" <newline>
 <inputvars> ::= <inputvar> | <inputvars> <inputvar>
 <inputvar> ::= <inputvartype> <space> <identifier> <newline>
@@ -25,19 +25,34 @@
 <script> ::= "script:" <newline> <template> <space> <tick> <magicstring> <tick>
 <template> ::= "template"
 <workflowheader> ::= "workflow" <space>
-<workflowbody> ::= <curlyopen> <newline> <channel> <pipe> <processcallsplaceholder> <newline> <curlyclose>
-<channel> ::= "channel.of" <open> <channellist> <close>
-<channellist> ::= <channelitem> | <channellist> <comma> <channelitem>
+<workflowbody> ::= <curlyopen> <newline> <channel>  <pipe> <processcallsplaceholder> <newline> <curlyclose>
+<channel> ::= "channel.from" <open> <channellist> <close> <branchtotwo>
+<branchtotwo> ::= ".branch " <curlyopen> <newline> <branch> <defaultbranch> <curlyclose>
+<branch> ::= <identifier> <colon> <booleanexpression> <newline>
+<defaultbranch> ::= <identifier> <colon> <true> <newline>
+
+<channellist> ::= <channelitemquad> | <channellist> <comma> <channelitemquad>
 <channelitem> ::= <number> | <quote> <identifier> <quote>
+<channelitempair> ::= <channelitem> <comma> <channelitem>
+<channelitemquad> ::= <channelitempair> <comma> <channelitempair>
+<channelpairlist> ::= <channelpairitem> | <channelpairlist> <comma> <channelpairitem>
+<channelpairitem> ::= <bracketopen> <channelitem> <comma> <channelitem> <bracketclose>
+<booleanexpression> ::= <boolean> | "it" <booleanoperator> <channelitem>
 <identifier> ::= <char> | <identifier> <char>
 <char> ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
 <int> ::= 0|1|2|3|4|5|6|7|8|9
+<boolean> ::= <true> | <false>
+<true> ::= "true"
+<false> ::= "false"
+<booleanoperator> ::= "<" | ">" | "<=" | ">=" | "==" | "!="
 <number> ::= <int> | <number> <int>
 <space> ::= " "
 <curlyopen> ::= "{"
 <curlyclose> ::= "}"
 <open> ::= "("
 <close> ::= ")"
+<bracketopen> ::= "["
+<bracketclose> ::= "]"
 <newline> ::= " \n "
 <pipe> ::= " | "
 <tick> ::= "'"

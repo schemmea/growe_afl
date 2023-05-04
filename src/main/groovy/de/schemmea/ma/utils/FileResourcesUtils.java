@@ -62,15 +62,21 @@ public class FileResourcesUtils {
     }
 
     public static String getJarName() {
-        return new File(FileResourcesUtils.class.getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .getPath())
-                .getName();
+        try {
+            return new File(FileResourcesUtils.class.getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .getPath())
+                    .getName();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        return "";
+        }
     }
 
     public static boolean runningFromJar() {
         var jarname = getJarName();
+
         return jarname.contains(".jar");
     }
 

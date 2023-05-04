@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo variable
+echo $variable
+echo $variable2

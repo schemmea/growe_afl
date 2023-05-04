@@ -18,31 +18,36 @@ class NfTest {
 
     @Fuzz
     public void testNF(@From(NfGenerator.class) String inputFile) throws IOException {
-        var newline = System.getProperty("line.separator");
+      try {
+          var newline = System.getProperty("line.separator");
 
-        inputFile = inputFile.replace("\\n", newline)
+          inputFile = inputFile.replace("\\n", newline)
 
-        println newline + "STARTING ITERATION " + (++iteration) + newline + inputFile
+          println newline + "STARTING ITERATION " + (++iteration) + newline + inputFile
 
-        var date = System.currentTimeMillis()
-        date -= 1680000000000
+          var date = System.currentTimeMillis()
+          date -= 1680000000000
 
-        File errorDirectory = Paths.get("generatedflows").toFile();
-        if (!errorDirectory.exists()) {
-            errorDirectory.mkdir();
-        }
+          File errorDirectory = Paths.get("generatedflows").toFile();
+          if (!errorDirectory.exists()) {
+              errorDirectory.mkdir();
+          }
 
-        File file = new File("generatedflows/out" + date + ".nf")
-        file.write inputFile
+          File file = new File("generatedflows/out" + date + ".nf")
+          file.write inputFile
 
 
-        //classloader setzen?
+          //classloader setzen?
 
-        String[] args2 = ["run", file.path]
+          String[] args2 = ["run", file.path]
 
-       status = new Launcher().command(args2).run();
+          status = new Launcher().command(args2).run();
 
-        println "launched nextflow, status:" + status
+          println "launched nextflow, status:" + status
+      }catch(Throwable t){
+          t.printStackTrace()
+          System.exit(1)
+      }
     }
     static int status = 0
 
@@ -55,7 +60,7 @@ class NfTest {
     public void testSimple() {
         var startTime = System.currentTimeMillis();
 
-        File file = new File(getClass().getResource("/scripts/yesOrNo.nf").toURI())
+        File file = new File(getClass().getResource("/templates/yesOrNo.nf").toURI())
 
         String[] args2 = ["run", file.absolutePath]
         final status = new Launcher().command(args2).run()

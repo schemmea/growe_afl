@@ -1,4 +1,4 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+//import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 //buildscript {
 //    repositories {
@@ -31,18 +31,30 @@ dependencies {
 
     // shadow localGroovy()
     // shadow gradleApi()
+    //implementation 'org.slf4j:slf4j-nop:1.7.36'
     implementation('org.codehaus.groovy:groovy-all:3.0.15') {
         exclude group: 'com.beust', module: 'jcommander'
         exclude group: 'org.jline', module: 'jline'
         exclude group: 'junit', module: 'junit'
         exclude group: 'info.picocli', module: 'picocli'
+      //  exclude group: 'org.slf4j', module: 'slf4j-api'
     }
 
-    implementation 'edu.berkeley.cs.jqf:jqf-fuzz:1.9'
-    implementation 'org.antlr:antlr4-runtime:4.12.0'
-    implementation 'io.nextflow:nextflow:23.02.1-edge'
+    implementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9')
+    {
+     //   exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
 
-    // exclude group: 'org.slf4j', module: 'slf4j-api'
+    implementation('org.antlr:antlr4-runtime:4.12.0')
+    {
+       // exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+    implementation('io.nextflow:nextflow:23.02.1-edge')
+    {
+       // exclude group: 'org.slf4j', module: 'slf4j-api'
+       // exclude group: 'ch.qos.logback', module: 'logback-classic'
+    //    exclude  group: 'org.slf4j', module: 'log4j-over-slf4j'
+    }
 
 
     // implementation files('libs/gramtest-0.2.3-jar-with-dependencies.jar')
@@ -53,13 +65,27 @@ dependencies {
 
     //antlr 'org.antlr:antlr4:4.5'
 
-    testImplementation 'org.codehaus.groovy:groovy-all:3.0.15'
-    //testImplementation 'org.codehaus.groovy:groovy-test-junit5:3.0.15'
-    testImplementation 'edu.berkeley.cs.jqf:jqf-fuzz:1.9'
+    testImplementation('org.codehaus.groovy:groovy-all:3.0.15') {
+        exclude group: 'com.beust', module: 'jcommander'
+        exclude group: 'org.jline', module: 'jline'
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'info.picocli', module: 'picocli'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
 
-    // testImplementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9') {
-    //     exclude group: 'org.slf4j', module: 'slf4j-api'
-    // }
+    testImplementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9')
+    {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+    testImplementation('org.antlr:antlr4-runtime:4.12.0')
+    {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+    testImplementation('io.nextflow:nextflow:23.02.1-edge')
+    {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+
 
 }
 
@@ -93,20 +119,27 @@ shadowJar {
     mergeGroovyExtensionModules()
 }
 
-//jar {
-//    manifest {
-//        attributes 'Main-Class': 'de.schemmea.ma.TestExecutor'
-//    }
-//
-//   duplicatesStrategy = DuplicatesStrategy.INCLUDE
-//   from {
-//       configurations.runtimeClasspath.collect {
-//           it.isDirectory() ? it : zipTree(it)
-//              .matching {
-//                  exclude 'META-INF/MANIFEST.MF'
-//                  exclude 'META-INF/LIST*'
-//           }
-//
-//       }
-//   }
+
+//task copyToLib(type: Copy) {
+//    into "${buildDir}/output/libs"
+//    from configurations.runtimeClasspath
 //}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'de.schemmea.ma.TestExecutor'
+    }
+
+    // duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    // from {
+    //     configurations.runtimeClasspath.collect {
+    //         it.isDirectory() ? it : zipTree(it)
+    //            .matching {
+    //                exclude 'META-INF/MANIFEST.MF'
+    //                exclude 'META-INF/LIST*'
+    //         }
+//
+    //     }
+    // }
+}
