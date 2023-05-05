@@ -171,8 +171,8 @@ public class FileResourcesUtils {
 
     }
 
-    public void copyFilesToFolder(String fileDir) {
-        File templateDirectory = Paths.get(fileDir).toFile();
+    public void copyFilesToFolder(String filesInResources, String outsidePath) {
+        File templateDirectory = Paths.get(outsidePath).toFile();
         if (!templateDirectory.exists()) {
             templateDirectory.mkdir();
         }
@@ -180,10 +180,10 @@ public class FileResourcesUtils {
             String protocol = this.getClass().getResource(this.getClass().getName() + ".class").getProtocol();
             if (Objects.equals(protocol, "jar")) {
                 // run in jar
-                copyFilesToOutside(fileDir);
+                copyFilesToOutside(filesInResources, outsidePath);
             } else if (Objects.equals(protocol, "file")) {
                 // run in ide
-                copyFiles(fileDir);
+                copyFiles(filesInResources);
             }
         } catch (Exception e) {
             //ignore
@@ -191,9 +191,10 @@ public class FileResourcesUtils {
 
     }
 
-    private void copyFilesToOutside(String fileDir) throws URISyntaxException, IOException {
+    private void copyFilesToOutside(String filesInResources, String outsidePath) throws URISyntaxException, IOException {
 
-        getPathsFromResourceJAR(fileDir).forEach(s -> {
+
+        getPathsFromResourceJAR(filesInResources).forEach(s -> {
             try {
                 System.out.println(s);
                 long copied = Files.copy(getFileFromResourceAsStream(s.toString()), Paths.get(s.toString()), StandardCopyOption.REPLACE_EXISTING);

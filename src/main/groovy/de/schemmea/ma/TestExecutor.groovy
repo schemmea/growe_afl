@@ -43,6 +43,6 @@ class TestExecutor {
     }
 
     private static void copyTemplates() {
-        new FileResourcesUtils().copyFilesToFolder("templates");
+        new FileResourcesUtils().copyFilesToFolder("templates", "generatedflows/templates");
     }
 }
