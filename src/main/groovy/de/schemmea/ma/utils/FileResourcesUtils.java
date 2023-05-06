@@ -177,15 +177,21 @@ public class FileResourcesUtils {
             templateDirectory.mkdir();
         }
         try {
-            String protocol = this.getClass().getResource(this.getClass().getName() + ".class").getProtocol();
-            if (Objects.equals(protocol, "jar")) {
+            String className = this.getClass().getName().replace('.', '/');
+            String classJar =
+                    this.getClass().getResource("/" + className + ".class").toString();
+            if (classJar.startsWith("jar:")) {
+                System.out.println("copying files from jar");
                 // run in jar
                 copyFilesToOutside(filesInResources, outsidePath);
-            } else if (Objects.equals(protocol, "file")) {
+            } else {
                 // run in ide
-                copyFiles(filesInResources);
+                System.out.println("copying files from ide run");
+                copyFiles(filesInResources, outsidePath);
             }
         } catch (Exception e) {
+            System.out.println("could not copy resources");
+            System.out.println(e.getMessage());
             //ignore
         }
 
@@ -194,28 +200,22 @@ public class FileResourcesUtils {
     private void copyFilesToOutside(String filesInResources, String outsidePath) throws URISyntaxException, IOException {
 
 
-        getPathsFromResourceJAR(filesInResources).forEach(s -> {
-            try {
-                System.out.println(s);
-                long copied = Files.copy(getFileFromResourceAsStream(s.toString()), Paths.get(s.toString()), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("copied bytes: " + copied);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        for (Path s : getPathsFromResourceJAR(filesInResources)) {
+            System.out.println(s);
+            long copied = Files.copy(getFileFromResourceAsStream(s.toString()), Paths.get(outsidePath, s.getFileName().toString()), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("copied bytes: " + copied);
+
+        }
     }
 
-    private void copyFiles(String fileDir) throws URISyntaxException, IOException {
+    private void copyFiles(String fileDir, String outsidePath) throws  IOException {
 
-        getFilesFromFolder(fileDir).forEach(s -> {
-            try {
-                System.out.println(s);
-                long copied = Files.copy(getFileFromResourceAsStream(s.toString()), Paths.get(s.toString()), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("copied bytes: " + copied);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        for (String s : getFilesFromFolder(fileDir)) {
+            System.out.println(s);
+            long copied = Files.copy(getFileFromResourceAsStream(s), Paths.get(outsidePath), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("copied bytes: " + copied);
+
+        }
     }
 
 }

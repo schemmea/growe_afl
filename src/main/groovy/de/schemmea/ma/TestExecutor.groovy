@@ -16,8 +16,8 @@ class TestExecutor {
     static void main(String... args) {
 
         String testname = "testNF"
-        long durationSeconds = 30
-        long trials = 1
+        long durationSeconds = 300
+        long trials = 10
         String errorDir = "errorDir"
         Class testclass = NfTest.class
         //Class testclass = SimpleTest.class

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-#./scripts/run_jqf_script.sh /c/Users/Alena/source/repos/demo2/build/libs/demo2-1.0-SNAPSHOT.jar
+#./scripts/run_debug_script.sh /c/Users/Alena/source/repos/demo2/build/libs/demo2-1.0-SNAPSHOT.jar
 # argument checking
-if [ $# -ne 1 ]; then
-  echo "Needs exactly 2 arguments: JQF Driver Path and Jar Path"
+if (( $# != 1 )); then
+  echo "Needs exactly 1 argument: Jar Path"
   exit 1
 fi
 
@@ -14,7 +14,6 @@ function log() {
   echo "$1" | tee -a "$LOGFILE"
 }
 
-TEST_METHOD=( 'testNF' )
 
 PLOT_DATA_SAVE_DIR="./plot_data"
 LOGFILE="./executor.log"

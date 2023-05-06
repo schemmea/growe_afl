@@ -32,29 +32,33 @@ dependencies {
     // shadow localGroovy()
     // shadow gradleApi()
     //implementation 'org.slf4j:slf4j-nop:1.7.36'
+    implementation('ch.qos.logback:logback-classic:1.2.11')
+
     implementation('org.codehaus.groovy:groovy-all:3.0.15') {
         exclude group: 'com.beust', module: 'jcommander'
         exclude group: 'org.jline', module: 'jline'
         exclude group: 'junit', module: 'junit'
         exclude group: 'info.picocli', module: 'picocli'
-      //  exclude group: 'org.slf4j', module: 'slf4j-api'
+        //  exclude group: 'org.slf4j', module: 'slf4j-api'
     }
 
     implementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9')
-    {
-     //   exclude group: 'org.slf4j', module: 'slf4j-api'
-    }
+            {
+                //   exclude group: 'org.slf4j', module: 'slf4j-api'
+            }
 
     implementation('org.antlr:antlr4-runtime:4.12.0')
-    {
-       // exclude group: 'org.slf4j', module: 'slf4j-api'
-    }
+            {
+                // exclude group: 'org.slf4j', module: 'slf4j-api'
+            }
     implementation('io.nextflow:nextflow:23.02.1-edge')
-    {
-       // exclude group: 'org.slf4j', module: 'slf4j-api'
-       // exclude group: 'ch.qos.logback', module: 'logback-classic'
-    //    exclude  group: 'org.slf4j', module: 'log4j-over-slf4j'
-    }
+            {
+                // exclude group: 'org.slf4j', module: 'slf4j-api'
+                exclude group: 'ch.qos.logback', module: 'logback-classic'
+                exclude group: 'ch.qos.logback', module: 'logback-core'
+
+                //    exclude  group: 'org.slf4j', module: 'log4j-over-slf4j'
+            }
 
 
     // implementation files('libs/gramtest-0.2.3-jar-with-dependencies.jar')
@@ -74,17 +78,17 @@ dependencies {
     }
 
     testImplementation('edu.berkeley.cs.jqf:jqf-fuzz:1.9')
-    {
-        exclude group: 'org.slf4j', module: 'slf4j-api'
-    }
+            {
+                exclude group: 'org.slf4j', module: 'slf4j-api'
+            }
     testImplementation('org.antlr:antlr4-runtime:4.12.0')
-    {
-        exclude group: 'org.slf4j', module: 'slf4j-api'
-    }
+            {
+                exclude group: 'org.slf4j', module: 'slf4j-api'
+            }
     testImplementation('io.nextflow:nextflow:23.02.1-edge')
-    {
-        exclude group: 'org.slf4j', module: 'slf4j-api'
-    }
+            {
+                exclude group: 'org.slf4j', module: 'slf4j-api'
+            }
 
 
 }

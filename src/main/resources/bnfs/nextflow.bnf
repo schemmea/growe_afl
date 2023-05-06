@@ -13,8 +13,8 @@
 <processheader> ::= "process" <space> <identifier>
 <processbody> ::=  <space> <staticinput> <newline> <space> <staticoutput> <space> <script>
 <input> ::= "input:" <newline> <inputvar> <newline>
-<staticinput> ::=   "input:"  <newline> <space> <space> "val variable" <newline> <space> <space> "val variable2" <newline>
-<staticoutput> ::=  "output:" <newline> <space> <space> "val variable" <newline>  <space> <space> "val variable2" <newline>
+<staticinput> ::=   "input:"  <newline> <space> <space> "val variable" <newline>
+<staticoutput> ::=  "output:" <newline> <space> <space> "val variable" <newline>
 <inputvars> ::= <inputvar> | <inputvars> <inputvar>
 <inputvar> ::= <inputvartype> <space> <identifier> <newline>
 <iotype> ::=  "val" | "path" | "each"  | "env" | "stdin" | "tuple"
@@ -26,7 +26,7 @@
 <template> ::= "template"
 <workflowheader> ::= "workflow" <space>
 <workflowbody> ::= <curlyopen> <newline> <space> <space> <channel> <pipe> <processcallsplaceholder> <newline> <curlyclose>
-<channel> ::= "Channel.from" <open> <channellist> <close> <branchtotwo>
+<channel> ::= "Channel.from" <open> <channellist> <close>
 <branchtotwo> ::= ".branch " <curlyopen> <newline> <branch> <defaultbranch> <space> <curlyclose>
 <branch> ::= <space> <space> "one" <colon> <booleanexpression> <newline>
 <defaultbranch> ::= <space> <space> "default" <colon> <true> <newline>

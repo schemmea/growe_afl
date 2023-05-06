@@ -1,4 +1,4 @@
-package de.schemmea.ma.nf;
+package de.schemmea.ma.generator;
 
 import com.sourceclear.gramtest.GeneratorVisitor;
 import com.sourceclear.gramtest.bnfLexer;

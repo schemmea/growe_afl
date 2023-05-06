@@ -1,8 +1,10 @@
-[ -n "$variable" ] && [ "$variable" -eq "$variable" ] 2>/dev/null
-if [ $? -ne 0 ]; then
-   echo $variable is not number
-   sleep 100 * printf "%d\n" "$vairable"
+re='^[0-9]+\$'
+if ! [[ $variable =~ \$re ]] ; then
+   echo "$variable is not number"
+   num=\$(printf "%d" "'$variable")
+  echo "sleepin \$num"
+   sleep \$num
 else
-  echo sleepin 100 * $vaiable
-  sleep 100 * $variable
+  echo "sleepin $variable"
+  sleep "$variable"
 fi

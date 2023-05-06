@@ -1,4 +1,4 @@
-package de.schemmea.ma.nf;
+package de.schemmea.ma.generator;
 
 import com.pholser.junit.quickcheck.generator.GenerationStatus;
 import com.pholser.junit.quickcheck.generator.Generator;

@@ -1,15 +1,16 @@
-[ -n "$variable" ] && [ "$variable" -eq "$variable" ] 2>/dev/null
-if [ $? -ne 0 ]; then
-  echo $variable is not number
-  num=$(printf "%d\n" "$variable")
-  for i in num ; do
-    echo \$i
-    sleep 10 * \$num
+re='^[0-9]+\$'
+if ! [[ $variable =~ \$re ]] ; then
+  num=\$(printf "%d" "'$variable")
+  echo "$variable is not number char: \$num"
+
+  for (( c=0; c<=\$num; c++ )); do
+    echo "sleep fraction of \$num \$c"
+    sleep \$num &
   done
 else
-  echo sleepin 100 * $variable
-    for i in num ; do
-      echo \$i
-      sleep 100 * $variable
+  echo "sleepin $variable"
+    for i in {0..$variable} ; do
+      echo "sleep fraction of $variable \$i"
+      sleep $variable &
     done
 fi

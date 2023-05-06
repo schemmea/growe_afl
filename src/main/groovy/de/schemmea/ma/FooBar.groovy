@@ -1,7 +1,7 @@
 package de.schemmea.ma
 
 import com.pholser.junit.quickcheck.random.SourceOfRandomness
-import de.schemmea.ma.nf.UrlGenerator
+import de.schemmea.ma.generator.UrlGenerator
 import edu.berkeley.cs.jqf.fuzz.junit.quickcheck.NonTrackingGenerationStatus
 import nextflow.cli.Launcher
 

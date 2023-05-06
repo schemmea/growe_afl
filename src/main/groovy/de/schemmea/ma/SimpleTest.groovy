@@ -1,7 +1,6 @@
 package de.schemmea.ma
 
-import com.pholser.junit.quickcheck.From
-import de.schemmea.ma.nf.UrlGenerator
+
 import edu.berkeley.cs.jqf.fuzz.Fuzz
 import edu.berkeley.cs.jqf.fuzz.JQF
 import groovy.util.logging.Slf4j
