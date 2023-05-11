@@ -1,6 +1,5 @@
 package de.schemmea.ma.nf
 
-import groovy.util.logging.Slf4j
 import nextflow.Const
 import nextflow.cli.CmdInfo
 import nextflow.cli.CmdRun
@@ -10,16 +9,21 @@ import nextflow.exception.AbortOperationException
 import nextflow.plugin.Plugins
 import nextflow.script.ScriptRunner
 import nextflow.secret.SecretsLoader
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
-@Slf4j
 class CustomNextflowScriptRunner extends CmdRun {
 
+    private static final Logger log
+            = LoggerFactory.getLogger(CmdRun.class);
 
     public CustomNextflowScriptRunner(List<String> args) {
         super()
         this.args = args;
         Launcher launcher = new Launcher().command((String[]) args.toArray())
         setLauncher(launcher)
+
+
     }
 
     @Override
@@ -56,11 +60,11 @@ class CustomNextflowScriptRunner extends CmdRun {
         catch (Exception e) {
             log.info(e.message)
         }
-        log.debug('Plugins init')
+        log.info('Plugins init')
 
         // -- specify the arguments
         final scriptFile = getScriptFile(pipeline)
-        log.debug('got script file')
+        log.info('got script file')
 
         // create the config object
         final builder = new ConfigBuilder()
@@ -69,26 +73,26 @@ class CustomNextflowScriptRunner extends CmdRun {
                 .setBaseDir(scriptFile.parent)
         final config = builder.build()
 
-        log.debug('built config')
+        log.info('built config')
 
         // check DSL syntax in the config
         launchInfo(config, scriptFile)
-        log.debug('launched info')
+        log.info('launched info')
 
         // check if NXF_ variables are set in nextflow.config
         checkConfigEnv(config)
-        log.debug('check config')
+        log.info('check config')
         // -- load plugins
         final cfg = plugins ? [plugins: plugins.tokenize(',')] : config
         Plugins.load(cfg)
-        log.debug('loaded plugins')
+        log.info('loaded plugins')
 
         // -- load secret provider
         if (SecretsLoader.isEnabled()) {
             final provider = SecretsLoader.instance.load()
             config.withSecretProvider(provider)
         }
-        log.debug('secrets loaded')
+        log.info('secrets loaded')
 
         // -- create a new runner instance
         final runner = new ScriptRunner(config)
@@ -98,7 +102,7 @@ class CustomNextflowScriptRunner extends CmdRun {
         runner.session.commandLine = launcher.cliString
         runner.session.ansiLog = launcher.options.ansiLog
         runner.session.disableJobsCancellation = getDisableJobsCancellation()
-        log.debug('session build')
+        log.info('session build')
 
         final isTowerEnabled = config.navigate('tower.enabled') as Boolean
         if (isTowerEnabled || log.isTraceEnabled())
@@ -114,16 +118,16 @@ class CustomNextflowScriptRunner extends CmdRun {
         }
 
         def info = CmdInfo.status(log.isTraceEnabled())
-        log.debug('\n' + info)
+        log.info('\n' + info)
 
         // -- add this run to the local history
         runner.verifyAndTrackHistory(launcher.cliString, runName)
 
         // -- run it!
         runner.execute(scriptArgs, this.entryName)
-        log.debug('started execution')
+        log.info('started execution')
 
-        runner.session.destroy()
-        runner.session.cleanup();
+     // runner.session.destroy()
+     // runner.session.cleanup();
     }
 }

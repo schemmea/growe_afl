@@ -5,32 +5,31 @@ import edu.berkeley.cs.jqf.fuzz.ei.*
 import edu.berkeley.cs.jqf.fuzz.guidance.Guidance
 import edu.berkeley.cs.jqf.fuzz.junit.*
 
-import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
+import java.text.SimpleDateFormat
 import java.time.Duration
 
 class TestExecutor {
+  public  static final String formattedDate = new Date().format("yyyy-MM-dd_hh-mm-ss");
 
     static void main(String... args) {
 
         String testname = "testNF"
-        long durationSeconds = 300
-        long trials = 10
-        String errorDir = "errorDir"
+        long durationSeconds = 60
+        long trials = 50
+        String errorDir = "$formattedDate/errorDir"
         Class testclass = NfTest.class
         //Class testclass = SimpleTest.class
 
-        println "" //empty line because of jqf
         println "Testing $testclass.name # $testname $trials times, duration: $durationSeconds s"
+        println "Working Directory for generated tests: $formattedDate"
+
 
         File errorDirectory = Paths.get(errorDir).toFile();
         if (!errorDirectory.exists()) {
             errorDirectory.mkdir();
         }
-
-        copyTemplates()
+        copyTemplates(formattedDate)
 
         Guidance guidance = new ZestGuidance(testname,
                 Duration.ofSeconds(durationSeconds),
@@ -42,7 +41,9 @@ class TestExecutor {
         println "Testing $testclass.name#$testname $trials times, duration: $durationSeconds s"
     }
 
-    private static void copyTemplates() {
-        new FileResourcesUtils().copyFilesToFolder("templates", "generatedflows/templates");
+    private static void copyTemplates(formattedDate) {
+        def newTemplatePath = "$formattedDate/generatedflows/templates"
+
+        new FileResourcesUtils().copyFilesToFolder("templates", newTemplatePath);
     }
 }

@@ -174,7 +174,7 @@ public class FileResourcesUtils {
     public void copyFilesToFolder(String filesInResources, String outsidePath) {
         File templateDirectory = Paths.get(outsidePath).toFile();
         if (!templateDirectory.exists()) {
-            templateDirectory.mkdir();
+            templateDirectory.mkdirs();
         }
         try {
             String className = this.getClass().getName().replace('.', '/');

@@ -30,12 +30,14 @@ class NfTest {
         var date = System.currentTimeMillis()
         date -= 1680000000000
 
-        File errorDirectory = Paths.get("generatedflows").toFile();
-        if (!errorDirectory.exists()) {
-            errorDirectory.mkdir();
+        String dir = "$TestExecutor.formattedDate/generatedflows"
+        println( "Writing file to dir: $dir")
+        File generated = Paths.get(dir).toFile();
+        if (!generated.exists()) {
+            generated.mkdir();
         }
 
-        File file = new File("generatedflows/out" + date + ".nf")
+        File file = new File("$dir/out" + date + ".nf")
         file.write inputFile
 
 
