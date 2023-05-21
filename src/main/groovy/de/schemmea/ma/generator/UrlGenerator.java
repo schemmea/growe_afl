@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 
@@ -30,7 +31,7 @@ public class UrlGenerator extends Generator<String> {
 
    public UrlGenerator() throws URISyntaxException, IOException {
         super(String.class);
-        InputStream file = getClass().getResourceAsStream("/bnfs/url.bnf");
+        InputStream file = getClass().getResourceAsStream("/nextflow/bnfs/url.bnf");
 
         Lexer lexer = new bnfLexer(org.antlr.v4.runtime.CharStreams.fromStream(file));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -40,7 +41,7 @@ public class UrlGenerator extends Generator<String> {
 
     @Override
     public String generate(SourceOfRandomness sourceOfRandomness, GenerationStatus generationStatus) {
-        extractor = new GeneratorVisitor(generateNumber, depth, min, max, true);
+        extractor = new GeneratorVisitor(generateNumber, depth, min, max, true, new SourceOfRandomness(new Random()));
         extractor.visit(tree);
         List<String> generatedTests = extractor.getTests();
 

@@ -1,10 +1,12 @@
 package com.sourceclear.gramtest;
 
+import com.pholser.junit.quickcheck.random.SourceOfRandomness;
 import org.antlr.v4.runtime.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -40,7 +42,7 @@ public class TestRunner implements Runnable {
 
   public void run() {
     while(true) {
-      this.extractor = new GeneratorVisitor(depth * max, depth, min, max, true);
+      this.extractor = new GeneratorVisitor(depth * max, depth, min, max, true,new SourceOfRandomness(new Random()));
       this.extractor.visit(tree);
       List<String> generatedTests = this.extractor.getTests();
       for (String s: generatedTests)

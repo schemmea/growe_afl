@@ -7,10 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FileResourcesUtils {
@@ -19,36 +16,38 @@ public class FileResourcesUtils {
 
         FileResourcesUtils app = new FileResourcesUtils();
 
-        // Sample 3 - read all files from a resources folder (JAR version)
-        try {
+        // // Sample 3 - read all files from a resources folder (JAR version)
+        // try {
 
-            // get paths from src/main/resources/json
-            List<Path> result = app.getPathsFromResourceJAR("json");
-            for (Path path : result) {
-                System.out.println("Path : " + path);
+        //     // get paths from src/main/resources/json
+        //     List<Path> result = app.getPathsFromResourceJAR("json");
+        //     for (Path path : result) {
+        //         System.out.println("Path : " + path);
 
-                String filePathInJAR = path.toString();
-                // Windows will returns /json/file1.json, cut the first /
-                // the correct path should be json/file1.json
-                if (filePathInJAR.startsWith("/")) {
-                    filePathInJAR = filePathInJAR.substring(1, filePathInJAR.length());
-                }
+        //         String filePathInJAR = path.toString();
+        //         // Windows will returns /json/file1.json, cut the first /
+        //         // the correct path should be json/file1.json
+        //         if (filePathInJAR.startsWith("/")) {
+        //             filePathInJAR = filePathInJAR.substring(1, filePathInJAR.length());
+        //         }
 
-                System.out.println("filePathInJAR : " + filePathInJAR);
+        //         System.out.println("filePathInJAR : " + filePathInJAR);
 
-                // read a file from resource folder
-                InputStream is = app.getFileFromResourceAsStream(filePathInJAR);
-                printInputStream(is);
-            }
+        //         // read a file from resource folder
+        //         InputStream is = app.getFileFromResourceAsStream(filePathInJAR);
+        //         printInputStream(is);
+        //     }
 
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
+        // } catch (URISyntaxException | IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 
     public List<String> getResourceFiles(String folder) {
         try {
-            if (FileResourcesUtils.runningFromJar()) {
+            if (FileResourcesUtils.runningFromJQF()) {
+                return getFileNamesFromFolderFromJQF(folder);
+            } else if (FileResourcesUtils.runningFromJar()) {
                 // run in jar
                 return getFileNamesFromFolderInJar(folder);
             } else {
@@ -61,22 +60,52 @@ public class FileResourcesUtils {
         return new ArrayList<>();
     }
 
-    public static String getJarName() {
+    public InputStream getResourceFileAsStream(String folder) {
+        try {
+            if (FileResourcesUtils.runningFromJQF()) {
+                return Files.newInputStream(Paths.get(getExecutionContextName() + folder));
+            } else if (FileResourcesUtils.runningFromJar()) {
+                // run in jar
+                return getClass().getResourceAsStream(folder);
+            } else {
+                // run in ide
+                return getClass().getResourceAsStream(folder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private List<String> getFileNamesFromFolderFromJQF(String folderName) {
+        File folder = new File(getExecutionContextName() + folderName);
+        File[] listOfFiles = folder.listFiles();
+
+        return Arrays.stream(listOfFiles).map(f -> f.getName()).collect(Collectors.toList());
+    }
+
+    private static boolean runningFromJQF() {
+        String jarname = getExecutionContextName();
+
+        return jarname.contains("jqf") || jarname.contains("test-classes");
+    }
+
+    public static String getExecutionContextName() {
         try {
             return new File(FileResourcesUtils.class.getProtectionDomain()
                     .getCodeSource()
                     .getLocation()
                     .getPath())
-                    .getName();
+                    .getAbsolutePath();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        return "";
+            return "";
         }
     }
 
     public static boolean runningFromJar() {
-        var jarname = getJarName();
-
+        String jarname = getExecutionContextName();
+        System.out.println("ExecutionContext: " + jarname);
         return jarname.contains(".jar");
     }
 
@@ -89,7 +118,7 @@ public class FileResourcesUtils {
 
         List<String> filenames = new ArrayList<>();
         boolean iswindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-        if (iswindows) folder = "/" + folder;
+        if (iswindows && !folder.startsWith("C:") && !folder.startsWith("/")) folder = "/" + folder;
         try (
                 InputStream in = getClass().getResourceAsStream(folder);
                 BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
@@ -99,13 +128,14 @@ public class FileResourcesUtils {
                 filenames.add(resource);
             }
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            System.out.println("couldnt load " + folder);
+            System.out.println(ex.getMessage());
         }
 
         return filenames;
     }
 
-    private List<String> getFileNamesFromFolder(String folder) {
+    public List<String> getFileNamesFromFolder(String folder) {
         List<String> result = getFilesFromFolder(folder);
         return result.stream().map(f -> f.replace(folder + "/", "")).collect(Collectors.toList());
     }
@@ -171,51 +201,40 @@ public class FileResourcesUtils {
 
     }
 
+
     public void copyFilesToFolder(String filesInResources, String outsidePath) {
         File templateDirectory = Paths.get(outsidePath).toFile();
         if (!templateDirectory.exists()) {
             templateDirectory.mkdirs();
         }
         try {
-            String className = this.getClass().getName().replace('.', '/');
-            String classJar =
-                    this.getClass().getResource("/" + className + ".class").toString();
-            if (classJar.startsWith("jar:")) {
-                System.out.println("copying files from jar");
-                // run in jar
-                copyFilesToOutside(filesInResources, outsidePath);
-            } else {
-                // run in ide
-                System.out.println("copying files from ide run");
-                copyFiles(filesInResources, outsidePath);
-            }
+
+            copyFiles(filesInResources, outsidePath);
+
         } catch (Exception e) {
             System.out.println("could not copy resources");
+            System.out.println("    source: " + filesInResources);
+            System.out.println("    target: " + outsidePath);
+
             System.out.println(e.getMessage());
             //ignore
         }
 
     }
 
-    private void copyFilesToOutside(String filesInResources, String outsidePath) throws URISyntaxException, IOException {
 
+    private void copyFiles(String fileDir, String outsidePath) throws IOException {
+        List<String> files = getFilesFromFolder(fileDir);
 
-        for (Path s : getPathsFromResourceJAR(filesInResources)) {
-            System.out.println(s);
-            long copied = Files.copy(getFileFromResourceAsStream(s.toString()), Paths.get(outsidePath, s.getFileName().toString()), StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("copied bytes: " + copied);
-
-        }
-    }
-
-    private void copyFiles(String fileDir, String outsidePath) throws  IOException {
-
-        for (String s : getFilesFromFolder(fileDir)) {
-            System.out.println(s);
-            long copied = Files.copy(getFileFromResourceAsStream(s), Paths.get(outsidePath), StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("copied bytes: " + copied);
+        for (String s : files) {
+            if (runningFromJar()) {
+                Files.copy(getFileFromResourceAsStream(s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
+            } else {
+                Files.copy(Paths.get(getExecutionContextName(), fileDir, s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
+            }
 
         }
     }
+
 
 }

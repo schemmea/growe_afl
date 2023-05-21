@@ -1,0 +1,2 @@
+Found crash: class java.lang.IllegalArgumentException - Unknown signal: HUP
+Saved - errorDir\failures\id_000000 random +crash

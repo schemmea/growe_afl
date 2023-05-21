@@ -51,7 +51,7 @@ dependencies {
             {
                 // exclude group: 'org.slf4j', module: 'slf4j-api'
             }
-    implementation('io.nextflow:nextflow:23.02.1-edge')
+    implementation('io.nextflow:nextflow:23.04.1')
             {
                 // exclude group: 'org.slf4j', module: 'slf4j-api'
                 exclude group: 'ch.qos.logback', module: 'logback-classic'
@@ -85,7 +85,7 @@ dependencies {
             {
                 exclude group: 'org.slf4j', module: 'slf4j-api'
             }
-    testImplementation('io.nextflow:nextflow:23.02.1-edge')
+    testImplementation('io.nextflow:nextflow:23.04.1')
             {
                 exclude group: 'org.slf4j', module: 'slf4j-api'
             }
