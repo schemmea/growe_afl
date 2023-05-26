@@ -2,11 +2,13 @@ package de.schemmea.ma.utils;
 
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public final class Configuration {
-
+    public static final DateTimeFormatter Formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+    public static final String formattedDate = LocalDateTime.now().format(Formatter);
     public static final String SOURCE_PATH = "/nextflow/";
     public static final String TEMPLATES = "templates/";
     public static final String OUTPUT_PATH = "generatedflows/";

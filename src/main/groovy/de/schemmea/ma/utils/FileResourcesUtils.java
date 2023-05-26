@@ -111,7 +111,8 @@ public class FileResourcesUtils {
 
     private List<String> getFileNamesFromFolderInJar(String folder) throws URISyntaxException, IOException {
         List<Path> result = getPathsFromResourceJAR(folder);
-        return result.stream().map(f -> f.toString().replace(folder + "/", "")).collect(Collectors.toList());
+        return result.stream().map(f -> f.toString().replace(folder, "")).collect(Collectors.toList());
+        //   return result.stream().map(f -> f.toFile().getName()).collect(Collectors.toList());
     }
 
     private List<String> getFilesFromFolder(String folder) {
@@ -144,7 +145,7 @@ public class FileResourcesUtils {
     // get a file from the resources folder
     // works everywhere, IDEA, unit test and JAR file.
     private InputStream getFileFromResourceAsStream(String fileName) {
-
+        if(fileName.startsWith("/")) fileName = fileName.substring(1);
         // The class loader that loaded the class
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
@@ -224,15 +225,17 @@ public class FileResourcesUtils {
 
 
     private void copyFiles(String fileDir, String outsidePath) throws IOException {
-        List<String> files = getFilesFromFolder(fileDir);
+        if (!fileDir.endsWith("/")) fileDir += "/";
+        List<String> files = getResourceFiles(fileDir);
 
         for (String s : files) {
             if (runningFromJar()) {
-                Files.copy(getFileFromResourceAsStream(s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
-            } else {
+                Files.copy(getFileFromResourceAsStream(fileDir + s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
+            } else if (runningFromJQF()) {
                 Files.copy(Paths.get(getExecutionContextName(), fileDir, s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
+            } else {
+                Files.copy(getFileFromResourceAsStream(fileDir + s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
             }
-
         }
     }
 

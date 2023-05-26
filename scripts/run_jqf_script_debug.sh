@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#./scripts/run_jqf_script.sh /c/Users/Alena/source/repos/JQF-jqf-1.9/scripts/jqf-driver.sh /c/Users/Alena/source/repos/demo2/build/libs/demo2-1.0-SNAPSHOT.jar
+#./scripts/run_jqf_script_debug.sh /c/Users/Alena/source/repos/JQF-jqf-1.9/scripts/jqf-driver.sh /c/Users/Alena/source/repos/demo2/build/libs/demo2-1.0-SNAPSHOT-all.jar
 # argument checking
 if [ $# -ne 2 ]; then
   echo "Needs exactly 2 arguments: JQF Driver Path and Jar Path"
@@ -50,7 +50,7 @@ function executeTest() {
     # export JQF_DISABLE_INSTRUMENTATION="true"
     export NXF_IGNORE_RESUME_HISTORY="true"
 
-    /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
+    /usr/bin/env bash -c "$DRIVER_PATH -Djqf.ei.MAX_INPUT_SIZE=102400 --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
 
     # copy plot data
     log "Saving Plot data..."

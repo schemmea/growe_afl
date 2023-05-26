@@ -17,9 +17,14 @@ class TestExecutor {
         String testname = "testNF"
         long durationSeconds = 60
         long trials = 50
-        String errorDir = "/errorDir"
+
         Class testclass = NfTest.class
         //Class testclass = SimpleTest.class
+
+        String errorDir = "errorDir"
+
+        boolean iswindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+        if (iswindows && !errorDir.startsWith("C:") && !errorDir.startsWith("/")) errorDir = "/" + errorDir;
 
         println "Testing $testclass.name # $testname $trials times, duration: $durationSeconds s"
        // println "Working Directory for generated tests: $Configuration.formattedDate"
