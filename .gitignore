@@ -4,3 +4,4 @@
 /.nextflow/
 /generatedflows/
 /2023-*
+.nextflow.log*

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+# Perform addition of two variables
+sum=$((variable + variable2))
+
+echo "Addition:"
+echo "$variable + $variable2 = \$sum"

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Concatenate two strings
+concatenated="${variable}_${variable2}"
+
+echo "String Concatenation:"
+echo "$variable + $variable2 = \$concatenated"

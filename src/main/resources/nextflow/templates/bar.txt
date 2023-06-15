@@ -1,2 +1,2 @@
 #!/bin/bash
-echo Bar $x
+echo Bar $$variable

@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
+import java.util.stream.Collectors;
 
 public class NfGenerator extends Generator<String> {
     private final int generateNumber = 1;
@@ -31,7 +32,10 @@ public class NfGenerator extends Generator<String> {
     Lexer lexer = null;
     List<String> scripts;
 
-    private String magicString = "382z9dfiusdpuzn5934magicstring9834n945zp9";
+    private final String magicstring = "scriptnamemagicstring";
+    private final String magicstring2 = "scriptname2magicstring";
+    private final String processcallsplaceholder = "prozessscallmagicstring";
+    private final String processwithtwovars = "twovars";
 
     public NfGenerator() {
         super(String.class);
@@ -57,9 +61,7 @@ public class NfGenerator extends Generator<String> {
             extractor.visit(tree);
             List<String> generatedTests = extractor.getTests();
 
-            //  int idx = generatedTests.size() > 1 ? sourceOfRandomness.nextInt(0, generatedTests.size() - 1) : 0;
             String genTest = generatedTests.get(0);
-
 
             return replaceMagicStringWithRandomScript(genTest, sourceOfRandomness);
         } catch (Exception e) {
@@ -69,10 +71,10 @@ public class NfGenerator extends Generator<String> {
         return "";
     }
 
-    private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
+    private String replaceScript(String testCase, String scriptMagicString, SourceOfRandomness sourceOfRandomness){
         String replaced = testCase;
         if (scripts.size() > 0) {
-            int count = replaced.split(magicString).length - 1;
+            int count = replaced.split(scriptMagicString).length - 1;
             for (int i = 0; i < count; i++) {
                 int template = new Random().nextInt(scripts.size());
 
@@ -82,13 +84,24 @@ public class NfGenerator extends Generator<String> {
                     System.out.println("dafuq - end of random");
                 }
                 String filename = scripts.get(template);
-                replaced = replaced.replaceFirst(magicString, filename);
+                replaced = replaced.replaceFirst(scriptMagicString, filename);
             }
         }
+    return replaced;
+    }
 
-        String processcalls = String.join(" | ", collectProcessNames(replaced)) + "";
+    private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
+        String replaced = replaceScript(testCase, magicstring, sourceOfRandomness);
+        replaced = replaceScript(replaced, magicstring2, sourceOfRandomness);
 
-        replaced = replaced.replace("spaceholder", processcalls);
+        var processnames = collectProcessNames(replaced);
+        var processnames2var = processnames.stream().filter(n -> n.contains(processwithtwovars)).collect(Collectors.toList());
+        processnames.removeAll(processnames2var);
+
+        String processcalls = String.join(" | ", processnames) + "";
+        processcalls += "\n" + String.join("(", processnames2var) + "('a','b'" + ")".repeat(processnames2var.size());
+
+        replaced = replaced.replace(processcallsplaceholder, processcalls);
 
         return replaced;
     }

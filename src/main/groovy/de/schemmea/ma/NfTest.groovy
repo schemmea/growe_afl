@@ -62,7 +62,7 @@ class NfTest {
         String[] orig_args2 = new String[]{"run", filename};
         List<String> args2 = List.of(filename);
 
-        Launcher launcher = new Launcher().command(orig_args2);//.run();
+        Launcher launcher = new Launcher().command(orig_args2)//.run();
 
         CmdRun myRunner = new CmdRun();
         myRunner.setArgs(args2);

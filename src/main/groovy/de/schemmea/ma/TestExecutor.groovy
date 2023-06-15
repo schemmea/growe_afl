@@ -36,12 +36,11 @@ class TestExecutor {
         }
 
         Guidance guidance = new ZestGuidance(testname,
-                Duration.ofSeconds(durationSeconds),
-                trials,
-                errorDirectory,
-                new Random())
+               null,
+                errorDirectory)
 
         GuidedFuzzing.run(testclass, testname, guidance, System.out)
+        System.out.println(String.format("Covered %d edges.", guidance.getTotalCoverage().getNonZeroCount()));
         println "Testing $testclass.name#$testname $trials times, duration: $durationSeconds s"
     }
 
