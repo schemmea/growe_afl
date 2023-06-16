@@ -24,7 +24,7 @@
 <template> ::= "template"
 <workflowheader> ::= "workflow" <space>
 <workflowbody> ::= <curlyopen> <newline> <space> <space> <channel> <pipe> <processcalls> <newline> <curlyclose>
-<channel> ::= "Channel.from" <open> <channellist> <close>
+<channel> ::= "Channel.of" <open> <channellist> <close>
 <branchtotwo> ::= ".branch " <curlyopen> <newline> <branch> <defaultbranch> <space> <curlyclose>
 <branch> ::= <space> <space> "one" <colon> <booleanexpression> <newline>
 <defaultbranch> ::= <space> <space> "default" <colon> <true> <newline>

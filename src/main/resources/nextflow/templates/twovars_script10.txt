@@ -1,8 +1,15 @@
 #!/bin/bash
 
+re='^[0-9]+\$'
+num1=$variable
+num2=$variable2
+if ! [[ $variable =~ \$re ]] ; then
+  num1=\$(printf "%d" "'$variable")
+if ! [[ $variable =~ \$re ]] ; then
+  num2=\$(printf "%d" "'$variable2")
 
 # Perform addition of two variables
-sum=$((variable + variable2))
+sum=\$((num1 + num2))
 
 echo "Addition:"
 echo "$variable + $variable2 = \$sum"

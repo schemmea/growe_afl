@@ -4,6 +4,7 @@
 <magicstring> ::= "scriptnamemagicstring"
 <magicstring2> ::= "scriptname2magicstring"
 <processcallsplaceholder> ::= "prozessscallmagicstring"
+<processcallsplaceholder2> ::= "prozesss2callmagicstring"
 <processwithtwovars> ::= "_twovars"
 <processes> ::= <process> <newline> <process> | <processes> <newline> <process>
 <workflow> ::= <workflowheader> <workflowbody>
@@ -27,13 +28,20 @@
 
 <template> ::= "template"
 <workflowheader> ::= "workflow" <space>
-<workflowbody> ::= <curlyopen> <newline> <space> <space> <channel> <pipe> <processcallsplaceholder> <newline> <curlyclose>
-<channel> ::= "Channel.from" <open> <channellist> <close>
+<workflowbody> ::= <curlyopen> <newline> <space> <space> <channel> <processcallsplaceholder> <newline> <space> <space> <branchedchannel> <processcallsplaceholder2> <newline> <curlyclose>
+<channel> ::= "Channel.of" <open> <channellist> <close>
+<branchedchannel> ::= <channel> <branchtotwo>
 
-<channellist> ::= <channelitemquad> | <channellist> <comma> <channelitemquad>
+<branchtotwo> ::= ".branch " <curlyopen> <newline> <branch> <defaultbranch> <space> <curlyclose>
+<branch> ::= <space> <space> "one" <colon> <booleanexpression> <newline>
+<defaultbranch> ::= <space> <space> "two" <colon> <booleanexpression> <newline>
+<booleanexpression> ::= <boolean> | "it" <booleanoperator> <channelitem> <or> <booleanexpression>
+
+<channellist> ::= <channelitemquad> | <channelitempair> | <channellist> <comma> <channelitem>
 <channelitem> ::= <number> | <quote> <identifier> <quote>
 <channelitempair> ::= <channelitem> <comma> <channelitem>
 <channelitemquad> ::= <channelitempair> <comma> <channelitempair>
+
 <identifier> ::= <char> <char> | <identifier> <char>
 <identifier2> ::= <identifier> <processwithtwovars>
 <char> ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
@@ -44,6 +52,7 @@
 <true> ::= "true"
 <false> ::= "false"
 <booleanoperator> ::= "<" | ">" | "<=" | ">=" | "==" | "!="
+<or> ::= "||"
 <number> ::= <zero> | <uint> |  <uint> <number>
 <space> ::= " "
 <curlyopen> ::= "{"

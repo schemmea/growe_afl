@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check user information and perform action based on the random variable
-if [[ "$variable" =~ ^[0-9]+$ ]]; then
+if [[ "$variable" =~ ^[0-9]+\$ ]]; then
     # Print specific user information
     echo "User Information - $variable"
     id "$variable"

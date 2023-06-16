@@ -35,6 +35,8 @@ public class NfGenerator extends Generator<String> {
     private final String magicstring = "scriptnamemagicstring";
     private final String magicstring2 = "scriptname2magicstring";
     private final String processcallsplaceholder = "prozessscallmagicstring";
+    private final String processcallsplaceholder2 = "prozesss2callmagicstring";
+
     private final String processwithtwovars = "twovars";
 
     public NfGenerator() {
@@ -71,37 +73,47 @@ public class NfGenerator extends Generator<String> {
         return "";
     }
 
-    private String replaceScript(String testCase, String scriptMagicString, SourceOfRandomness sourceOfRandomness){
+    private String replaceScript(String testCase, String scriptMagicString, String scriptFilter, SourceOfRandomness sourceOfRandomness) {
         String replaced = testCase;
-        if (scripts.size() > 0) {
+        var filteredScripts = scripts.stream().filter(s->s.contains(scriptFilter)).collect(Collectors.toList());
+        if (filteredScripts.size() > 0) {
             int count = replaced.split(scriptMagicString).length - 1;
             for (int i = 0; i < count; i++) {
-                int template = new Random().nextInt(scripts.size());
+                int template = new Random().nextInt(filteredScripts.size()); //if end of randomness - should not happen
 
                 try {
-                    template = sourceOfRandomness.nextInt(scripts.size());
+                    template = sourceOfRandomness.nextInt(filteredScripts.size());
                 } catch (Exception e) {
                     System.out.println("dafuq - end of random");
                 }
-                String filename = scripts.get(template);
+                String filename = filteredScripts.get(template);
                 replaced = replaced.replaceFirst(scriptMagicString, filename);
             }
         }
-    return replaced;
+        return replaced;
     }
 
     private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
-        String replaced = replaceScript(testCase, magicstring, sourceOfRandomness);
-        replaced = replaceScript(replaced, magicstring2, sourceOfRandomness);
+        String replaced = testCase;
+        replaced = replaceScript(replaced, magicstring, "", sourceOfRandomness);
+        replaced = replaceScript(replaced, magicstring2, processwithtwovars,sourceOfRandomness);
 
         var processnames = collectProcessNames(replaced);
         var processnames2var = processnames.stream().filter(n -> n.contains(processwithtwovars)).collect(Collectors.toList());
         processnames.removeAll(processnames2var);
 
-        String processcalls = String.join(" | ", processnames) + "";
-        processcalls += "\n" + String.join("(", processnames2var) + "('a','b'" + ")".repeat(processnames2var.size());
-
+        String processcalls = "";
+        //one variable
+        if (processnames.size() > 0) processcalls += " | "+ String.join(" | ", processnames);
         replaced = replaced.replace(processcallsplaceholder, processcalls);
+
+        //tow variables
+        String processcalls2 = "";
+        if (processnames2var.size() > 0) {
+            processcalls2 +=" | "+ String.join(" | ", processnames2var);
+        }
+        replaced = replaced.replace(processcallsplaceholder2, processcalls2);
+
 
         return replaced;
     }
