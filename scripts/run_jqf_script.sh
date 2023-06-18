@@ -46,8 +46,6 @@ function executeTest() {
     # log "===== Executing $CURRENT_METHOD  ====="
     log "===== Executing  ====="
 
-    export NXF_IGNORE_RESUME_HISTORY="true"
-
     /usr/bin/env bash -c "$DRIVER_PATH -Djqf.ei.MAX_INPUT_SIZE=102400 --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
 
     # copy plot data

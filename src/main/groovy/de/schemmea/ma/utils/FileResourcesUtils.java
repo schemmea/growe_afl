@@ -105,7 +105,7 @@ public class FileResourcesUtils {
 
     public static boolean runningFromJar() {
         String jarname = getExecutionContextName();
-        System.out.println("ExecutionContext: " + jarname);
+       // System.out.println("ExecutionContext: " + jarname);
         return jarname.contains(".jar");
     }
 
