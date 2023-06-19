@@ -39,16 +39,7 @@ function executeTest() {
     # TEST_DIR="$BASEDIR/test"
 
     # create execution dirs
-    # mkdir -p "$BASEDIR" "$FAIL_DIR" "$WORKING_DIR" "$TEST_DIR"
-
-    #core execution
-    log ""
-    # log "===== Executing $CURRENT_METHOD  ====="
-    log "===== Executing  ====="
-
-    /usr/bin/env bash -c "$DRIVER_PATH -Djqf.ei.MAX_INPUT_SIZE=102400 --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
-
-    # copy plot data
+    # mkdir -p "$BASEDIR" "$FAIL_DIR" "$WORKING_DIR" "$TEST_DIR"kj
     log "Saving Plot data..."
     #savePlotData "plot_data"
 

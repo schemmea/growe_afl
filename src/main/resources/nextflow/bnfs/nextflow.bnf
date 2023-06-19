@@ -32,10 +32,10 @@
 <channel> ::= "Channel.of" <open> <channellist> <close>
 <branchedchannel> ::= <channel> <branchtotwo>
 
-<branchtotwo> ::= ".branch " <curlyopen> <newline> <branch> <defaultbranch> <space> <curlyclose>
-<branch> ::= <space> <space> "one" <colon> <booleanexpression> <newline>
-<defaultbranch> ::= <space> <space> "two" <colon> <booleanexpression> <newline>
-<booleanexpression> ::= <boolean> | "it" <booleanoperator> <channelitem> <or> <booleanexpression>
+<branchtotwo> ::= ".branch " <curlyopen> <newline> <branchone> <branchtwo> <space> <curlyclose>
+<branchone> ::= <space> <space> "one" <colon> <booleanexpression> <newline>
+<branchtwo> ::= <space> <space> "two" <colon> <booleanexpression> <newline>
+<booleanexpression> ::= <true> | "(String) it" <booleanoperator> " (String) " <channelitem> <or> <booleanexpression>
 
 <channellist> ::= <channelitemquad> | <channelitempair> | <channellist> <comma> <channelitem>
 <channelitem> ::= <number> | <quote> <identifier> <quote>

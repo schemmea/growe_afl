@@ -15,7 +15,7 @@ class TestExecutor {
     static void main(String... args) {
 
         String testname = "testNF"
-        long durationSeconds = 300
+        long durationSeconds = 3600
         long trials = 5
 
         Class testclass = NfTest.class
@@ -36,8 +36,8 @@ class TestExecutor {
         }
 
         Guidance guidance = new ZestGuidance(testname,
-               null,
-                errorDirectory)
+                                             Duration.ofSeconds( durationSeconds),
+                                             errorDirectory)
 
         GuidedFuzzing.run(testclass, testname, guidance, System.out)
         System.out.println(String.format("Covered %d edges.", guidance.getTotalCoverage().getNonZeroCount()));
