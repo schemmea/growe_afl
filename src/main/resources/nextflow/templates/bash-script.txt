@@ -1,2 +1,2 @@
 #!/bin/bash
-echo 'Hello ${$variable}' > file.out
+echo 'Hello $variable' > file.out

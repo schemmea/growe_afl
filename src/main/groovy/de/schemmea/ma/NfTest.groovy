@@ -2,7 +2,8 @@ package de.schemmea.ma
 
 import com.pholser.junit.quickcheck.From
 import de.schemmea.ma.generator.NfGenerator
-import de.schemmea.ma.utils.Configuration
+import de.schemmea.ma.generator.Configuration
+import de.schemmea.ma.generator.WorkflowGenerator
 import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.Fuzz
 import edu.berkeley.cs.jqf.fuzz.JQF
@@ -12,14 +13,12 @@ import org.junit.Before
 import org.junit.runner.RunWith
 
 import java.nio.file.Paths
-import java.util.concurrent.CompletableFuture
 
 @RunWith(JQF.class)
 class NfTest {
 
 
     static int iteration = 0;
-    static int status = 0
 
 
     @Before
@@ -35,12 +34,12 @@ class NfTest {
 
     @Fuzz
     public void testNF(@From(NfGenerator.class) String inputFile) throws IOException {
+        System.out.println(Configuration.newline + "STARTING ITERATION " + (++iteration) + Configuration.newline + inputFile);
 
         String newline = System.getProperty("line.separator");
 
         inputFile = inputFile.replace("\\n", newline);
 
-        System.out.println(newline + "STARTING ITERATION " + (++iteration) + newline + inputFile);
 
         long date = System.currentTimeMillis();
         date -= 1680000000000L;
@@ -71,7 +70,7 @@ class NfTest {
         myRunner.run();
 
         /**
-          String[] orig_args2 = ["run", file.path]
+         String[] orig_args2 = ["run", file.path]
          ArrayList<String> args2 = [file.path];
 
          status = new Launcher().command(args2).run();
@@ -82,10 +81,25 @@ class NfTest {
          println "launched nextflow, status:" + status
          **/
 
-        System.out.println("launched nextflow, status:" + status);
+        System.out.println("nextflow completed");
 
     }
 
+    @Fuzz
+    public void testWorkflow(@From(WorkflowGenerator.class) File inputFile) {
+        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
 
+        String filename = inputFile.getAbsolutePath();
+        String[] orig_args2 = new String[]{"run", filename};
+        List<String> args2 = List.of(filename);
+
+        Launcher launcher = new Launcher().command(orig_args2)//.run();
+
+        CmdRun myRunner = new CmdRun();
+        myRunner.setArgs(args2);
+        myRunner.setLauncher(launcher);
+
+        myRunner.run();
+    }
 
 }

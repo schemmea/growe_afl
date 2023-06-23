@@ -39,7 +39,13 @@ function executeTest() {
     # TEST_DIR="$BASEDIR/test"
 
     # create execution dirs
-    # mkdir -p "$BASEDIR" "$FAIL_DIR" "$WORKING_DIR" "$TEST_DIR"kj
+    # mkdir -p "$BASEDIR" "$FAIL_DIR" "$WORKING_DIR" "$TEST_DIR"
+        log "===== Executing  ====="
+    	  export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=102400"
+        export JVM_OPTS="$JVM_OPTS -Djqf.logCoverage=true"
+        export JVM_OPTS="$JVM_OPTS -Djqf.ei.QUIET_MODE=false"
+
+        /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
     log "Saving Plot data..."
     #savePlotData "plot_data"
 

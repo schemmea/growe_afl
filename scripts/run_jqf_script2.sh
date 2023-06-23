@@ -15,8 +15,6 @@ function log() {
   echo "$1" | tee -a "$LOGFILE"
 }
 
-TEST_METHOD=( 'testNF' )
-
 PLOT_DATA_SAVE_DIR="./plot_data"
 LOGFILE="./executor.log"
 EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")"
@@ -31,15 +29,11 @@ function savePlotData() {
   cp "$1" "$PLOT_DATA_SAVE_DIR/plot_data.csv"
 }
 
-function executeTest() {
-    # generate dir names
-    # BASEDIR="./${CURRENT_METHOD}"
-    # FAIL_DIR="$BASEDIR/fail"
-    # WORKING_DIR="$BASEDIR/work"
-    # TEST_DIR="$BASEDIR/test"
 
-    # create execution dirs
-    # mkdir -p "$BASEDIR" "$FAIL_DIR" "$WORKING_DIR" "$TEST_DIR"
+function executeTest() {
+
+    DURATIONSECONDS=2000
+    ITERATIONS=15
 
     #core execution
     log ""
@@ -49,11 +43,7 @@ function executeTest() {
     export JVM_OPTS="$JVM_OPTS -Djqf.logCoverage=true"
     export JVM_OPTS="$JVM_OPTS -Djqf.ei.QUIET_MODE=false"
 
-    /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
-
-    # copy plot data
-    log "Saving Plot data..."
-    #savePlotData "plot_data"
+    /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH -d $DURATIONSECONDS -i $ITERATIONS | tee -a $LOGFILE 2>/dev/null"
 
    # log "Archiving working directory..."
    # zip -r "$BASEDIR/work.zip" "$WORKING_DIR" && rm -r "$WORKING_DIR"
