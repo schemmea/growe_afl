@@ -9,7 +9,7 @@ if ! [[ $variable =~ \$re ]] ; then
 if ! [[ $variable =~ \$re ]] ; then
   num2=\$(printf "%d" "'$variable2")
 
-difference=$((num1 - num2))
+difference=\$((num1 - num2))
 
 echo "Subtraction:"
 echo "$variable (\$num1) - $variable2 (\$num1) = \$difference"
