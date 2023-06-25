@@ -1,11 +1,5 @@
 package de.schemmea.ma.generator;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
 public final class Configuration {
     public static final String SOURCE_PATH = "/nextflow/";
     public static final String TEMPLATES = "templates/";

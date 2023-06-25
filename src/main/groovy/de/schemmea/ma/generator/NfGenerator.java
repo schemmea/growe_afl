@@ -61,7 +61,11 @@ public class NfGenerator extends Generator<String> {
 
             String genTest = generatedTests.get(0);
 
-            return replaceMagicStringWithRandomScript(genTest, sourceOfRandomness);
+            genTest = replaceMagicStringWithRandomScript(genTest, sourceOfRandomness);
+
+            genTest = genTest.replace("\\n", Configuration.newline);
+
+            return genTest;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

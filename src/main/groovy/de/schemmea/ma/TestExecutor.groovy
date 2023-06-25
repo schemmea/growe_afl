@@ -15,6 +15,10 @@ import java.time.Duration
 class TestExecutor {
 
     private static Args ARGS = new Args();
+    private static Set<String> stackTraces = new HashSet<>();
+    private static Map<String, Integer> nameCountMap = new HashMap<>();
+
+    static File logfile = new File(Paths.get(Configuration.EXCEPTION_LOG_FILE).toUri());
 
     static void main(String... args) {
 
@@ -50,10 +54,6 @@ class TestExecutor {
         println "Tested $testclass.name#$testname $ARGS.iteration times, duration: $ARGS.durationInSeconds s"
     }
 
-    private static Set<String> stackTraces = new HashSet<>();
-    private static Map<String, Integer> nameCountMap = new HashMap<>();
-
-    static File logfile = new File(Paths.get(Configuration.EXCEPTION_LOG_FILE).toUri());
 
     private static void handleResult(Object[] files, Result result, Throwable throwable) {
         if (result == Result.FAILURE && files.length == 1 && files[0] instanceof File) {

@@ -36,11 +36,6 @@ class NfTest {
     public void testNF(@From(NfGenerator.class) String inputFile) throws IOException {
         System.out.println(Configuration.newline + "STARTING ITERATION " + (++iteration) + Configuration.newline + inputFile);
 
-        String newline = System.getProperty("line.separator");
-
-        inputFile = inputFile.replace("\\n", newline);
-
-
         long date = System.currentTimeMillis();
         date -= 1680000000000L;
 
