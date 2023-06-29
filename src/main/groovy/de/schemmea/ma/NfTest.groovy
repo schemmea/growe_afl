@@ -95,6 +95,8 @@ class NfTest {
         myRunner.setLauncher(launcher);
 
         myRunner.run();
+
+        //nextflow clean ? <
     }
 
 }

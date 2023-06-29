@@ -6,7 +6,12 @@
 <processcallsplaceholder> ::= "prozessscallmagicstring"
 <processcallsplaceholder2> ::= "prozesss2callmagicstring"
 <processwithtwovars> ::= "_twovars"
-<processes> ::= <process> <newline> <process> | <processes> <newline> <process>
+<channelnameone> ::= "namedchannel1"
+<channelnametwo> ::= "namedchannel2"
+<processes> ::= <twoprocesses> | <fourprocesses> | <processes> <newline> <process>
+<twoprocesses> ::= <process> <newline> <process>
+<fourprocesses> ::= <twoprocesses> <newline> <twoverprocesses>
+
 <workflow> ::= <workflowheader> <workflowbody>
 <debug> ::= "debug true"
 <process> ::= <process1> | <process2>
@@ -14,29 +19,32 @@
 
 <processheader> ::= "process" <space> <identifier>
 <processbody> ::=  <space> <staticinput> <newline> <space> <staticoutput> <space> <script>
-<staticinput> ::=   "input:"  <newline> <space> <space> "val variable" <newline>
-<staticoutput> ::=  "output:" <newline> <space> <space> "val variable" <newline>
-<script> ::= "script:" <newline> <space> <space> <template> <space> <tick> <magicstring> <tick>
+<staticinput> ::=   "input:"  <newline> <doublespace> "val variable" <newline>
+<staticoutput> ::=  "output:" <newline> <doublespace> "val variable" <newline>
+<script> ::= "script:" <newline> <doublespace> <template> <space> <tick> <magicstring> <tick>
 
 <process2> ::= <processheader2> <curlyopen> <newline> <space> <debug> <newline> <processbody2> <newline> <curlyclose> <newline>
 
 <processheader2> ::= "process" <space> <identifier2>
 <processbody2> ::=  <space> <staticinput2> <newline> <space> <staticoutput2> <space> <script2>
-<staticinput2> ::=   "input:"  <newline> <space> <space> "val variable" <newline> <space> <space> "val variable2" <newline>
-<staticoutput2> ::=  "output:" <newline> <space> <space> "val variable" <newline> <space> <space> "val variable2" <newline>
-<script2> ::= "script:" <newline> <space> <space> <template> <space> <tick> <magicstring2> <tick>
+<staticinput2> ::=   "input:"  <newline> <doublespace> "val variable" <newline> <doublespace> "val variable2" <newline>
+<staticoutput2> ::=  "output:" <newline> <doublespace> "val variable" <newline> <doublespace> "val variable2" <newline>
+<script2> ::= "script:" <newline> <doublespace> <template> <space> <tick> <magicstring2> <tick>
 
 <template> ::= "template"
 <workflowheader> ::= "workflow" <space>
-<workflowbody> ::= <curlyopen> <newline> <space> <space> <channel> <processcallsplaceholder> <newline> <space> <space> <branchedchannel> <processcallsplaceholder2> <newline> <curlyclose>
+<workflowbody> ::= <curlyopen> <newline> <onevarprocesses> <newline> <twoverprocesses>  <newline> <curlyclose>
+<onevarprocesses> ::= <doublespace> <channel> <setchannelnameone> <newline> <doublespace> <channelnameone> <processcallsplaceholder>
+<twoverprocesses> ::= <doublespace> <branchedchannel> <setchannelnametwo> <newline> <doublespace> <channelnametwo> <processcallsplaceholder2>
 <channel> ::= "Channel.of" <open> <channellist> <close>
 <branchedchannel> ::= <channel> <branchtotwo>
-
+<setchannelnameone> ::= ".set" <curlyopen> <channelnameone> <curlyclose>
+<setchannelnametwo> ::= ".set" <curlyopen> <channelnametwo> <curlyclose>
 <branchtotwo> ::= ".branch " <curlyopen> <newline> <branchone> <branchtwo> <space> <curlyclose>
-<branchone> ::= <space> <space> "one" <colon> <booleanexpression> <newline>
-<branchtwo> ::= <space> <space> "two" <colon> <booleanexpression> <newline>
-<booleanexpression> ::= <true> | "(String) it" <booleanoperator> " (String) " <channelitem> <or> <booleanexpression>
-
+<branchone> ::= <doublespace> "one" <colon> <booleanexpression> <newline>
+<branchtwo> ::= <doublespace> "two" <colon> <booleanexpression> <newline>
+<booleanexpression> ::= <compare> | <compare> <or> <booleanexpression>
+<compare> ::= "(String) it" <booleanoperator> " (String) " <channelitem>
 <channellist> ::= <channelitemquad> | <channelitempair> | <channellist> <comma> <channelitem>
 <channelitem> ::= <number> | <quote> <identifier> <quote>
 <channelitempair> ::= <channelitem> <comma> <channelitem>
@@ -51,10 +59,11 @@
 <boolean> ::= <true> | <false>
 <true> ::= "true"
 <false> ::= "false"
-<booleanoperator> ::= "<" | ">" | "<=" | ">=" | "==" | "!="
+<booleanoperator> ::= "<" | ">" | "<=" | ">=" | "!="
 <or> ::= "||"
 <number> ::= <zero> | <uint> |  <uint> <number>
 <space> ::= " "
+<doublespace> ::= <space> <space>
 <curlyopen> ::= "{"
 <curlyclose> ::= "}"
 <open> ::= "("

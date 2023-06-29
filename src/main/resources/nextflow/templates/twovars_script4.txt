@@ -1,10 +1,16 @@
 #!/bin/bash
 
+re='^[0-9]+\$'
+num=100
+variable=ewr
+if ! [[ $variable =~ $re ]] ; then
+  num=$(printf "%d" "'$variable")
+
 # Calculate the number of bytes for the desired memory consumption
-memory_size=\$((1024 * 1024 * 100))  # 100 MB
+memory_size=$((1024 * 1024 * num))  # 100 MB
 
 # Allocate memory by creating a large array
-data=(\$(dd if=/dev/zero bs="$memory_size" count=1))
+data=($(dd if=/dev/zero bs="$memory_size" count=1))
 
 # Perform some operations using the allocated memory
 # ...
