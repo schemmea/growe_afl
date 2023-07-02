@@ -6,8 +6,8 @@ if ! [[ $variable =~ \$re ]] ; then
    #echo "sleepin \$num"
 
    max=\$(( num > upper ? upper : num ))
-max=\$((max/100))
-  echo "sleepin \$max - \$num  $variable"
+   max=\$((max/100))
+   echo "sleepin \$max - \$num  $variable"
    sleep \$max
 else
   #echo "sleepin $variable"

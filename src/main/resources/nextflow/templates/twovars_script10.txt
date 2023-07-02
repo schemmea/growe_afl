@@ -5,8 +5,14 @@ num1=$variable
 num2=$variable2
 if ! [[ $variable =~ \$re ]] ; then
   num1=\$(printf "%d" "'$variable")
-if ! [[ $variable =~ \$re ]] ; then
+else
+  num1=$variable
+fi
+if ! [[ $variable2 =~ \$re ]] ; then
   num2=\$(printf "%d" "'$variable2")
+else
+  num2=$variable2
+ fi
 
 # Perform addition of two variables
 sum=\$((num1 + num2))

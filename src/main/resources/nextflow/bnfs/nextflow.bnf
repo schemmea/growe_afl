@@ -8,9 +8,7 @@
 <processwithtwovars> ::= "_twovars"
 <channelnameone> ::= "namedchannel1"
 <channelnametwo> ::= "namedchannel2"
-<processes> ::= <twoprocesses> | <fourprocesses> | <processes> <newline> <process>
-<twoprocesses> ::= <process> <newline> <process>
-<fourprocesses> ::= <twoprocesses> <newline> <twoverprocesses>
+<processes> ::= <process> <newline> <process> <newline> <process> | <processes> <newline> <process>
 
 <workflow> ::= <workflowheader> <workflowbody>
 <debug> ::= "debug true"
@@ -33,9 +31,9 @@
 
 <template> ::= "template"
 <workflowheader> ::= "workflow" <space>
-<workflowbody> ::= <curlyopen> <newline> <onevarprocesses> <newline> <twoverprocesses>  <newline> <curlyclose>
-<onevarprocesses> ::= <doublespace> <channel> <setchannelnameone> <newline> <doublespace> <channelnameone> <processcallsplaceholder>
-<twoverprocesses> ::= <doublespace> <branchedchannel> <setchannelnametwo> <newline> <doublespace> <channelnametwo> <processcallsplaceholder2>
+<workflowbody> ::= <curlyopen> <newline> <onevarchannel> <newline> <twovarchannel> <newline> <curlyclose>
+<onevarchannel> ::= <doublespace> <channel> <setchannelnameone> <newline> <doublespace> <channelnameone> <processcallsplaceholder>
+<twovarchannel> ::= <doublespace> <branchedchannel> <setchannelnametwo> <newline> <doublespace> <channelnametwo> <processcallsplaceholder2>
 <channel> ::= "Channel.of" <open> <channellist> <close>
 <branchedchannel> ::= <channel> <branchtotwo>
 <setchannelnameone> ::= ".set" <curlyopen> <channelnameone> <curlyclose>
@@ -45,10 +43,8 @@
 <branchtwo> ::= <doublespace> "two" <colon> <booleanexpression> <newline>
 <booleanexpression> ::= <compare> | <compare> <or> <booleanexpression>
 <compare> ::= "(String) it" <booleanoperator> " (String) " <channelitem>
-<channellist> ::= <channelitemquad> | <channelitempair> | <channellist> <comma> <channelitem>
+<channellist> ::= <channelitem> <comma> <channelitem> <comma> <channelitem> | <channellist> <comma> <channelitem>
 <channelitem> ::= <number> | <quote> <identifier> <quote>
-<channelitempair> ::= <channelitem> <comma> <channelitem>
-<channelitemquad> ::= <channelitempair> <comma> <channelitempair>
 
 <identifier> ::= <char> <char> | <identifier> <char>
 <identifier2> ::= <identifier> <processwithtwovars>
