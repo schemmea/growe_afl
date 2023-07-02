@@ -37,7 +37,6 @@ class NfTest {
         System.out.println(Configuration.newline + "STARTING ITERATION " + (++iteration) + Configuration.newline + inputFile);
 
         long date = System.currentTimeMillis();
-        date -= 1680000000000L;
 
         File generated = Paths.get(Configuration.OUTPUT_PATH).toFile();
         if (!generated.exists()) {

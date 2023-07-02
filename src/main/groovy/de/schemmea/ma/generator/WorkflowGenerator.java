@@ -58,7 +58,6 @@ public class WorkflowGenerator extends Generator<File> {
 
     private String getFileName() {
         long date = System.currentTimeMillis();
-        date -= 1680000000000L;
 
         return generated.getAbsolutePath() + "/out" + date + ".nf";
     }

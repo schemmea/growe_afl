@@ -32,8 +32,8 @@ function savePlotData() {
 
 function executeTest() {
 
-    DURATIONSECONDS=2000
-    ITERATIONS=15
+    DURATIONSECONDS=7200
+    ITERATIONS=1500
 
     #core execution
     log ""
