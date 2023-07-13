@@ -1,8 +1,9 @@
 package de.schemmea.ma
 
 import com.pholser.junit.quickcheck.From
-import de.schemmea.ma.generator.NfGenerator
+import de.schemmea.ma.generator.BaselineGenerator
 import de.schemmea.ma.generator.Configuration
+import de.schemmea.ma.generator.NfGenerator
 import de.schemmea.ma.generator.WorkflowGenerator
 import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.Fuzz
@@ -17,7 +18,7 @@ import org.junit.runner.RunWith
 import java.nio.file.Paths
 
 @RunWith(JQF.class)
-class NfTest {
+class BaselineNfTest {
 
 
     static int iteration = 0;
@@ -35,7 +36,7 @@ class NfTest {
     }
 
     @Fuzz
-    public void testWorkflow(@From(WorkflowGenerator.class) File inputFile) {
+    public void testBaseline(@From(BaselineGenerator.class) File inputFile) {
         print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
 
         String filename = inputFile.getAbsolutePath();

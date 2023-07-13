@@ -81,8 +81,10 @@ class TestExecutor {
             writer.append(name + ";" + unique + ";" + count + ";" + mainFile.getName() + ";" + Configuration.newline);
             writer.close();
 
-        }else{
-            //todo delete file because no error was thrown
+        }else if (result == Result.SUCCESS && files.length == 1 && files[0] instanceof File){
+            //delete file because no error was thrown
+            var mainFile = (File) files[0];
+            mainFile.delete();
         }
     }
 

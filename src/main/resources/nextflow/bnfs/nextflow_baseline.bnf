@@ -1,0 +1,41 @@
+<nextflow> ::= <shebang> <newline> <processes> <space> <workflow>
+
+<shebang> ::= "#!/usr/bin/env nextflow"
+<magicstring> ::= "script1" | "script2.sh" | "script3" | "script4.txt" | "script5"
+
+<processes> ::= <process> | <processes> <process>
+<process> ::= <processheader> <curlyopen> <newline> <processbody> <newline> <curlyclose> <newline>
+
+<processheader> ::= "process" <space> <identifier>
+<processbody> ::=  <input> <output> <script>
+<input> ::= "input:" <newline> <inputvar> <newline>
+<inputvar> ::= <inputvartype> <space> <identifier> <newline>
+<iotype> ::=  "val" | "path" | "env" | "stdin" | "tuple"
+<inputvartype> ::=  <iotype> | "each"
+<output> ::= "output:" <newline> <outputvar> <newline>
+<outputvar> ::= <iotype> <space> <identifier> <newline>
+<script> ::= "script:" <newline> "template '" <magicstring> "'"
+
+<processcall> ::= <identifier> <open> <close> <space>
+<processcallpiped> ::= <processcall> <pipe> <processcall>
+<processcalls> ::= <processcall> | <processcall> <processcalls> | <processcallpiped>
+
+<workflow> ::= <workflowheader> <workflowbody>
+<workflowheader> ::= "workflow" <space>
+<channel> ::= "Channel.of" <open> <channellist> <close>
+<channellist> ::= <channelitem> | <channellist> <comma> <channelitem>
+<channelitem> ::= <uint> | <quote> <identifier> <quote>
+<workflowbody> ::= <curlyopen> <newline> <channel> <pipe> <processcalls> <newline> <curlyclose>
+
+<identifier> ::= a|b|c|d|e|f|g|h
+<uint> ::= 1|2|3|4|5|6|7|8|9
+<space> ::= " "
+<curlyopen> ::= "{"
+<curlyclose> ::= "}"
+<open> ::= "("
+<close> ::= ")"
+<newline> ::= " \n "
+<pipe> ::= " | "
+<quote> ::= '"'
+<comma> ::= ","
+

@@ -74,25 +74,6 @@ public class StringGenerator {
         return "";
     }
 
-    private String replaceScript(String testCase, String scriptMagicString, String scriptFilter, SourceOfRandomness sourceOfRandomness) {
-        String replaced = testCase;
-        var filteredScripts = scripts.stream().filter(s -> s.contains(scriptFilter)).collect(Collectors.toList());
-        if (filteredScripts.size() > 0) {
-            int count = replaced.split(scriptMagicString).length - 1;
-            for (int i = 0; i < count; i++) {
-                int template = new Random().nextInt(filteredScripts.size()); //if end of randomness - should not happen
-
-                try {
-                    template = sourceOfRandomness.nextInt(filteredScripts.size());
-                } catch (Exception e) {
-                    System.out.println("dafuq - end of random");
-                }
-                String filename = filteredScripts.get(template);
-                replaced = replaced.replaceFirst(scriptMagicString, filename);
-            }
-        }
-        return replaced;
-    }
 
     private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
         String replaced = testCase;
@@ -103,7 +84,6 @@ public class StringGenerator {
         var processnames2var = processnames.stream().filter(n -> n.contains(processwithtwovars)).collect(Collectors.toList());
         processnames.removeAll(processnames2var);
 
-        //todo join process differently
         /**
          * //idea: take first two single val processes and first twovar process and put them together with ch2.onew and ch2.two
          channel.of(...).set { channelname }

@@ -22,7 +22,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class WorkflowGenerator extends Generator<File> {
-    private File generated;
 
     StringGenerator baseGenerator;
 
@@ -30,11 +29,6 @@ public class WorkflowGenerator extends Generator<File> {
         super(File.class);
 
         baseGenerator = new StringGenerator();
-
-        generated = new File(Paths.get(Configuration.OUTPUT_PATH).toUri());
-        if (!generated.exists()) {
-            generated.mkdir();
-        }
     }
 
     @Override
@@ -58,6 +52,10 @@ public class WorkflowGenerator extends Generator<File> {
 
     private String getFileName() {
         long date = System.currentTimeMillis();
+        File generated = new File(Paths.get(Configuration.OUTPUT_PATH).toUri());
+        if (!generated.exists()) {
+            generated.mkdir();
+        }
 
         return generated.getAbsolutePath() + "/out" + date + ".nf";
     }
