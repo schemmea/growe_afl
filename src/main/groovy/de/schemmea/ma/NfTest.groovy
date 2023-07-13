@@ -9,6 +9,8 @@ import edu.berkeley.cs.jqf.fuzz.Fuzz
 import edu.berkeley.cs.jqf.fuzz.JQF
 import nextflow.cli.CmdRun
 import nextflow.cli.Launcher
+import nextflow.plugin.Plugins
+import org.junit.After
 import org.junit.Before
 import org.junit.runner.RunWith
 
@@ -98,4 +100,10 @@ class NfTest {
         //nextflow clean ? <
     }
 
+    @After
+    public void cleanUp(){
+        Plugins.stop()
+    }
+
 }
+

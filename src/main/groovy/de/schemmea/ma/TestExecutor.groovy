@@ -81,6 +81,8 @@ class TestExecutor {
             writer.append(name + ";" + unique + ";" + count + ";" + mainFile.getName() + ";" + Configuration.newline);
             writer.close();
 
+        }else{
+            //todo delete file because no error was thrown
         }
     }
 

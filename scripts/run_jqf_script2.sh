@@ -32,7 +32,7 @@ function savePlotData() {
 
 function executeTest() {
 
-    DURATIONSECONDS=7200
+    DURATIONSECONDS=1200
     ITERATIONS=1500
 
     #core execution
