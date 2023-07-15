@@ -16,9 +16,7 @@
 <outputvar> ::= <iotype> <space> <identifier> <newline>
 <script> ::= "script:" <newline> "template '" <magicstring> "'"
 
-<processcall> ::= <identifier> <open> <close> <space>
-<processcallpiped> ::= <processcall> <pipe> <processcall>
-<processcalls> ::= <processcall> | <processcall> <processcalls> | <processcallpiped>
+<processcalls> ::= <identifier> <pipe> <identifier> | <identifier> <pipe> <processcalls>
 
 <workflow> ::= <workflowheader> <workflowbody>
 <workflowheader> ::= "workflow" <space>

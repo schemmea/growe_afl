@@ -35,28 +35,26 @@ class BaselineNfTest {
         }
     }
 
+    private File currentFile;
+
     @Fuzz
     public void testBaseline(@From(BaselineGenerator.class) File inputFile) {
         print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
-
+        currentFile = inputFile;
         String filename = inputFile.getAbsolutePath();
         String[] orig_args2 = new String[]{"run", filename};
-        List<String> args2 = List.of(filename);
 
-        Launcher launcher = new Launcher().command(orig_args2)//.run();
+        int status = new Launcher().command(orig_args2).run();
 
-        CmdRun myRunner = new CmdRun();
-        myRunner.setArgs(args2);
-        myRunner.setLauncher(launcher);
-
-        myRunner.run();
-
-        //nextflow clean ? <
+        print 'status ' + status
     }
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         Plugins.stop()
+        if(currentFile){
+            currentFile.delete()
+        }
     }
 
 }
