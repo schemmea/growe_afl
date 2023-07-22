@@ -12,10 +12,12 @@ import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 public class ContentGenerator {
@@ -28,6 +30,8 @@ public class ContentGenerator {
 
     private static final String magicstring = "scriptnamemagicstring";
     private static final String magicstring2 = "scriptname2magicstring";
+    private static final String magicstring3 = "scriptplaceholdermagicstring";
+    private static final String magicstring4 = "scriptplaceholdermagicstring";
     private static final String processcallsplaceholder = "prozessscallmagicstring";
     private static final String processcallsplaceholder2 = "prozesss2callmagicstring";
     private static final String channelnameone = "namedchannel1";
@@ -73,8 +77,9 @@ public class ContentGenerator {
         }
         return "";
     }
+
     private String replaceProcesscallsPlaceholder(String testCase, SourceOfRandomness sourceOfRandomness) {
-       String replaced = testCase;
+        String replaced = testCase;
         var processnames = collectProcessNames(replaced);
         var processnames2var = processnames.stream().filter(n -> n.contains(processwithtwovars)).collect(Collectors.toList());
         processnames.removeAll(processnames2var);
@@ -116,17 +121,19 @@ public class ContentGenerator {
     }
 
 
-    private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
+    private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) throws IOException {
         String replaced = testCase;
-        replaced = replaceScript(replaced, magicstring, s -> !s.contains(processwithtwovars), sourceOfRandomness);
-        replaced = replaceScript(replaced, magicstring2, s -> s.contains(processwithtwovars), sourceOfRandomness);
+        replaced = replaceScript(replaced, magicstring, s -> !s.contains(processwithtwovars), false, sourceOfRandomness);
+        replaced = replaceScript(replaced, magicstring2, s -> s.contains(processwithtwovars), false, sourceOfRandomness);
 
+        replaced = replaceScript(replaced, magicstring3, s -> !s.contains(processwithtwovars), true, sourceOfRandomness);
+        replaced = replaceScript(replaced, magicstring4, s -> s.contains(processwithtwovars), true, sourceOfRandomness);
 
 
         return replaced;
     }
 
-    private String replaceScript(String testCase, String scriptMagicString, Predicate<String> scriptFilter, SourceOfRandomness sourceOfRandomness) {
+    private String replaceScript(String testCase, String scriptMagicString, Predicate<String> scriptFilter, boolean putFileContent, SourceOfRandomness sourceOfRandomness) throws IOException {
         String replaced = testCase;
         var filteredScripts = scripts.stream().filter(scriptFilter).collect(Collectors.toList());
         if (filteredScripts.size() > 0) {
@@ -134,10 +141,20 @@ public class ContentGenerator {
             for (int i = 0; i < count; i++) {
                 //todo call script inline and not with template ? -> needs adaption in bnf
 
-                int template = sourceOfRandomness.nextInt(filteredScripts.size());
-
-                String filename = filteredScripts.get(template);
-                replaced = replaced.replaceFirst(scriptMagicString, filename);
+                String filename = sourceOfRandomness.choose(filteredScripts);
+                if (putFileContent) {
+                    InputStream inputStream = new FileResourcesUtils().getFileFromResourceAsStream(Configuration.TEMPLATE_SOURCE_PATH + filename);
+                    ByteArrayOutputStream result = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[1024];
+                    for (int length; (length = inputStream.read(buffer)) != -1; ) {
+                        result.write(buffer, 0, length);
+                    }
+                    // StandardCharsets.UTF_8.name() > JDK 7
+                    String content = result.toString("UTF-8");
+                    replaced = replaced.replaceFirst(scriptMagicString, Matcher.quoteReplacement(content));
+                } else {
+                    replaced = replaced.replaceFirst(scriptMagicString, filename);
+                }
             }
         }
         return replaced;

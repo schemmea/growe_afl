@@ -16,7 +16,8 @@ public class NextflowCommandGenerator extends Generator<String[]> {
     }
 
     //    static String[] commands = new String[]{"clean", "code", "config", "console", "drop", "help", "info", "list", "log", "pull", "run", "secrets", "view"};
-    static String[] commands = new String[]{"help", "info", "run", "clean", "config", "list", "log", "drop", "secrets"};
+   // static String[] commands = new String[]{"help", "info", "run", "clean", "config", "list", "log", "drop", "secrets"};
+    static String[] commands = new String[]{"help", "info", "run"};
 
 
     static String[] runOptions = new String[]{"-with-docker", "-with-report",

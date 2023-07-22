@@ -15,9 +15,13 @@ function log() {
   echo "$1" | tee -a "$LOGFILE"
 }
 
+DURATIONHOURS=2
+DURATIONSECONDS=$((DURATIONHOURS*60*60))
+ITERATIONS=1500
+
 PLOT_DATA_SAVE_DIR="./plot_data"
 LOGFILE="./executor.log"
-EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")"
+EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")-$DURATIONHOURS"
 
 # method declaration
 function savePlotData() {
@@ -32,14 +36,12 @@ function savePlotData() {
 
 function executeTest() {
 
-    DURATIONSECONDS=1200
-    ITERATIONS=1500
 
     #core execution
     log ""
     # log "===== Executing $CURRENT_METHOD  ====="
     log "===== Executing  ====="
-	  export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=102400"
+	  export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=204800"
     export JVM_OPTS="$JVM_OPTS -Djqf.logCoverage=true"
     export JVM_OPTS="$JVM_OPTS -Djqf.ei.QUIET_MODE=false"
 

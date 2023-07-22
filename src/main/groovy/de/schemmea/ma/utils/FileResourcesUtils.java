@@ -144,7 +144,7 @@ public class FileResourcesUtils {
 
     // get a file from the resources folder
     // works everywhere, IDEA, unit test and JAR file.
-    private InputStream getFileFromResourceAsStream(String fileName) {
+    public InputStream getFileFromResourceAsStream(String fileName) {
         if (fileName.startsWith("/")) fileName = fileName.substring(1);
         // The class loader that loaded the class
         ClassLoader classLoader = getClass().getClassLoader();

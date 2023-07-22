@@ -15,8 +15,6 @@ function log() {
   echo "$1" | tee -a "$LOGFILE"
 }
 
-TEST_METHOD=( 'testNF' )
-
 PLOT_DATA_SAVE_DIR="./plot_data"
 LOGFILE="./executor.log"
 EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")"
@@ -30,6 +28,12 @@ function savePlotData() {
   # copy passed executions plot data and rename it meaningful
   cp "$1" "$PLOT_DATA_SAVE_DIR/plot_data.csv"
 }
+
+
+DURATIONHOURS=1
+DURATIONSECONDS=$((DURATIONHOURS*60*60))
+ITERATIONS=40
+
 
 function executeTest() {
     # generate dir names
@@ -48,9 +52,8 @@ function executeTest() {
     export JVM_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005"
     # no coverage with following env
     # export JQF_DISABLE_INSTRUMENTATION="true"
-    export NXF_IGNORE_RESUME_HISTORY="true"
 
-    /usr/bin/env bash -c "$DRIVER_PATH -Djqf.ei.MAX_INPUT_SIZE=102400 --illegal-access=permit -Xmx4G -jar $JAR_PATH | tee -a $LOGFILE 2>/dev/null"
+    /usr/bin/env bash -c "$DRIVER_PATH -Djqf.ei.MAX_INPUT_SIZE=204800 --illegal-access=permit -Xmx4G -jar $JAR_PATH  -d $DURATIONSECONDS -i $ITERATIONS| tee -a $LOGFILE 2>/dev/null"
 
     # copy plot data
     log "Saving Plot data..."

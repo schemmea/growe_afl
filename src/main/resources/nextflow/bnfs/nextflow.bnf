@@ -3,6 +3,8 @@
 <shebang> ::= "#!/usr/bin/env nextflow"
 <magicstring> ::= "scriptnamemagicstring"
 <magicstring2> ::= "scriptname2magicstring"
+<magicstring3> ::= "scriptplaceholdermagicstring"
+<magicstring4> ::= "scriptplaceholdermagicstring"
 <processcallsplaceholder> ::= "prozessscallmagicstring"
 <processcallsplaceholder2> ::= "prozesss2callmagicstring"
 <processwithtwovars> ::= "_twovars"
@@ -16,25 +18,31 @@
 <process1> ::= <processheader> <curlyopen> <newline> <space> <debug> <newline> <processbody> <newline> <curlyclose> <newline>
 
 <processheader> ::= "process" <space> <identifier>
-<processbody> ::=  <space> <staticinput> <newline> <space> <staticoutput> <space> <script>
+<processbody> ::=  <space> <staticinput> <newline> <space> <staticoutput> <space> <content>
 <staticinput> ::=   "input:"  <newline> <doublespace> "val variable" <newline>
 <staticoutput> ::=  "output:" <newline> <doublespace> "val variable" <newline>
-<script> ::= "script:" <newline> <doublespace> <template> <space> <tick> <magicstring> <tick>
+<content> ::= <templatescript> | <script>
+<templatescript> ::= "script:" <newline> <doublespace> <template> <space> <tick> <magicstring> <tick>
+<script> ::= "script:" <newline> <threetick> <newline> <magicstring3> <newline> <threetick>
+
 
 <process2> ::= <processheader2> <curlyopen> <newline> <space> <debug> <newline> <processbody2> <newline> <curlyclose> <newline>
 
 <processheader2> ::= "process" <space> <identifier2>
-<processbody2> ::=  <space> <staticinput2> <newline> <space> <staticoutput2> <space> <script2>
+<processbody2> ::=  <space> <staticinput2> <newline> <space> <staticoutput2> <space> <content2>
 <staticinput2> ::=   "input:"  <newline> <doublespace> "val variable" <newline> <doublespace> "val variable2" <newline>
 <staticoutput2> ::=  "output:" <newline> <doublespace> "val variable" <newline> <doublespace> "val variable2" <newline>
-<script2> ::= "script:" <newline> <doublespace> <template> <space> <tick> <magicstring2> <tick>
+<content2> ::= <templatescript2> | <script2>
+<templatescript2> ::= "script:" <newline> <doublespace> <template> <space> <tick> <magicstring2> <tick>
+<script2> ::= "script:" <newline> <threetick> <newline> <magicstring4> <newline> <threetick>
 
 <template> ::= "template"
 <workflowheader> ::= "workflow" <space>
 <workflowbody> ::= <curlyopen> <newline> <onevarchannel> <newline> <twovarchannel> <newline> <curlyclose>
 <onevarchannel> ::= <doublespace> <channel> <setchannelnameone> <newline> <doublespace> <channelnameone> <processcallsplaceholder>
 <twovarchannel> ::= <doublespace> <branchedchannel> <setchannelnametwo> <newline> <doublespace> <channelnametwo> <processcallsplaceholder2>
-<channel> ::= "Channel.of" <open> <channellist> <close>
+<channel> ::= "Channel." <channeltype> <open> <channellist> <close>
+<channeltype> ::= "of" | "fromList" | "fromPath" | "fromFilePairs" | "fromSRA" | "value" | "watchPath"
 <branchedchannel> ::= <channel> <branchtotwo>
 <setchannelnameone> ::= ".set" <curlyopen> <channelnameone> <curlyclose>
 <setchannelnametwo> ::= ".set" <curlyopen> <channelnametwo> <curlyclose>
@@ -43,8 +51,8 @@
 <branchtwo> ::= <doublespace> "two" <colon> <booleanexpression> <newline>
 <booleanexpression> ::= <compare> | <compare> <or> <booleanexpression>
 <compare> ::= "(String) it" <booleanoperator> " (String) " <channelitem>
-<channellist> ::= <channelitem> <comma> <channelitem> <comma> <channelitem> | <channellist> <comma> <channelitem>
-<channelitem> ::= <number> | <quote> <identifier> <quote>
+<channellist> ::= <channelitem> <comma> <channelitem> | <channellist> <comma> <channelitem>
+<channelitem> ::= <number> | <quote> <identifier> <quote> | <number> <points> <number> | <quote> <char> <quote> <points> <quote> <char> <quote>
 
 <identifier> ::= <char> <char> | <identifier> <char>
 <identifier2> ::= <identifier> <processwithtwovars>
@@ -69,6 +77,8 @@
 <newline> ::= " \n "
 <pipe> ::= " | "
 <tick> ::= "'"
+<threetick> ::= "'''"
 <comma> ::= ","
 <quote> ::= '"'
 <colon> ::= ":"
+<points> ::= ".."
