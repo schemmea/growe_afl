@@ -4,7 +4,6 @@ import com.sourceclear.gramtest.GeneratorVisitor;
 import com.sourceclear.gramtest.bnfLexer;
 import com.sourceclear.gramtest.bnfParser;
 import com.pholser.junit.quickcheck.generator.GenerationStatus;
-import com.pholser.junit.quickcheck.generator.Generator;
 import com.pholser.junit.quickcheck.random.SourceOfRandomness;
 import de.schemmea.ma.utils.FileResourcesUtils;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -19,7 +18,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class StringGenerator {
+public class ContentGenerator {
     private static final int generateNumber = 1;
     private static final int depth = 4;
     private static final int max = 4;
@@ -37,7 +36,7 @@ public class StringGenerator {
 
     private final ParserRuleContext tree;
 
-    public StringGenerator() throws IOException {
+    public ContentGenerator() throws IOException {
 
         System.out.println("Generator - ctor");
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
@@ -63,6 +62,7 @@ public class StringGenerator {
             String genTest = generatedTests.get(0);
 
             genTest = replaceMagicStringWithRandomScript(genTest, sourceOfRandomness);
+            genTest = replaceProcesscallsPlaceholder(genTest, sourceOfRandomness);
 
             genTest = genTest.replace("\\n", Configuration.newline);
 
@@ -73,13 +73,8 @@ public class StringGenerator {
         }
         return "";
     }
-
-
-    private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
-        String replaced = testCase;
-        replaced = replaceScript(replaced, magicstring, s -> !s.contains(processwithtwovars), sourceOfRandomness);
-        replaced = replaceScript(replaced, magicstring2, s -> s.contains(processwithtwovars), sourceOfRandomness);
-
+    private String replaceProcesscallsPlaceholder(String testCase, SourceOfRandomness sourceOfRandomness) {
+       String replaced = testCase;
         var processnames = collectProcessNames(replaced);
         var processnames2var = processnames.stream().filter(n -> n.contains(processwithtwovars)).collect(Collectors.toList());
         processnames.removeAll(processnames2var);
@@ -117,6 +112,16 @@ public class StringGenerator {
         }
         replaced = replaced.replace(processcallsplaceholder, processcalls);
 
+        return replaced;
+    }
+
+
+    private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
+        String replaced = testCase;
+        replaced = replaceScript(replaced, magicstring, s -> !s.contains(processwithtwovars), sourceOfRandomness);
+        replaced = replaceScript(replaced, magicstring2, s -> s.contains(processwithtwovars), sourceOfRandomness);
+
+
 
         return replaced;
     }
@@ -127,13 +132,10 @@ public class StringGenerator {
         if (filteredScripts.size() > 0) {
             int count = replaced.split(scriptMagicString).length - 1;
             for (int i = 0; i < count; i++) {
-                int template = new Random().nextInt(filteredScripts.size()); //if end of randomness - should not happen
+                //todo call script inline and not with template ? -> needs adaption in bnf
 
-                try {
-                    template = sourceOfRandomness.nextInt(filteredScripts.size());
-                } catch (Exception e) {
-                    System.out.println("dafuq - end of random");
-                }
+                int template = sourceOfRandomness.nextInt(filteredScripts.size());
+
                 String filename = filteredScripts.get(template);
                 replaced = replaced.replaceFirst(scriptMagicString, filename);
             }

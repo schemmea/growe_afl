@@ -4,6 +4,7 @@ import com.beust.jcommander.JCommander
 import de.schemmea.ma.generator.Configuration
 import de.schemmea.ma.guidance.FileAwareZestGuidance
 import de.schemmea.ma.utils.Args
+import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.ei.ZestGuidance
 import edu.berkeley.cs.jqf.fuzz.guidance.Guidance
 import edu.berkeley.cs.jqf.fuzz.guidance.Result
@@ -41,6 +42,9 @@ class BaselineTestExecutor {
         if (!errorDirectory.exists()) {
             errorDirectory.mkdir();
         }
+
+        new FileResourcesUtils().copyFilesToFolder(Configuration.TEMPLATE_SOURCE_PATH, Configuration.OUTPUT_TEMPLATE_PATH);
+        new FileResourcesUtils().copyFilesToFolder(Configuration.DATA_SOURCE_PATH, Configuration.OUTPUT_DATA_PATH);
 
         Guidance guidance = new ZestGuidance(testname,
                 Duration.ofSeconds(ARGS.durationInSeconds),

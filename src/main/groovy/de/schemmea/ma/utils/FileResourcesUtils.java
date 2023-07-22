@@ -105,7 +105,7 @@ public class FileResourcesUtils {
 
     public static boolean runningFromJar() {
         String jarname = getExecutionContextName();
-       // System.out.println("ExecutionContext: " + jarname);
+        // System.out.println("ExecutionContext: " + jarname);
         return jarname.contains(".jar");
     }
 
@@ -145,7 +145,7 @@ public class FileResourcesUtils {
     // get a file from the resources folder
     // works everywhere, IDEA, unit test and JAR file.
     private InputStream getFileFromResourceAsStream(String fileName) {
-        if(fileName.startsWith("/")) fileName = fileName.substring(1);
+        if (fileName.startsWith("/")) fileName = fileName.substring(1);
         // The class loader that loaded the class
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
@@ -229,13 +229,16 @@ public class FileResourcesUtils {
         List<String> files = getResourceFiles(fileDir);
 
         for (String s : files) {
-            if (runningFromJar()) {
-                Files.copy(getFileFromResourceAsStream(fileDir + s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
-            } else if (runningFromJQF()) {
-                Files.copy(Paths.get(getExecutionContextName(), fileDir, s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
-            } else {
-                Files.copy(getFileFromResourceAsStream(fileDir + s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
-            }
+            try {
+
+                if (runningFromJar()) {
+                    Files.copy(getFileFromResourceAsStream(fileDir + s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
+                } else if (runningFromJQF()) {
+                    Files.copy(Paths.get(getExecutionContextName(), fileDir, s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
+                } else {
+                    Files.copy(getFileFromResourceAsStream(fileDir + s), Paths.get(outsidePath, s), StandardCopyOption.REPLACE_EXISTING);
+                }
+            } catch (Exception ignored) {/** */}
         }
     }
 

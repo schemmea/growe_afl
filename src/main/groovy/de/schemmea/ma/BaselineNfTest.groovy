@@ -3,8 +3,6 @@ package de.schemmea.ma
 import com.pholser.junit.quickcheck.From
 import de.schemmea.ma.generator.BaselineGenerator
 import de.schemmea.ma.generator.Configuration
-import de.schemmea.ma.generator.NfGenerator
-import de.schemmea.ma.generator.WorkflowGenerator
 import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.Fuzz
 import edu.berkeley.cs.jqf.fuzz.JQF
@@ -26,13 +24,7 @@ class BaselineNfTest {
 
     @Before
     public void setup() {
-        System.out.println("@Before");
-        //is this called multiple times?
-        if (iteration == 0) {
-            new FileResourcesUtils().copyFilesToFolder(Configuration.TEMPLATE_SOURCE_PATH, Configuration.OUTPUT_TEMPLATE_PATH);
-            new FileResourcesUtils().copyFilesToFolder(Configuration.DATA_SOURCE_PATH, Configuration.OUTPUT_DATA_PATH);
 
-        }
     }
 
     private File currentFile;

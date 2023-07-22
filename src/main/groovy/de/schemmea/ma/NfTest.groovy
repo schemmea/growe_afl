@@ -1,9 +1,9 @@
 package de.schemmea.ma
 
 import com.pholser.junit.quickcheck.From
-import de.schemmea.ma.generator.NfGenerator
 import de.schemmea.ma.generator.Configuration
-import de.schemmea.ma.generator.WorkflowGenerator
+import de.schemmea.ma.generator.NextflowCommandGenerator
+import de.schemmea.ma.generator.WorkflowFileGenerator
 import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.Fuzz
 import edu.berkeley.cs.jqf.fuzz.JQF
@@ -14,8 +14,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.runner.RunWith
 
-import java.nio.file.Paths
-
 @RunWith(JQF.class)
 class NfTest {
 
@@ -25,17 +23,11 @@ class NfTest {
 
     @Before
     public void setup() {
-        System.out.println("@Before");
-        //is this called multiple times?
-        if (iteration == 0) {
-            new FileResourcesUtils().copyFilesToFolder(Configuration.TEMPLATE_SOURCE_PATH, Configuration.OUTPUT_TEMPLATE_PATH);
-            new FileResourcesUtils().copyFilesToFolder(Configuration.DATA_SOURCE_PATH, Configuration.OUTPUT_DATA_PATH);
 
-        }
     }
 
     @Fuzz
-    public void testWorkflow(@From(WorkflowGenerator.class) File inputFile) {
+    public void testWorkflow(@From(WorkflowFileGenerator.class) File inputFile) {
         print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
 
         String filename = inputFile.getAbsolutePath();
@@ -51,6 +43,18 @@ class NfTest {
         myRunner.run();
 
         //nextflow clean ? <
+    }
+
+
+    @Fuzz
+    public void testNFCommand(@From(NextflowCommandGenerator.class) String[] command) {
+        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
+
+        print command
+
+        int status = new Launcher().command(command).run();
+
+        print "status "+status
     }
 
     @After

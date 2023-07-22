@@ -1,0 +1,74 @@
+<nextflow> ::= <shebang> <newline> <processes> <space> <workflow>
+
+<shebang> ::= "#!/usr/bin/env nextflow"
+<magicstring> ::= "scriptnamemagicstring"
+<magicstring2> ::= "scriptname2magicstring"
+<processcallsplaceholder> ::= "prozessscallmagicstring"
+<processcallsplaceholder2> ::= "prozesss2callmagicstring"
+<processwithtwovars> ::= "_twovars"
+<channelnameone> ::= "namedchannel1"
+<channelnametwo> ::= "namedchannel2"
+<processes> ::= <process> <newline> <process> <newline> <process> | <processes> <newline> <process>
+
+<workflow> ::= <workflowheader> <workflowbody>
+<debug> ::= "debug true"
+<process> ::= <process1> | <process2>
+<process1> ::= <processheader> <curlyopen> <newline> <space> <debug> <newline> <processbody> <newline> <curlyclose> <newline>
+
+<processheader> ::= "process" <space> <identifier>
+<processbody> ::=  <space> <staticinput> <newline> <space> <staticoutput> <space> <script>
+<staticinput> ::=   "input:"  <newline> <doublespace> "val variable" <newline>
+<staticoutput> ::=  "output:" <newline> <doublespace> "val variable" <newline>
+<script> ::= "script:" <newline> <doublespace> <template> <space> <tick> <magicstring> <tick>
+
+<process2> ::= <processheader2> <curlyopen> <newline> <space> <debug> <newline> <processbody2> <newline> <curlyclose> <newline>
+
+<processheader2> ::= "process" <space> <identifier2>
+<processbody2> ::=  <space> <staticinput2> <newline> <space> <staticoutput2> <space> <script2>
+<staticinput2> ::=   "input:"  <newline> <doublespace> "val variable" <newline> <doublespace> "val variable2" <newline>
+<staticoutput2> ::=  "output:" <newline> <doublespace> "val variable" <newline> <doublespace> "val variable2" <newline>
+<script2> ::= "script:" <newline> <doublespace> <template> <space> <tick> <magicstring2> <tick>
+
+<template> ::= "template"
+<workflowheader> ::= "workflow" <space>
+<workflowbody> ::= <curlyopen> <newline> <onevarchannel> <newline> <twovarchannel> <newline> <curlyclose>
+<onevarchannel> ::= <doublespace> <channel> <setchannelnameone> <newline> <doublespace> <channelnameone> <processcallsplaceholder>
+<twovarchannel> ::= <doublespace> <branchedchannel> <setchannelnametwo> <newline> <doublespace> <channelnametwo> <processcallsplaceholder2>
+<channel> ::= "Channel.of" <open> <channellist> <close>
+<branchedchannel> ::= <channel> <branchtotwo>
+<setchannelnameone> ::= ".set" <curlyopen> <channelnameone> <curlyclose>
+<setchannelnametwo> ::= ".set" <curlyopen> <channelnametwo> <curlyclose>
+<branchtotwo> ::= ".branch " <curlyopen> <newline> <branchone> <branchtwo> <space> <curlyclose>
+<branchone> ::= <doublespace> "one" <colon> <booleanexpression> <newline>
+<branchtwo> ::= <doublespace> "two" <colon> <booleanexpression> <newline>
+<booleanexpression> ::= <compare> | <compare> <or> <booleanexpression>
+<compare> ::= "(String) it" <booleanoperator> " (String) " <channelitem>
+<channellist> ::= <channelitem> <comma> <channelitem> <comma> <channelitem> | <channellist> <comma> <channelitem>
+<channelitem> ::= <number> | <quote> <identifier> <quote>
+
+<identifier> ::= <char> <char> | <identifier> <char>
+<identifier2> ::= <identifier> <processwithtwovars>
+<char> ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
+<uint> ::= 1|2|3|4|5|6|7|8|9
+<zero> ::= 0
+<digit> ::= <zero> | <uint>
+<boolean> ::= <true> | <false>
+<true> ::= "true"
+<false> ::= "false"
+<booleanoperator> ::= "<" | ">" | "<=" | ">=" | "!="
+<or> ::= "||"
+<number> ::= <zero> | <uint> |  <uint> <number>
+<space> ::= " "
+<doublespace> ::= <space> <space>
+<curlyopen> ::= "{"
+<curlyclose> ::= "}"
+<open> ::= "("
+<close> ::= ")"
+<bracketopen> ::= "["
+<bracketclose> ::= "]"
+<newline> ::= " \n "
+<pipe> ::= " | "
+<tick> ::= "'"
+<comma> ::= ","
+<quote> ::= '"'
+<colon> ::= ":"

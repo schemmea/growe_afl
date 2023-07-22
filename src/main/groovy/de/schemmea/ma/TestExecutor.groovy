@@ -4,6 +4,7 @@ import com.beust.jcommander.JCommander
 import de.schemmea.ma.generator.Configuration
 import de.schemmea.ma.guidance.FileAwareZestGuidance
 import de.schemmea.ma.utils.Args
+import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.guidance.Guidance
 import edu.berkeley.cs.jqf.fuzz.guidance.Result
 import edu.berkeley.cs.jqf.fuzz.junit.*
@@ -26,7 +27,7 @@ class TestExecutor {
         commander.parse(args);
         commander.setProgramName("TestingNF")
 
-        String testname = "testWorkflow"
+        String testname = "testNFCommand"
         Class testclass = NfTest.class
 
         String errorDir = Configuration.ERROR_DIR;
@@ -40,6 +41,10 @@ class TestExecutor {
         if (!errorDirectory.exists()) {
             errorDirectory.mkdir();
         }
+
+            new FileResourcesUtils().copyFilesToFolder(Configuration.SOURCE_PATH, Configuration.OUTPUT_PATH);
+            new FileResourcesUtils().copyFilesToFolder(Configuration.TEMPLATE_SOURCE_PATH, Configuration.OUTPUT_TEMPLATE_PATH);
+            new FileResourcesUtils().copyFilesToFolder(Configuration.DATA_SOURCE_PATH, Configuration.OUTPUT_DATA_PATH);
 
         Guidance guidance = new FileAwareZestGuidance(testname,
                 Duration.ofSeconds(ARGS.durationInSeconds),
@@ -81,7 +86,7 @@ class TestExecutor {
             writer.append(name + ";" + unique + ";" + count + ";" + mainFile.getName() + ";" + Configuration.newline);
             writer.close();
 
-        }else if (result == Result.SUCCESS && files.length == 1 && files[0] instanceof File){
+        } else if (result == Result.SUCCESS && files.length == 1 && files[0] instanceof File) {
             //delete file because no error was thrown
             var mainFile = (File) files[0];
             mainFile.delete();

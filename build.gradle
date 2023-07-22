@@ -114,9 +114,9 @@ sourceSets.main.groovy.srcDirs = ['src/main/groovy']
  }
  **/
 application {
-    mainClass = 'de.schemmea.ma.BaselineTestExecutor'
+    mainClass = 'de.schemmea.ma.TestExecutor'
 }
-mainClassName = 'de.schemmea.ma.BaselineTestExecutor'
+mainClassName = 'de.schemmea.ma.TestExecutor'
 
 
 shadowJar {
@@ -132,7 +132,7 @@ shadowJar {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'de.schemmea.ma.BaselineTestExecutor'
+        attributes 'Main-Class': 'de.schemmea.ma.TestExecutor'
     }
 
     // duplicatesStrategy = DuplicatesStrategy.INCLUDE
