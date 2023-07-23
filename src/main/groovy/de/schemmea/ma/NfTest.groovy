@@ -23,16 +23,16 @@ class NfTest {
 
     @Before
     public void setup() {
+        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
 
     }
 
     @Fuzz
     public void testWorkflow(@From(WorkflowFileGenerator.class) File inputFile) {
-        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
 
         String filename = inputFile.getAbsolutePath();
         String[] orig_args2 = new String[]{"run", filename};
-        List<String> args2 = List.of(filename);
+        def args2 = [filename]
 
         Launcher launcher = new Launcher().command(orig_args2)//.run();
 
@@ -48,17 +48,26 @@ class NfTest {
 
     @Fuzz
     public void testNFCommand(@From(NextflowCommandGenerator.class) String[] command) {
-        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
-
         print command
 
-        int status = new Launcher().command(command).run();
+        if (command[0] == "run") {
+            //avoid try catch in Launcher
+            Launcher launcher = new Launcher().command(command)
 
-        print "status "+status
+            CmdRun myRunner = new CmdRun();
+            myRunner.setArgs(command.tail().toList());
+            myRunner.setLauncher(launcher);
+
+            myRunner.run();
+
+        } else {
+            int status = new Launcher().command(command).run();
+            print "status " + status
+        }
     }
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         Plugins.stop()
     }
 
