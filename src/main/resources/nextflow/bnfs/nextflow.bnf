@@ -3,8 +3,8 @@
 <shebang> ::= "#!/usr/bin/env nextflow"
 <magicstring> ::= "scriptnamemagicstring"
 <magicstring2> ::= "scriptname2magicstring"
-<magicstring3> ::= "scriptplaceholdermagicstring"
-<magicstring4> ::= "scriptplaceholdermagicstring"
+<magicstring3> ::= "scriptplaceholder1magicstring"
+<magicstring4> ::= "scriptplaceholder2magicstring"
 <processcallsplaceholder> ::= "prozessscallmagicstring"
 <processcallsplaceholder2> ::= "prozesss2callmagicstring"
 <processwithtwovars> ::= "_twovars"
@@ -41,8 +41,9 @@
 <workflowbody> ::= <curlyopen> <newline> <onevarchannel> <newline> <twovarchannel> <newline> <curlyclose>
 <onevarchannel> ::= <doublespace> <channel> <setchannelnameone> <newline> <doublespace> <channelnameone> <processcallsplaceholder>
 <twovarchannel> ::= <doublespace> <branchedchannel> <setchannelnametwo> <newline> <doublespace> <channelnametwo> <processcallsplaceholder2>
-<channel> ::= "Channel." <channeltype> <open> <channellist> <close>
-<channeltype> ::= "of" | "fromList" | "fromPath" | "fromFilePairs" | "fromSRA" | "value" | "watchPath"
+<channel> ::= "Channel.of"  <open> <channellist> <close>
+<channeltype> ::= "of" | "fromList" | "value"
+<filechannel> ::=  "fromPath" | "fromFilePairs" | "fromSRA" | "watchPath"
 <branchedchannel> ::= <channel> <branchtotwo>
 <setchannelnameone> ::= ".set" <curlyopen> <channelnameone> <curlyclose>
 <setchannelnametwo> ::= ".set" <curlyopen> <channelnametwo> <curlyclose>
@@ -50,9 +51,10 @@
 <branchone> ::= <doublespace> "one" <colon> <booleanexpression> <newline>
 <branchtwo> ::= <doublespace> "two" <colon> <booleanexpression> <newline>
 <booleanexpression> ::= <compare> | <compare> <or> <booleanexpression>
-<compare> ::= "(String) it" <booleanoperator> " (String) " <channelitem>
+<compare> ::= "(String) it" <booleanoperator> " (String) " <compchannelitem>
 <channellist> ::= <channelitem> <comma> <channelitem> | <channellist> <comma> <channelitem>
-<channelitem> ::= <number> | <quote> <identifier> <quote> | <number> <points> <number> | <quote> <char> <quote> <points> <quote> <char> <quote>
+<channelitem> ::= <compchannelitem> | <digit> <points> <digit> | <quote> <char> <quote> <points> <quote> <char> <quote>
+<compchannelitem> ::= <number> | <quote> <identifier> <quote>
 
 <identifier> ::= <char> <char> | <identifier> <char>
 <identifier2> ::= <identifier> <processwithtwovars>
@@ -77,7 +79,7 @@
 <newline> ::= " \n "
 <pipe> ::= " | "
 <tick> ::= "'"
-<threetick> ::= "'''"
+<threetick> ::= '"""'
 <comma> ::= ","
 <quote> ::= '"'
 <colon> ::= ":"

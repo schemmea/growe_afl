@@ -23,13 +23,13 @@ class NfTest {
 
     @Before
     public void setup() {
-        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
+
 
     }
 
     @Fuzz
     public void testWorkflow(@From(WorkflowFileGenerator.class) File inputFile) {
-
+        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
         String filename = inputFile.getAbsolutePath();
         String[] orig_args2 = new String[]{"run", filename};
         def args2 = [filename]
@@ -48,6 +48,8 @@ class NfTest {
 
     @Fuzz
     public void testNFCommand(@From(NextflowCommandGenerator.class) String[] command) {
+
+        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
         print command
 
         if (command[0] == "run") {

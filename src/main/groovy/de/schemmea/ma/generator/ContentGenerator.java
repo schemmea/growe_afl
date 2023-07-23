@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,8 @@ public class ContentGenerator {
 
     private static final String magicstring = "scriptnamemagicstring";
     private static final String magicstring2 = "scriptname2magicstring";
-    private static final String magicstring3 = "scriptplaceholdermagicstring";
-    private static final String magicstring4 = "scriptplaceholdermagicstring";
+    private static final String magicstring3 = "scriptplaceholder1magicstring";
+    private static final String magicstring4 = "scriptplaceholder2magicstring";
     private static final String processcallsplaceholder = "prozessscallmagicstring";
     private static final String processcallsplaceholder2 = "prozesss2callmagicstring";
     private static final String channelnameone = "namedchannel1";
@@ -121,7 +122,7 @@ public class ContentGenerator {
     }
 
 
-    private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) throws IOException {
+    private String replaceMagicStringWithRandomScript(String testCase, SourceOfRandomness sourceOfRandomness) {
         String replaced = testCase;
         replaced = replaceScript(replaced, magicstring, s -> !s.contains(processwithtwovars), false, sourceOfRandomness);
         replaced = replaceScript(replaced, magicstring2, s -> s.contains(processwithtwovars), false, sourceOfRandomness);
@@ -133,7 +134,7 @@ public class ContentGenerator {
         return replaced;
     }
 
-    private String replaceScript(String testCase, String scriptMagicString, Predicate<String> scriptFilter, boolean putFileContent, SourceOfRandomness sourceOfRandomness) throws IOException {
+    private String replaceScript(String testCase, String scriptMagicString, Predicate<String> scriptFilter, boolean putFileContent, SourceOfRandomness sourceOfRandomness) {
         String replaced = testCase;
         var filteredScripts = scripts.stream().filter(scriptFilter).collect(Collectors.toList());
         if (filteredScripts.size() > 0) {
@@ -143,15 +144,22 @@ public class ContentGenerator {
 
                 String filename = sourceOfRandomness.choose(filteredScripts);
                 if (putFileContent) {
-                    InputStream inputStream = new FileResourcesUtils().getFileFromResourceAsStream(Configuration.TEMPLATE_SOURCE_PATH + filename);
-                    ByteArrayOutputStream result = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[1024];
-                    for (int length; (length = inputStream.read(buffer)) != -1; ) {
-                        result.write(buffer, 0, length);
+                    try {
+                        InputStream inputStream = new FileResourcesUtils().getFileFromResourceAsStream(Configuration.TEMPLATE_SOURCE_PATH + filename);
+                        ByteArrayOutputStream result = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[1024];
+                        for (int length; (length = inputStream.read(buffer)) != -1; ) {
+                            result.write(buffer, 0, length);
+                        }
+                        // StandardCharsets.UTF_8.name() > JDK 7
+                        String content = null;
+
+                        content = result.toString(StandardCharsets.UTF_8.name());
+
+                        replaced = replaced.replaceFirst(scriptMagicString, Matcher.quoteReplacement(content));
+                    } catch (IOException e) {
+                        System.err.println(e.getMessage());
                     }
-                    // StandardCharsets.UTF_8.name() > JDK 7
-                    String content = result.toString("UTF-8");
-                    replaced = replaced.replaceFirst(scriptMagicString, Matcher.quoteReplacement(content));
                 } else {
                     replaced = replaced.replaceFirst(scriptMagicString, filename);
                 }
