@@ -4,9 +4,9 @@
 if [[ "$variable" =~ ^[0-9]+\$ ]]; then
     # Print specific network interface information
     echo "Network Interface Information - $variable"
-    #ifconfig "$variable"
+    ip link show
 else
     # Print all network interface information
     echo "All Network Interface Information"
-    #ifconfig -a
+    ip -$variable
 fi

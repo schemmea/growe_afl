@@ -5,5 +5,4 @@ for ((i=0; i<5; i++))
 do
     echo "Disk Space Usage - Iteration \$i"
     df -h "$variable"
-    sleep 1
 done

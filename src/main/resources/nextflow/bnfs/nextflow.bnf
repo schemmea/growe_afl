@@ -39,11 +39,15 @@
 <template> ::= "template"
 <workflowheader> ::= "workflow" <space>
 <workflowbody> ::= <curlyopen> <newline> <onevarchannel> <newline> <twovarchannel> <newline> <curlyclose>
-<onevarchannel> ::= <doublespace> <channel> <setchannelnameone> <newline> <doublespace> <channelnameone> <processcallsplaceholder>
+<onevarchannel> ::= <doublespace> <singlechannel> <setchannelnameone> <newline> <doublespace> <channelnameone> <processcallsplaceholder>
 <twovarchannel> ::= <doublespace> <branchedchannel> <setchannelnametwo> <newline> <doublespace> <channelnametwo> <processcallsplaceholder2>
 <channel> ::= "Channel.of"  <open> <channellist> <close>
-<channeltype> ::= "of" | "fromList" | "value"
-<filechannel> ::=  "fromPath" | "fromFilePairs" | "fromSRA" | "watchPath"
+<singlechannel> ::= <channel> | <filechannel>
+<filechannel> ::= <filechannel1> | <filechannel2>
+<filechannel1> ::= "Channel.fromPath"  <open> <quote> <data> <slash> <asterisk> <dot> <filetype> <quote> <close>
+<filechannel2> ::= "Channel.fromFilePairs" <open> <quote> <data> <slash> <asterisk> <curlyopen> 1 <comma> 2 <curlyclose> <asterisk> <dot> <filetype> <quote> <close>
+<data> ::= "data"
+<filetype> ::= "txt" | "fa" | "fq" | "fastq" | "csv"
 <branchedchannel> ::= <channel> <branchtotwo>
 <setchannelnameone> ::= ".set" <curlyopen> <channelnameone> <curlyclose>
 <setchannelnametwo> ::= ".set" <curlyopen> <channelnametwo> <curlyclose>
@@ -68,6 +72,9 @@
 <booleanoperator> ::= "<" | ">" | "<=" | ">=" | "!="
 <or> ::= "||"
 <number> ::= <zero> | <uint> |  <uint> <number>
+<slash> ::= "/"
+<asterisk> ::= "*"
+<dot> ::= "."
 <space> ::= " "
 <doublespace> ::= <space> <space>
 <curlyopen> ::= "{"

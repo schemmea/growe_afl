@@ -42,9 +42,9 @@ class TestExecutor {
             errorDirectory.mkdir();
         }
 
-            new FileResourcesUtils().copyFilesToFolder(Configuration.SOURCE_PATH, Configuration.OUTPUT_PATH);
-            new FileResourcesUtils().copyFilesToFolder(Configuration.TEMPLATE_SOURCE_PATH, Configuration.OUTPUT_TEMPLATE_PATH);
-            new FileResourcesUtils().copyFilesToFolder(Configuration.DATA_SOURCE_PATH, Configuration.OUTPUT_DATA_PATH);
+        new FileResourcesUtils().copyFilesToFolder(Configuration.SOURCE_PATH, Configuration.OUTPUT_PATH);
+        new FileResourcesUtils().copyFilesToFolder(Configuration.TEMPLATE_SOURCE_PATH, Configuration.OUTPUT_TEMPLATE_PATH);
+        new FileResourcesUtils().copyFilesToFolder(Configuration.DATA_SOURCE_PATH, Configuration.OUTPUT_DATA_PATH);
 
         Guidance guidance = new FileAwareZestGuidance(testname,
                 Duration.ofSeconds(ARGS.durationInSeconds),
@@ -62,11 +62,11 @@ class TestExecutor {
 
     private static void handleResult(Object[] files, Result result, Throwable throwable) {
         if (result == Result.FAILURE && files.length == 1) {
-           File mainFile = null;
-            if(files[0] instanceof File) {
-                 mainFile = (File) files[0];
-           } else if(((String[])files[0])[0] == "run"){
-                mainFile = new File(((String[])files[0])[1])
+            File mainFile = null;
+            if (files[0] instanceof File) {
+                mainFile = (File) files[0];
+            } else if (((String[]) files[0])[0] == "run") {
+                mainFile = new File(((String[]) files[0])[1])
             }
 
             String name;
@@ -92,14 +92,13 @@ class TestExecutor {
             writer.append(name + ";" + unique + ";" + count + ";" + mainFile.getName() + ";" + Configuration.newline);
             writer.close();
 
-        } else if (result == Result.SUCCESS && files.length == 1 && files[0] instanceof File) {
+        } else if (result == Result.SUCCESS && files.length == 1 && files[0] instanceof File && !ARGS.keepTestFile) {
             //delete file because no error was thrown
             var mainFile = (File) files[0];
             mainFile.delete();
-        }
-        else  if (result == Result.SUCCESS && files.length == 1 && files[0] instanceof String[]){
-            if(((String[])files[0])[0] == "run"){
-                new File(((String[])files[0])[1]).delete()
+        } else if (result == Result.SUCCESS && files.length == 1 && files[0] instanceof String[] && !ARGS.keepTestFile) {
+            if (((String[]) files[0])[0] == "run") {
+                new File(((String[]) files[0])[1]).delete()
             }
         }
     }

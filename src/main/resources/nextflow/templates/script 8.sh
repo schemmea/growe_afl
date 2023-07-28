@@ -5,5 +5,4 @@ for ((i=0; i<5; i++))
 do
     echo "File Permissions - Iteration \$i"
     ls -l "$variable"
-    sleep 1
 done

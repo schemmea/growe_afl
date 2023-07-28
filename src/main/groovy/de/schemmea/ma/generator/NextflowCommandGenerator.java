@@ -21,7 +21,7 @@ public class NextflowCommandGenerator extends Generator<String[]> {
 
 
     static String[] runOptions = new String[]{"-with-docker", "-with-report",
-            "-with-trace", "-with-timeline", "-with-dag"};
+            "-with-trace", "-with-timeline"};
     static String[] secretsOptions = new String[]{"delete", "list", "get", "put", "set"};
 
     //"-with-charliecloud", "-with-podman", "-with-singularity", "-with-apptainer",

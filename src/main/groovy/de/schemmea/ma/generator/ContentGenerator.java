@@ -1,5 +1,6 @@
 package de.schemmea.ma.generator;
 
+import com.pholser.junit.quickcheck.generator.Generator;
 import com.sourceclear.gramtest.GeneratorVisitor;
 import com.sourceclear.gramtest.bnfLexer;
 import com.sourceclear.gramtest.bnfParser;
@@ -21,7 +22,7 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
-public class ContentGenerator {
+public class ContentGenerator extends Generator<String> {
     private static final int generateNumber = 1;
     private static final int depth = 4;
     private static final int max = 4;
@@ -42,7 +43,7 @@ public class ContentGenerator {
     private final ParserRuleContext tree;
 
     public ContentGenerator() throws IOException {
-
+        super(String.class);
         System.out.println("Generator - ctor");
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
@@ -108,7 +109,7 @@ public class ContentGenerator {
         if (processnames2var.size() > 0) {
             processcalls2 = " | " + String.join(" | ", processnames2var) + "\n" + joinedProcesscalls;
         }
-        replaced = replaced.replace(processcallsplaceholder2, processcalls2);
+        replaced = replaced.replace(processcallsplaceholder2, Matcher.quoteReplacement(processcalls2));
 
 
         String processcalls = "";
@@ -116,7 +117,7 @@ public class ContentGenerator {
         if (processnames.size() > 0) {
             processcalls += " | " + String.join(" | ", processnames);
         }
-        replaced = replaced.replace(processcallsplaceholder, processcalls);
+        replaced = replaced.replace(processcallsplaceholder, Matcher.quoteReplacement(processcalls));
 
         return replaced;
     }
@@ -152,9 +153,7 @@ public class ContentGenerator {
                             result.write(buffer, 0, length);
                         }
                         // StandardCharsets.UTF_8.name() > JDK 7
-                        String content = null;
-
-                        content = result.toString(StandardCharsets.UTF_8.name());
+                        String content = result.toString(StandardCharsets.UTF_8.name());
 
                         replaced = replaced.replaceFirst(scriptMagicString, Matcher.quoteReplacement(content));
                     } catch (IOException e) {

@@ -3,7 +3,6 @@
 # Loop to check file size every second for 5 seconds
 for ((i=0; i<5; i++))
 do
-    echo "File Size - Iteration \$i"
-    ls -l "$variable"
-    sleep 1
+    echo "file - Iteration \$i"
+    du -a "$variable"
 done
