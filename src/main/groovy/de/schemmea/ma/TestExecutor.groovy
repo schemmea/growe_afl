@@ -1,7 +1,8 @@
 package de.schemmea.ma
 
-import com.beust.jcommander.JCommander
+import com.beust.jcommander.*
 import de.schemmea.ma.generator.Configuration
+import de.schemmea.ma.guidance.FileAwareExecutionIndexingGuidance
 import de.schemmea.ma.guidance.FileAwareZestGuidance
 import de.schemmea.ma.utils.Args
 import de.schemmea.ma.utils.FileResourcesUtils
@@ -23,9 +24,7 @@ class TestExecutor {
 
     static void main(String... args) {
 
-        var commander = new JCommander(ARGS)
-        commander.parse(args);
-        commander.setProgramName("TestingNF")
+        var commander = new JCommander(ARGS,args)
 
         String testname = "testNFCommand"
         Class testclass = NfTest.class
@@ -46,13 +45,20 @@ class TestExecutor {
         new FileResourcesUtils().copyFilesToFolder(Configuration.TEMPLATE_SOURCE_PATH, Configuration.OUTPUT_TEMPLATE_PATH);
         new FileResourcesUtils().copyFilesToFolder(Configuration.DATA_SOURCE_PATH, Configuration.OUTPUT_DATA_PATH);
 
-        Guidance guidance = new FileAwareZestGuidance(testname,
-                Duration.ofSeconds(ARGS.durationInSeconds),
-                ARGS.iteration,
-                errorDirectory,
-                new Random(),
-                TestExecutor::handleResult)
-
+        Guidance guidance = null;
+        if (ARGS.guidance == "ei")
+            guidance = new FileAwareExecutionIndexingGuidance(testname,
+                    Duration.ofSeconds(ARGS.durationInSeconds),
+                    errorDirectory,
+                    new File[]{},
+                    TestExecutor::handleResult)
+        else
+            guidance = new FileAwareZestGuidance(testname,
+                    Duration.ofSeconds(ARGS.durationInSeconds),
+                    ARGS.iteration,
+                    errorDirectory,
+                    new Random(),
+                    TestExecutor::handleResult)
         GuidedFuzzing.run(testclass, testname, guidance, System.out)
 
         System.out.println(String.format("Covered %d edges.", guidance.getTotalCoverage().getNonZeroCount()));

@@ -41,7 +41,7 @@ function executeTest() {
     log ""
     # log "===== Executing $CURRENT_METHOD  ====="
     log "===== Executing  ====="
-	  export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=204800"
+	export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=204800"
     export JVM_OPTS="$JVM_OPTS -Djqf.logCoverage=true"
     export JVM_OPTS="$JVM_OPTS -Djqf.ei.QUIET_MODE=false"
 

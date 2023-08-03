@@ -32,7 +32,7 @@ function savePlotData() {
 
 DURATIONHOURS=1
 DURATIONSECONDS=$((DURATIONHOURS*60*60))
-ITERATIONS=40
+ITERATIONS=100
 
 
 function executeTest() {
@@ -49,11 +49,18 @@ function executeTest() {
     log ""
     # log "===== Executing $CURRENT_METHOD  ====="
     log "===== Executing  ====="
-    export JVM_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005"
+    export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=204800"
+    export JVM_OPTS="$JVM_OPTS -Djqf.logCoverage=true"
+    export JVM_OPTS="$JVM_OPTS -Djqf.ei.QUIET_MODE=false"
+
+    #ei guidance    
+    export JVM_OPTS="$JVM_OPTS -Djqf.tracing.MATCH_CALLEE_NAMES=true -Djqf.tracing.TRACE_GENERATORS=true"
+
+    export JVM_OPTS="$JVM_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005"
     # no coverage with following env
     # export JQF_DISABLE_INSTRUMENTATION="true"
 
-    /usr/bin/env bash -c "$DRIVER_PATH -Djqf.ei.MAX_INPUT_SIZE=204800 --illegal-access=permit -Xmx4G -jar $JAR_PATH  -d $DURATIONSECONDS -i $ITERATIONS| tee -a $LOGFILE 2>/dev/null"
+    /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH  -d $DURATIONSECONDS -i $ITERATIONS -g zest -k| tee -a $LOGFILE 2>/dev/null"
 
     # copy plot data
     log "Saving Plot data..."

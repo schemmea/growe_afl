@@ -1,11 +1,10 @@
 package de.schemmea.ma.guidance;
 
-import com.pholser.junit.quickcheck.random.SourceOfRandomness;
-import edu.berkeley.cs.jqf.fuzz.ei.*;
+import edu.berkeley.cs.jqf.fuzz.ei.ExecutionIndexingGuidance;
+import edu.berkeley.cs.jqf.fuzz.ei.ZestGuidance;
 import edu.berkeley.cs.jqf.fuzz.guidance.GuidanceException;
 import edu.berkeley.cs.jqf.fuzz.guidance.Result;
 import edu.berkeley.cs.jqf.fuzz.util.FastNonCollidingCoverage;
-import javassist.bytecode.stackmap.BasicBlock;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,15 +13,18 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class FileAwareZestGuidance extends ZestGuidance {
+public class FileAwareExecutionIndexingGuidance extends ExecutionIndexingGuidance {
 
     private final FileAwareResultListener listener;
     private Object[] lastArgs;
 
-    public FileAwareZestGuidance(String testName, Duration duration, Long trials, File outputDirectory, Random rnd, FileAwareResultListener listener) throws IOException {
+    public FileAwareExecutionIndexingGuidance(String testName, Duration duration, Long trials, File outputDirectory, Random rnd, FileAwareResultListener listener) throws IOException {
         super(testName, duration, trials, outputDirectory, rnd);
         this.listener = listener;
-
+    }
+    public FileAwareExecutionIndexingGuidance(String testName, Duration duration, File outputDirectory, File[] seeds, FileAwareResultListener listener) throws IOException {
+        super(testName, duration, outputDirectory, seeds);
+        this.listener = listener;
     }
 
     @Override

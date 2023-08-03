@@ -160,7 +160,7 @@ public class ContentGenerator extends Generator<String> {
                         System.err.println(e.getMessage());
                     }
                 } else {
-                    replaced = replaced.replaceFirst(scriptMagicString, filename);
+                    replaced = replaced.replaceFirst(scriptMagicString, Matcher.quoteReplacement(filename));
                 }
             }
         }

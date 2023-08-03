@@ -29,13 +29,27 @@ class Args {
         this.keepTestFile = keepTestFile
     }
 
-    @Parameter(names = ["--duration", "-d"], description = "How long should zest run in maximum")
+    String getGuidance() {
+        return guidance
+    }
+
+    void setGuidance(String guidance) {
+        this.guidance = guidance
+    }
+
+    @Parameter(names = ["--duration", "-d"], description = "How long should we run in maximum")
     private int durationInSeconds = 360;
 
-    @Parameter(names = ["--iteration", "-i"], description = "How many tests should zest perform")
+    @Parameter(names = ["--iteration", "-i"], description = "How many tests should we perform")
     private int iteration = 5;
 
 
     @Parameter(names = ["--keepTestFile", "-k"], description = "Should keep testfile after run")
     private boolean keepTestFile = false;
+
+
+    @Parameter(names = ["--guidance", "-g"], description = "Use zest guidance or ei guidance")
+    private String guidance = "zest";
+
+
 }
