@@ -49,8 +49,9 @@ class TestExecutor {
         if (ARGS.guidance == "ei")
             guidance = new FileAwareExecutionIndexingGuidance(testname,
                     Duration.ofSeconds(ARGS.durationInSeconds),
+                    ARGS.iteration,
                     errorDirectory,
-                    new File[]{},
+                    new Random(),
                     TestExecutor::handleResult)
         else
             guidance = new FileAwareZestGuidance(testname,

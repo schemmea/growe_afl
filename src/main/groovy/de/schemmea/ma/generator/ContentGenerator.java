@@ -67,8 +67,8 @@ public class ContentGenerator extends Generator<String> {
 
             String genTest = generatedTests.get(0);
 
-            genTest = replaceMagicStringWithRandomScript(genTest, sourceOfRandomness);
             genTest = replaceProcesscallsPlaceholder(genTest, sourceOfRandomness);
+            genTest = replaceMagicStringWithRandomScript(genTest, sourceOfRandomness);
 
             genTest = genTest.replace("\\n", Configuration.newline);
 

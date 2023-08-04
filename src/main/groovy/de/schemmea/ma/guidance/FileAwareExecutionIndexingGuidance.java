@@ -22,10 +22,6 @@ public class FileAwareExecutionIndexingGuidance extends ExecutionIndexingGuidanc
         super(testName, duration, trials, outputDirectory, rnd);
         this.listener = listener;
     }
-    public FileAwareExecutionIndexingGuidance(String testName, Duration duration, File outputDirectory, File[] seeds, FileAwareResultListener listener) throws IOException {
-        super(testName, duration, outputDirectory, seeds);
-        this.listener = listener;
-    }
 
     @Override
     public void handleResult(Result result, Throwable error) throws GuidanceException {
