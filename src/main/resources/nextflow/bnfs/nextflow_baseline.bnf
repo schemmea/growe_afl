@@ -9,11 +9,11 @@
 <processheader> ::= "process" <space> <identifier>
 <processbody> ::=  <input> <output> <script>
 <input> ::= "input:" <newline> <inputvar> <newline>
-<inputvar> ::= <inputvartype> <space> <identifier> <newline>
+<inputvar> ::= <inputvartype> <space> "variable" <newline>
 <iotype> ::=  "val" | "path" | "env" | "stdin" | "tuple"
 <inputvartype> ::=  <iotype> | "each"
 <output> ::= "output:" <newline> <outputvar> <newline>
-<outputvar> ::= <iotype> <space> <identifier> <newline>
+<outputvar> ::= <iotype> <space> "variable" <newline>
 <script> ::= "script:" <newline> "template '" <magicstring> "'"
 
 <processcalls> ::= <identifier> <pipe> <identifier> | <identifier> <pipe> <processcalls>
@@ -25,7 +25,7 @@
 <channelitem> ::= <uint> | <quote> <identifier> <quote>
 <workflowbody> ::= <curlyopen> <newline> <channel> <pipe> <processcalls> <newline> <curlyclose>
 
-<identifier> ::= a|b|c|d|e|f|g|h
+<identifier> ::= a|b|c|d|e
 <uint> ::= 1|2|3|4|5|6|7|8|9
 <space> ::= " "
 <curlyopen> ::= "{"

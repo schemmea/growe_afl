@@ -16,7 +16,7 @@ import java.time.Duration
 
 class TestExecutor {
 
-    private static Args ARGS = new Args();
+    static Args ARGS = new Args();
     private static Set<String> stackTraces = new HashSet<>();
     private static Map<String, Integer> nameCountMap = new HashMap<>();
 
@@ -24,10 +24,15 @@ class TestExecutor {
 
     static void main(String... args) {
 
-        var commander = new JCommander(ARGS,args)
+        var commander = new JCommander(ARGS, args)
 
         String testname = "testNFCommand"
         Class testclass = NfTest.class
+        if(ARGS.useBaseline)
+        {
+            testname = "testBaseline"
+            testclass = BaselineNfTest.class
+        }
 
         String errorDir = Configuration.ERROR_DIR;
 

@@ -44,7 +44,7 @@ class BaselineNfTest {
     @After
     public void cleanUp() {
         Plugins.stop()
-        if(currentFile){
+        if(currentFile && ! TestExecutor.ARGS.keepTestFile){
             currentFile.delete()
         }
     }

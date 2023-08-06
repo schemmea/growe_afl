@@ -14,6 +14,7 @@ import org.apache.commons.lang.StringUtils
 import java.nio.file.Paths
 import java.time.Duration
 
+@Deprecated
 class BaselineTestExecutor {
 
     private static Args ARGS = new Args();

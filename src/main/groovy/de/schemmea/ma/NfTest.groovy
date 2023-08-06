@@ -70,6 +70,7 @@ class NfTest {
 
     @After
     public void cleanUp() {
+        //plugins won't stop after sriptcompilation exception
         Plugins.stop()
     }
 
