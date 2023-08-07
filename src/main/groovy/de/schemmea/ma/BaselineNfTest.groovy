@@ -36,9 +36,15 @@ class BaselineNfTest {
         String filename = inputFile.getAbsolutePath();
         String[] orig_args2 = new String[]{"run", filename};
 
-        int status = new Launcher().command(orig_args2).run();
+        def args2 = [filename]
 
-        print 'status ' + status
+        Launcher launcher = new Launcher().command(orig_args2)//.run();
+
+        CmdRun myRunner = new CmdRun();
+        myRunner.setArgs(args2);
+        myRunner.setLauncher(launcher);
+
+        myRunner.run();
     }
 
     @After

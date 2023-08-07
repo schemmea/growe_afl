@@ -16,7 +16,7 @@ function log() {
 }
 
 DURATIONHOURS=2
-DURATIONSECONDS=$((DURATIONHOURS*60*60))
+DURATIONSECONDS=$((DURATIONHOURS * 60 * 60))
 ITERATIONS=1500
 
 PLOT_DATA_SAVE_DIR="./plot_data"
@@ -33,22 +33,23 @@ function savePlotData() {
   cp "$1" "$PLOT_DATA_SAVE_DIR/plot_data.csv"
 }
 
-
 function executeTest() {
 
+  #core execution
+  log ""
+  # log "===== Executing $CURRENT_METHOD  ====="
+  log "===== Executing  ====="
+  export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=204800"
+  export JVM_OPTS="$JVM_OPTS -Djqf.logCoverage=true"
+  export JVM_OPTS="$JVM_OPTS -Djqf.ei.QUIET_MODE=false"
 
-    #core execution
-    log ""
-    # log "===== Executing $CURRENT_METHOD  ====="
-    log "===== Executing  ====="
-	export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=204800"
-    export JVM_OPTS="$JVM_OPTS -Djqf.logCoverage=true"
-    export JVM_OPTS="$JVM_OPTS -Djqf.ei.QUIET_MODE=false"
+  #ei guidance
+  export JVM_OPTS="$JVM_OPTS -Djqf.tracing.MATCH_CALLEE_NAMES=true -Djqf.tracing.TRACE_GENERATORS=true"
 
-    /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH -d $DURATIONSECONDS -i $ITERATIONS | tee -a $LOGFILE 2>/dev/null"
+  /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH -d $DURATIONSECONDS -i $ITERATIONS | tee -a $LOGFILE 2>/dev/null"
 
-   # log "Archiving working directory..."
-   # zip -r "$BASEDIR/work.zip" "$WORKING_DIR" && rm -r "$WORKING_DIR"
+  # log "Archiving working directory..."
+  # zip -r "$BASEDIR/work.zip" "$WORKING_DIR" && rm -r "$WORKING_DIR"
 }
 
 # execution preparation

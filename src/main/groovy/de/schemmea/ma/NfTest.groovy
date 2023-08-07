@@ -42,7 +42,6 @@ class NfTest {
 
         myRunner.run();
 
-        //nextflow clean ? <
     }
 
 

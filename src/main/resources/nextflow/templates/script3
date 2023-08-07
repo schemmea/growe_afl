@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Print memory usage continuously until interrupted
-
+# Print memory usage
+{
     echo "Memory Usage"
-    free -m | grep "$variable"
+    free -m | grep "$variable" &&
+} || {
+  echo "error"
+}
