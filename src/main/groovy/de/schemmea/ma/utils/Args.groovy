@@ -61,7 +61,7 @@ class Args {
 
 
     @Parameter(names = ["--guidance", "-g"], description = "Use zest guidance or ei guidance")
-    private String guidance = "zest";
+    private String guidance = "ei";
 
 
 }

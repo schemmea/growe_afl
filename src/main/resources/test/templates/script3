@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Print memory usage continuously until interrupted
+
+    echo "Memory Usage"
+    free -m | grep "$variable"

@@ -80,7 +80,6 @@ class TestExecutor {
             } else if (((String[]) files[0])[0] == "run") {
                 mainFile = new File(((String[]) files[0])[1])
             }
-
             String name;
             String stackTrace;
             if (throwable == null) {
@@ -101,7 +100,7 @@ class TestExecutor {
 
             //write to csv : exception, unique, file name
             FileWriter writer = new FileWriter(logfile, true);
-            writer.append(name + ";" + unique + ";" + count + ";" + mainFile.getName() + ";" + Configuration.newline);
+            writer.append(name + ";" + unique + ";" + count + ";" + mainFile?.getName() + ";" + Configuration.newline);
             writer.close();
 
         } else if (result == Result.SUCCESS && files.length == 1 && files[0] instanceof File && !ARGS.keepTestFile) {

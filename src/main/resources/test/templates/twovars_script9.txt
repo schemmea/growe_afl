@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Perform subtraction of two variables
+re='^[0-9]+\$'
+num1=$variable
+num2=$variable2
+if ! [[ $variable =~ \$re ]] ; then
+  num1=\$(printf "%d" "'$variable")
+fi
+if ! [[ $variable =~ \$re ]] ; then
+  num2=\$(printf "%d" "'$variable2")
+fi
+difference=\$((num1 - num2))
+
+echo "Subtraction:"
+echo "$variable (\$num1) - $variable2 (\$num1) = \$difference"

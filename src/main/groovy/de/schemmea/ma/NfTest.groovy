@@ -1,6 +1,7 @@
 package de.schemmea.ma
 
 import com.pholser.junit.quickcheck.From
+import com.pholser.junit.quickcheck.generator.java.lang.StringGenerator
 import de.schemmea.ma.generator.Configuration
 import de.schemmea.ma.generator.NextflowCommandGenerator
 import de.schemmea.ma.generator.WorkflowFileGenerator
@@ -45,7 +46,6 @@ class NfTest {
         //nextflow clean ? <
     }
 
-
     @Fuzz
     public void testNFCommand(@From(NextflowCommandGenerator.class) String[] command) {
 
@@ -66,6 +66,23 @@ class NfTest {
             int status = new Launcher().command(command).run();
             print "status " + status
         }
+    }
+
+    @Fuzz
+    public void testTest(@From(StringGenerator.class) String inputFile) {
+        String filename = "/home/alena/source/ma_test2/src/main/resources/test/out1691309795610.nf";
+        String[] orig_args2 = new String[]{"run", filename};
+        def args2 = [filename]
+
+        Launcher launcher = new Launcher().command(orig_args2)//.run();
+
+        CmdRun myRunner = new CmdRun();
+        myRunner.setArgs(args2);
+        myRunner.setLauncher(launcher);
+
+        myRunner.run();
+
+        //nextflow clean ? <
     }
 
     @After

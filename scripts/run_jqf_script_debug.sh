@@ -30,20 +30,12 @@ function savePlotData() {
 }
 
 
-DURATIONHOURS=1
+DURATIONHOURS=2
 DURATIONSECONDS=$((DURATIONHOURS*60*60))
-ITERATIONS=100
+ITERATIONS=2000
 
 
 function executeTest() {
-    # generate dir names
-    # BASEDIR="./${CURRENT_METHOD}"
-    # FAIL_DIR="$BASEDIR/fail"
-    # WORKING_DIR="$BASEDIR/work"
-    # TEST_DIR="$BASEDIR/test"
-
-    # create execution dirs
-    # mkdir -p "$BASEDIR" "$FAIL_DIR" "$WORKING_DIR" "$TEST_DIR"
 
     #core execution
     log ""
@@ -60,7 +52,7 @@ function executeTest() {
     # no coverage with following env
     # export JQF_DISABLE_INSTRUMENTATION="true"
 
-    /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH  -d $DURATIONSECONDS -i $ITERATIONS -g zest -k| tee -a $LOGFILE 2>/dev/null"
+    /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx6G -jar $JAR_PATH  -d $DURATIONSECONDS -i $ITERATIONS -g ei | tee -a $LOGFILE 2>/dev/null"
 
     # copy plot data
     log "Saving Plot data..."

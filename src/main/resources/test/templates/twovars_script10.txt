@@ -1,0 +1,21 @@
+#!/bin/bash
+
+re='^[0-9]+\$'
+num1=$variable
+num2=$variable2
+if ! [[ $variable =~ \$re ]] ; then
+  num1=\$(printf "%d" "'$variable")
+else
+  num1=$variable
+fi
+if ! [[ $variable2 =~ \$re ]] ; then
+  num2=\$(printf "%d" "'$variable2")
+else
+  num2=$variable2
+ fi
+
+# Perform addition of two variables
+sum=\$((num1 + num2))
+
+echo "Addition:"
+echo "$variable + $variable2 = \$sum"
