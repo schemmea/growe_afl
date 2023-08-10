@@ -54,8 +54,11 @@ function executeTest() {
 
     /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx6G -jar $JAR_PATH  -d $DURATIONSECONDS -i $ITERATIONS -g ei | tee -a $LOGFILE 2>/dev/null"
 
+    rm -r work/
+    rm -r .nextflow/
+
     # copy plot data
-    log "Saving Plot data..."
+    #log "Saving Plot data..."
     #savePlotData "plot_data"
 
    # log "Archiving working directory..."

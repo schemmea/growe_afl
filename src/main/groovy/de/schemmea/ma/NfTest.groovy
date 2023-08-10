@@ -12,6 +12,7 @@ import nextflow.cli.CmdRun
 import nextflow.cli.Launcher
 import nextflow.plugin.Plugins
 import org.junit.After
+import org.junit.Assume
 import org.junit.Before
 import org.junit.runner.RunWith
 
@@ -68,20 +69,39 @@ class NfTest {
         }
     }
 
+
+    @Fuzz
+    public void testNFCommand2(@From(NextflowCommandGenerator.class) String[] command) {
+
+        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
+        print command
+
+        int status = new Launcher().command(command).run();
+        print "status " + status
+        Assume.assumeTrue(status == 0)
+
+    }
+
     @Fuzz
     public void testTest(@From(StringGenerator.class) String inputFile) {
-        String filename = "/home/alena/source/ma_test2/src/main/resources/test/out1691309795610.nf";
-        String[] orig_args2 = new String[]{"run", filename};
-        def args2 = [filename]
+        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
 
-        Launcher launcher = new Launcher().command(orig_args2)//.run();
+        try {
+            String filename = "/home/alena/source/ma_test2/src/main/resources/test/out1691656718885.nf";
+            String[] orig_args2 = new String[]{"run", filename};
+            def args2 = [filename]
 
-        CmdRun myRunner = new CmdRun();
-        myRunner.setArgs(args2);
-        myRunner.setLauncher(launcher);
+            int status = new Launcher().command(orig_args2).run();
+            Assume.assumeTrue(status==0)
 
-        myRunner.run();
+        } catch (Exception ex) {
+            println "EXCEPTION"
+            ex.printStackTrace()
 
+        } catch (Error e) {
+            println "ERROR"
+            println e.getCause()
+        }
         //nextflow clean ? <
     }
 
@@ -89,6 +109,7 @@ class NfTest {
     public void cleanUp() {
         //plugins won't stop after sriptcompilation exception
         Plugins.stop()
+        //nextflow clean -f
     }
 
 }
