@@ -7,6 +7,8 @@ import com.pholser.junit.quickcheck.random.SourceOfRandomness;
 import java.io.*;
 import java.nio.file.Paths;
 
+import static de.schemmea.ma.generator.Util.getFileName;
+
 public class WorkflowFileGenerator extends Generator<File> {
 
     ContentGenerator baseGenerator;
@@ -34,16 +36,6 @@ public class WorkflowFileGenerator extends Generator<File> {
             e.printStackTrace();
         }
         return null;
-    }
-
-    private String getFileName() {
-        long date = System.currentTimeMillis();
-        File generated = new File(Paths.get(Configuration.OUTPUT_PATH).toUri());
-        if (!generated.exists()) {
-            generated.mkdir();
-        }
-
-        return generated.getAbsolutePath() + "/out" + date + ".nf";
     }
 
 

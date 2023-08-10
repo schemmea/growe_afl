@@ -21,6 +21,8 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static de.schemmea.ma.generator.Util.getFileName;
+
 public class BaselineGenerator extends Generator<File> {
     private static final int generateNumber = 1;
     private static final int depth = 2;
@@ -43,16 +45,6 @@ public class BaselineGenerator extends Generator<File> {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         tree = new bnfParser(tokens).rulelist();
 
-    }
-
-    private String getFileName() {
-        long date = System.currentTimeMillis();
-        File generated = new File(Paths.get(Configuration.OUTPUT_PATH).toUri());
-        if (!generated.exists()) {
-            generated.mkdir();
-        }
-
-        return generated.getAbsolutePath() + "/out" + date + ".nf";
     }
 
 

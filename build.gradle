@@ -27,7 +27,7 @@ dependencies {
 
     implementation('org.antlr:antlr4-runtime:4.12.0')
 
-    implementation('io.nextflow:nextflow:23.04.1')
+    implementation('io.nextflow:nextflow:23.04.2')
             {
                 // exclude group: 'org.slf4j', module: 'slf4j-api'
                 exclude group: 'ch.qos.logback', module: 'logback-classic'
@@ -50,7 +50,7 @@ dependencies {
             {
                 exclude group: 'org.slf4j', module: 'slf4j-api'
             }
-    testImplementation('io.nextflow:nextflow:23.04.1')
+    testImplementation('io.nextflow:nextflow:23.04.2')
             {
                 exclude group: 'org.slf4j', module: 'slf4j-api'
             }

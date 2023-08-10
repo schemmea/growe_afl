@@ -56,6 +56,7 @@ class Args {
     @Parameter(names = ["--keepTestFile", "-k"], description = "Should keep testfile after run")
     private boolean keepTestFile = false;
 
+
     @Parameter(names = ["--useBaseline", "-b"], description = "Should we run experiments with baseline generation?")
     private boolean useBaseline = false;
 

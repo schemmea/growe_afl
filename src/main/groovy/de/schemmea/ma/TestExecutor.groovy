@@ -9,6 +9,7 @@ import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.guidance.Guidance
 import edu.berkeley.cs.jqf.fuzz.guidance.Result
 import edu.berkeley.cs.jqf.fuzz.junit.*
+import edu.berkeley.cs.jqf.fuzz.random.RandomDriver
 import org.apache.commons.lang.StringUtils
 
 import java.nio.file.Paths
@@ -51,20 +52,31 @@ class TestExecutor {
         new FileResourcesUtils().copyFilesToFolder(Configuration.DATA_SOURCE_PATH, Configuration.OUTPUT_DATA_PATH);
 
         Guidance guidance = null;
-        if (ARGS.guidance == "ei")
+        if (ARGS.guidance == "ei") {
             guidance = new FileAwareExecutionIndexingGuidance(testname,
                     Duration.ofSeconds(ARGS.durationInSeconds),
                     ARGS.iteration,
                     errorDirectory,
                     new Random(),
                     TestExecutor::handleResult)
-        else
+        }
+        else if (ARGS.guidance == "blind") {
+            System.setProperty("jqf.ei.TOTALLY_RANDOM", "true");
             guidance = new FileAwareZestGuidance(testname,
                     Duration.ofSeconds(ARGS.durationInSeconds),
                     ARGS.iteration,
                     errorDirectory,
                     new Random(),
                     TestExecutor::handleResult)
+        }
+        else {
+            guidance = new FileAwareZestGuidance(testname,
+                    Duration.ofSeconds(ARGS.durationInSeconds),
+                    ARGS.iteration,
+                    errorDirectory,
+                    new Random(),
+                    TestExecutor::handleResult)
+        }
         GuidedFuzzing.run(testclass, testname, guidance, System.out)
 
         System.out.println(String.format("Covered %d edges.", guidance.getTotalCoverage().getNonZeroCount()));

@@ -15,6 +15,7 @@ import org.junit.runner.RunWith
 
 import java.nio.file.Paths
 
+@Deprecated
 @RunWith(JQF.class)
 class BaselineNfTest {
 
@@ -33,10 +34,16 @@ class BaselineNfTest {
     public void testBaseline(@From(BaselineGenerator.class) File inputFile) {
         print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
         currentFile = inputFile;
+
         String filename = inputFile.getAbsolutePath();
+
+        //trick for ij
+
         String[] orig_args2 = new String[]{"run", filename};
 
         def args2 = [filename]
+
+        //does this ignore comments?
 
         Launcher launcher = new Launcher().command(orig_args2)//.run();
 

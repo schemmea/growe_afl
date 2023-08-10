@@ -16,6 +16,8 @@ import org.junit.Assume
 import org.junit.Before
 import org.junit.runner.RunWith
 
+import static de.schemmea.ma.generator.Util.getFileName
+
 @RunWith(JQF.class)
 class NfTest {
 
@@ -29,9 +31,11 @@ class NfTest {
 
     }
 
+    @SuppressWarnings('DuplicatedCode')
     @Fuzz
     public void testWorkflow(@From(WorkflowFileGenerator.class) File inputFile) {
         print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
+
         String filename = inputFile.getAbsolutePath();
         String[] orig_args2 = new String[]{"run", filename};
         def args2 = [filename]
@@ -43,17 +47,40 @@ class NfTest {
         myRunner.setLauncher(launcher);
 
         myRunner.run();
+    }
 
+    @Fuzz
+    public void testAFL(InputStream inputStream){
+        /**
+         * install afl
+         * https://medium.com/@ayushpriya10/fuzzing-applications-with-american-fuzzy-lop-afl-54facc65d102
+         * https://www.dannyvanheumen.nl/post/java-fuzzing-with-afl-and-jqf/
+         */
+        String filename =getFileName();
+        File file = new File(filename);
+
+        byte[] buffer = new byte[1024];
+
+        try (OutputStream outputStream = new FileOutputStream(filename)) {
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+        } catch (Exception e) {
+            /**ignore**/
+        }
+
+        testWorkflow(file);
     }
 
     @Fuzz
     public void testNFCommand(@From(NextflowCommandGenerator.class) String[] command) {
 
-        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
-        print command
+        println Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
+        println command
 
         if (command[0] == "run") {
-            //avoid try catch in Launcher
+            //avoid try catch (Throwable) in Launcher
             Launcher launcher = new Launcher().command(command)
 
             CmdRun myRunner = new CmdRun();
@@ -64,22 +91,11 @@ class NfTest {
 
         } else {
             int status = new Launcher().command(command).run();
-            print "status " + status
+            println "status " + status
+            Assume.assumeTrue(status==0)
         }
     }
 
-
-    @Fuzz
-    public void testNFCommand2(@From(NextflowCommandGenerator.class) String[] command) {
-
-        print Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
-        print command
-
-        int status = new Launcher().command(command).run();
-        print "status " + status
-        Assume.assumeTrue(status == 0)
-
-    }
 
     @Fuzz
     public void testTest(@From(StringGenerator.class) String inputFile) {
@@ -104,11 +120,26 @@ class NfTest {
         //nextflow clean ? <
     }
 
+    @Fuzz
+    public void testNFCommand2(@From(NextflowCommandGenerator.class) String[] command) {
+
+        println Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
+        println command
+
+        int status = new Launcher().command(command).run();
+        println "status " + status
+
+        Assume.assumeTrue(status==0)
+    }
+
+
     @After
     public void cleanUp() {
         //plugins won't stop after sriptcompilation exception
         Plugins.stop()
+
         //nextflow clean -f
+        int status = new Launcher().command(new String[]{"clean","-f"}).run();
     }
 
 }
