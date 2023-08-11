@@ -1,1 +1,1 @@
-./bin/jqf-afl-fuzz -v -c ~/demo2/build/libs/demo2-1.0-SNAPSHOT-all.jar:~/demo2/build/classes/groovy/main de.schemmea.ma.NfTest testAFL -i ./examples/target/seeds/nextflow/
+./bin/jqf-afl-fuzz -v -c ~/growe/build/libs/growe-1.0-SNAPSHOT-all.jar:~/growe/build/classes/groovy/main de.schemmea.ma.NfTest testAFL -i ./examples/target/seeds/nextflow/

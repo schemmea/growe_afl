@@ -9,7 +9,6 @@ import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.guidance.Guidance
 import edu.berkeley.cs.jqf.fuzz.guidance.Result
 import edu.berkeley.cs.jqf.fuzz.junit.*
-import edu.berkeley.cs.jqf.fuzz.random.RandomDriver
 import org.apache.commons.lang.StringUtils
 
 import java.nio.file.Paths
@@ -29,11 +28,6 @@ class TestExecutor {
 
         String testname = "testNFCommand"
         Class testclass = NfTest.class
-        if(ARGS.useBaseline)
-        {
-            testname = "testBaseline"
-            testclass = BaselineNfTest.class
-        }
 
         String errorDir = Configuration.ERROR_DIR;
 
@@ -60,15 +54,7 @@ class TestExecutor {
                     new Random(),
                     TestExecutor::handleResult)
         }
-        else if (ARGS.guidance == "blind") {
-            System.setProperty("jqf.ei.TOTALLY_RANDOM", "true");
-            guidance = new FileAwareZestGuidance(testname,
-                    Duration.ofSeconds(ARGS.durationInSeconds),
-                    ARGS.iteration,
-                    errorDirectory,
-                    new Random(),
-                    TestExecutor::handleResult)
-        }
+
         else {
             guidance = new FileAwareZestGuidance(testname,
                     Duration.ofSeconds(ARGS.durationInSeconds),

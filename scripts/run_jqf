@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+parentdir="$(dirname "$(pwd)")"
+repodir="$(dirname "$parentdir")"
+
+
+DRIVER_PATH="$parentdir/JQF/scripts/jqf-driver.sh"
+JAR_PATH="$(pwd)/build/libs/growe-1.0-SNAPSHOT-all.jar"
+
+function log() {
+  echo "$1" | tee -a "$LOGFILE"
+}
+
+DURATIONHOURS=2
+DURATIONSECONDS=$((DURATIONHOURS * 60 * 60))
+ITERATIONS=1500
+
+LOGFILE="./executor.log"
+EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")-$DURATIONHOURS"
+
+
+function executeTest() {
+
+  #core execution
+  log ""
+  # log "===== Executing $CURRENT_METHOD  ====="
+  log "===== Executing  ====="
+  export JVM_OPTS="$JVM_OPTS -Djqf.ei.MAX_INPUT_SIZE=204800"
+  export JVM_OPTS="$JVM_OPTS -Djqf.logCoverage=true"
+  export JVM_OPTS="$JVM_OPTS -Djqf.ei.QUIET_MODE=false"
+  export JVM_OPTS="$JVM_OPTS -DuseFastNonCollidingCoverageInstrumentation=true"
+
+  #ei guidance
+  #export JVM_OPTS="$JVM_OPTS -Djqf.tracing.MATCH_CALLEE_NAMES=true -Djqf.tracing.TRACE_GENERATORS=true"
+
+  #blind
+  #export JVM_OPTS="$JVM_OPTS -Djqf.ei.TOTALLY_RANDOM=true"
+
+  #-k -> keeptestfiles
+  #-g -> guidance ei or zest
+
+  /usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -Xmx4G -jar $JAR_PATH -d $DURATIONSECONDS -i $ITERATIONS | tee -a $LOGFILE 2>/dev/null"
+
+  rm -r work/
+  rm -r .nextflow/
+  
+  # log "Archiving working directory..."
+  # zip -r "$BASEDIR/work.zip" "$WORKING_DIR" && rm -r "$WORKING_DIR"
+}
+
+# execution preparation
+mkdir -p "$EXEC_DIR" || return 1
+cd "$EXEC_DIR" || return 1
+
+executeTest
+
+echo ""
+echo "===== DONE ====="

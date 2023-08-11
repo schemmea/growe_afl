@@ -5,7 +5,6 @@ import com.pholser.junit.quickcheck.generator.java.lang.StringGenerator
 import de.schemmea.ma.generator.Configuration
 import de.schemmea.ma.generator.NextflowCommandGenerator
 import de.schemmea.ma.generator.WorkflowFileGenerator
-import de.schemmea.ma.utils.FileResourcesUtils
 import edu.berkeley.cs.jqf.fuzz.Fuzz
 import edu.berkeley.cs.jqf.fuzz.JQF
 import nextflow.cli.CmdRun
@@ -74,7 +73,7 @@ class NfTest {
     }
 
     @Fuzz
-    public void testNFCommand(@From(NextflowCommandGenerator.class) String[] command) {
+    public void testNFCommand(@From(GroovyGenerator.class) String[] command) {
 
         println Configuration.newline + "ITERATION " + ++iteration + Configuration.newline
         println command
