@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="setting up test with groovy.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Util.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Util.groovy" afterDir="false" />
+    <list default="true" id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="fckng lineendings">
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693158918684</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fckng lineendings">
+      <option name="closed" value="true" />
+      <created>1693159014972</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1693159014972</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,7 +234,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="setting up test with groovy." />
-    <option name="LAST_COMMIT_MESSAGE" value="setting up test with groovy." />
+    <MESSAGE value="fckng lineendings" />
+    <option name="LAST_COMMIT_MESSAGE" value="fckng lineendings" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
