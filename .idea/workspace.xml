@@ -4,133 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="setting up afl">
-      <change afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/NfAFLTest.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Configuration.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/seeds/hello.nf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/seeds/splitLetters.nf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/seeds/tagging.nf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/seeds/tuples-dsl2.nf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/seeds/when-block.nf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/seeds/workflow-oncomplete.nf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="setting up test with groovy.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/old/run_debug_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/old/run_jqf_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/old/run_jqf_script2.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/old/run_jqf_script_debug.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/old/run_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_afl" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_afl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_jqf" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_jqf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/com/sourceclear/gramtest/bnf.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/GroovyGenerator.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/NfTest.groovy" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/GeneratorVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/TestRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnf.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnf.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnfBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnfBaseVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnfLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnfLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnfLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnfListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnfParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sourceclear/gramtest/bnfVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/generator/BaselineGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/generator/Configuration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/generator/ContentGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/generator/NextflowCommandGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/generator/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Util.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/generator/WorkflowFileGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/guidance/FileAwareExecutionIndexingGuidance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/guidance/FileAwareZestGuidance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/schemmea/ma/utils/FileResourcesUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/bnfs/nextflow.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/bnfs/nextflow_baseline.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/bnfs/nextflow_v1.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/bnfs/nextflow_v2.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/bnfs/nextflow_v3.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/bnfs/nextflow_v4.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/data3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/file-b.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/seeds/nativeCode.nf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/ggal_1_48850000_49020000.Ggal71.500bpflank.fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/ggal_1_48850000_49020000.bed.gff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/ggal_alpha_1.fq" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/ggal_alpha_2.fq" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/ggal_beta_1.fq" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/ggal_beta_2.fq" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/p1.fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/p2.fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/p3.fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/p4.fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/p5.fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/prot.fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/sample.fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/scratch_csv_bom.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/seqs_a.fastq" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/seqs_b.fastq" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/data/seqs_c.fastq" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/nextflow.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/allocate_script1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/bar.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/bash-script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/foo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/long_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/multi_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script 10" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script 8.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script2.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/script9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/shell-script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/test_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/twovars_script9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nextflow/templates/yesOrNo.nf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/seeds/yesOrNo.nf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/allocate_script1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/bar.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/bash-script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/foo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/long_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/multi_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script 10" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script 8.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script2.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/script9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/shell-script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/test_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/twovars_script9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test/templates/yesOrNo.nf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/seeds/new file" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Util.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Util.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,6 +206,15 @@
     </recent_temporary>
   </component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="setting up test with groovy.">
+      <option name="closed" value="true" />
+      <created>1693158918684</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1693158918684</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -339,6 +227,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="setting up test with groovy." />
+    <option name="LAST_COMMIT_MESSAGE" value="setting up test with groovy." />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
