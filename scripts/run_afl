@@ -10,7 +10,7 @@ DRIVER_PATH="$parentdir/JQF/bin/jqf-afl-fuzz"
 EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")-afl"
 
 
-classpath="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar:$(pwd)/build/classes/groovy/main"
+classpath="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar:$(pwd)/build/classes/java/main"
 jqf_classpath="$($parentdir/JQF/examples_classpath.sh)"
 
 seeds="$(pwd)/build/resources/main/seeds/"
@@ -19,7 +19,7 @@ dict="$(pwd)/build/resource/main/dictionaries/nextflow.dict"
 mkdir -p "$EXEC_DIR" || return 1
 cd "$EXEC_DIR" || return 1
 
-/usr/bin/env bash -c "$DRIVER_PATH -v -c $jqf_classpath de.schemmea.ma.NfAFLTest testAFL -i $seeds -x $dict"
+/usr/bin/env bash -c "$DRIVER_PATH -v -c $classpath de.schemmea.ma.NfAFLTest testAFL -i $seeds -x $dict"
 
 #remove nextflow generated shit
 rm -r work/
