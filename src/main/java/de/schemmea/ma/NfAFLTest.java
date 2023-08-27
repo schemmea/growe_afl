@@ -5,6 +5,7 @@ import edu.berkeley.cs.jqf.fuzz.JQF;
 import nextflow.cli.CmdRun;
 import nextflow.cli.Launcher;
 import nextflow.plugin.Plugins;
+import org.junit.After;
 import org.junit.Assume;
 import org.junit.runner.RunWith;
 
@@ -41,8 +42,12 @@ public class NfAFLTest {
         }
     }
 
+    static int iteration =0;
+
     @Fuzz
     public void testAFL(InputStream inputStream) throws IOException {
+
+        System.out.println("+++++ ITERATION "+ ++iteration + "+++++");
         /*
          * install afl
          * https://medium.com/@ayushpriya10/fuzzing-applications-with-american-fuzzy-lop-afl-54facc65d102
@@ -69,17 +74,22 @@ public class NfAFLTest {
         } finally {
 
             //instead of @After
-            Plugins.stop();
             Files.delete(Paths.get(filename));
 
-            Files.delete(Paths.get(System.getProperty("user.dir"),".nextflow.log"));
 
-            //nextflow clean does not work?!
-            int status = new Launcher().command(new String[]{"clean", "-f"}).run();
 
         }
 
     }
+
+@After
+public void clean()throws IOException{
+    Plugins.stop();
+    Files.delete(Paths.get(System.getProperty("user.dir"),".nextflow.log"));
+    //nextflow clean does not work?!
+    int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+
+}
 
     @Fuzz
     public void debugTest() throws IOException {
