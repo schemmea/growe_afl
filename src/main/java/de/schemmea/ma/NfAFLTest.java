@@ -73,10 +73,35 @@ public class NfAFLTest {
             Files.delete(Paths.get(filename));
 
             //nextflow clean does not work?!
-            int status = new Launcher().command(new String[]{"clean"}).run();
+            int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+        }
+    }
 
-            //maybe two time
-            // Plugins.stop();
+    @Fuzz
+    public void debugTest(){
+        String filename = "/home/alena/source/ma_test2/src/main/resources/seeds/yesOrNo.nf";
+        try {
+
+            List<String> args2 = List.of(filename);
+            String[] orig_args2 = new String[]{"run", filename};
+
+            Launcher launcher = new Launcher().command(orig_args2);//.run();
+
+            CmdRun myRunner = new CmdRun();
+            myRunner.setArgs(args2);
+            myRunner.setLauncher(launcher);
+
+            myRunner.run();
+        } catch (Throwable t) {
+            Assume.assumeNoException(t);
+        } finally {
+
+            //instead of @After
+            Plugins.stop();
+
+            //nextflow clean up to reduce ram?
+            int status = new Launcher().command(new String[]{"clean","-f"}).run();
+
 
         }
     }
