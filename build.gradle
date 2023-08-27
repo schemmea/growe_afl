@@ -1,5 +1,4 @@
 plugins {
-    id 'groovy'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
@@ -14,52 +13,15 @@ repositories {
 }
 
 dependencies {
-    implementation('ch.qos.logback:logback-classic:1.2.11')
-
-    implementation('org.codehaus.groovy:groovy-all:3.0.15') {
-        exclude group: 'com.beust', module: 'jcommander'
-        exclude group: 'org.jline', module: 'jline'
-        exclude group: 'junit', module: 'junit'
-        exclude group: 'info.picocli', module: 'picocli'
-    }
-
     implementation('edu.berkeley.cs.jqf:jqf-fuzz:2.0')
 
-    implementation('org.antlr:antlr4-runtime:4.12.0')
-
     implementation('io.nextflow:nextflow:23.04.2')
-            {
-                // exclude group: 'org.slf4j', module: 'slf4j-api'
-                exclude group: 'ch.qos.logback', module: 'logback-classic'
-                exclude group: 'ch.qos.logback', module: 'logback-core'
-            }
 
-    testImplementation('org.codehaus.groovy:groovy-all:3.0.15') {
-        exclude group: 'com.beust', module: 'jcommander'
-        exclude group: 'org.jline', module: 'jline'
-        exclude group: 'junit', module: 'junit'
-        exclude group: 'info.picocli', module: 'picocli'
-        exclude group: 'org.slf4j', module: 'slf4j-api'
-    }
-
-    testImplementation('edu.berkeley.cs.jqf:jqf-fuzz:2.0')
-            {
-                exclude group: 'org.slf4j', module: 'slf4j-api'
-            }
-    testImplementation('org.antlr:antlr4-runtime:4.12.0')
-            {
-                exclude group: 'org.slf4j', module: 'slf4j-api'
-            }
-    testImplementation('io.nextflow:nextflow:23.04.2')
-            {
-                exclude group: 'org.slf4j', module: 'slf4j-api'
-            }
 }
 
 sourceSets {
     main {
-        java { srcDirs = [] }
-        groovy { srcDirs += ['src/main/java'] }
+        java { srcDirs = ['src/main/java'] }
     }
 }
 

@@ -1,1 +1,27 @@
-./bin/jqf-afl-fuzz -v -c ~/growe/build/libs/growe-1.0-SNAPSHOT-all.jar:~/growe/build/classes/groovy/main de.schemmea.ma.NfTest testAFL -i ./examples/target/seeds/nextflow/
+#!/usr/bin/env bash
+
+parentdir="$(dirname "$(pwd)")"
+
+
+DRIVER_PATH="$parentdir/JQF/bin/jqf-afl-fuzz"
+
+#/usr/bin/env bash -c "$parentdir/JQF/setup.sh"
+
+EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")-afl"
+
+
+classpath="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar:$(pwd)/build/classes/groovy/main"
+jqf_classpath="$($parentdir/JQF/examples_classpath.sh)"
+
+seeds="$(pwd)/build/resources/main/seeds/"
+dict="$(pwd)/build/resource/main/dictionaries/nextflow.dict"
+
+mkdir -p "$EXEC_DIR" || return 1
+cd "$EXEC_DIR" || return 1
+
+/usr/bin/env bash -c "$DRIVER_PATH -v -c $jqf_classpath de.schemmea.ma.NfAFLTest testAFL -i $seeds -x $dict"
+
+#remove nextflow generated shit
+rm -r work/
+rm -r .nextflow/
+rm .nextflow.log*
