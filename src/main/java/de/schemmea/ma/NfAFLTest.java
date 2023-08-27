@@ -68,6 +68,7 @@ public class NfAFLTest {
 
             myRunner.run();
 
+            Thread.sleep(1000); //1sec
 
             clean();
         } catch (IOException e) {
