@@ -14,7 +14,7 @@ classpath="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar:$(pwd)/build/classes
 jqf_classpath="$($parentdir/JQF/examples_classpath.sh)"
 
 seeds="$(pwd)/build/resources/main/seeds/"
-dict="$(pwd)/build/resource/main/dictionaries/nextflow.dict"
+dict="$(pwd)/build/resources/main/dictionaries/nextflow.dict"
 
 mkdir -p "$EXEC_DIR" || return 1
 cd "$EXEC_DIR" || return 1
