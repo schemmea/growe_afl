@@ -72,13 +72,17 @@ public class NfAFLTest {
             Plugins.stop();
             Files.delete(Paths.get(filename));
 
+            Files.delete(Paths.get(System.getProperty("user.dir"),".nextflow.log"));
+
             //nextflow clean does not work?!
             int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+
         }
+
     }
 
     @Fuzz
-    public void debugTest(){
+    public void debugTest() throws IOException {
         String filename = "/home/alena/source/ma_test2/src/main/resources/seeds/yesOrNo.nf";
         try {
 
@@ -102,6 +106,7 @@ public class NfAFLTest {
             //nextflow clean up to reduce ram?
             int status = new Launcher().command(new String[]{"clean","-f"}).run();
 
+            Files.delete(Paths.get(System.getProperty("user.dir"),".nextflow.log"));
 
         }
     }
