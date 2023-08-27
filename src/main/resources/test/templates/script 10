@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Loop to display system load every second for 5 seconds
-for ((i=0; i<5; i++))
-do
-    echo "System Load - Iteration \$i"
-    uptime | grep "$variable"
-done

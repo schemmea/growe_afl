@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Loop to check disk space usage every second for 5 seconds
-for ((i=0; i<5; i++))
-do
-    echo "Disk Space Usage - Iteration \$i"
-    df -h "$variable"
-done

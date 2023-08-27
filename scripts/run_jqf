@@ -5,7 +5,7 @@ repodir="$(dirname "$parentdir")"
 
 
 DRIVER_PATH="$parentdir/JQF/scripts/jqf-driver.sh"
-JAR_PATH="$(pwd)/build/libs/growe-1.0-SNAPSHOT-all.jar"
+JAR_PATH="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar"
 
 function log() {
   echo "$1" | tee -a "$LOGFILE"

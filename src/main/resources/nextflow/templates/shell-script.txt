@@ -1,2 +1,0 @@
-#!/bin/bash
-echo "Hello $variable !{family} !{params.data}" > file.out
