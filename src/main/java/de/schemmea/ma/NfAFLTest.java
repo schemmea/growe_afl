@@ -42,12 +42,12 @@ public class NfAFLTest {
         }
     }
 
-    static int iteration =0;
+    static int iteration = 0;
 
     @Fuzz
     public void testAFL(InputStream inputStream) throws IOException {
 
-        System.out.println("+++++ ITERATION "+ ++iteration + "+++++");
+        System.out.println("+++++ ITERATION " + ++iteration + "+++++");
         /*
          * install afl
          * https://medium.com/@ayushpriya10/fuzzing-applications-with-american-fuzzy-lop-afl-54facc65d102
@@ -76,20 +76,19 @@ public class NfAFLTest {
             //instead of @After
             Files.delete(Paths.get(filename));
 
-
-
         }
 
     }
 
-@After
-public void clean()throws IOException{
-    Plugins.stop();
-    Files.delete(Paths.get(System.getProperty("user.dir"),".nextflow.log"));
-    //nextflow clean does not work?!
-    int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+    @After
+    public void clean() throws IOException {
+        System.out.println("+++++ CLEANING " + iteration + "+++++");
+        Plugins.stop();
+        Files.delete(Paths.get(System.getProperty("user.dir"), ".nextflow.log"));
+        //nextflow clean does not work?!
+        int status = new Launcher().command(new String[]{"clean", "-f"}).run();
 
-}
+    }
 
     @Fuzz
     public void debugTest() throws IOException {
@@ -109,14 +108,6 @@ public void clean()throws IOException{
         } catch (Throwable t) {
             Assume.assumeNoException(t);
         } finally {
-
-            //instead of @After
-            Plugins.stop();
-
-            //nextflow clean up to reduce ram?
-            int status = new Launcher().command(new String[]{"clean","-f"}).run();
-
-            Files.delete(Paths.get(System.getProperty("user.dir"),".nextflow.log"));
 
         }
     }

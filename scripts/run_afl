@@ -22,6 +22,6 @@ cd "$EXEC_DIR" || return 1
 /usr/bin/env bash -c "$DRIVER_PATH -v -c $classpath de.schemmea.ma.NfAFLTest testAFL -i $seeds -x $dict"
 
 #remove nextflow generated shit
-rm -r work/
-rm -r .nextflow/
-rm .nextflow.log*
+#rm -r work/
+#rm -r .nextflow/
+#rm .nextflow.log*
