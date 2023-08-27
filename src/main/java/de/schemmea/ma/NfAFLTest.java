@@ -67,6 +67,9 @@ public class NfAFLTest {
             myRunner.setLauncher(launcher);
 
             myRunner.run();
+
+
+            clean();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (Throwable t) {
@@ -80,7 +83,7 @@ public class NfAFLTest {
 
     }
 
-    @After
+
     public void clean() throws IOException {
         System.out.println("+++++ CLEANING " + iteration + "+++++");
         Plugins.stop();
