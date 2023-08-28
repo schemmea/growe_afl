@@ -20,7 +20,7 @@ class TestExecutor {
         if (ARGS.guidance == "repro") {
             def testInputFiles = []
             new File(ARGS.reproDir).eachFile FileType.FILES, {
-                testInputFiles it
+                testInputFiles << it
             }
 
             String traceDirName = System.getProperty("jqf.repro.traceDir");
