@@ -64,7 +64,7 @@ public class NfAFLTest {
 
             int launcher = new Launcher().command(orig_args2).run();
 
-           Assume.assumeTrue(launcher==0);
+            Assume.assumeTrue(launcher == 0);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (Throwable t) {
@@ -97,7 +97,7 @@ public class NfAFLTest {
 
             int launcher = new Launcher().command(orig_args2).run();
 
-            Assume.assumeTrue(launcher==0);
+            Assume.assumeTrue(launcher == 0);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (Throwable t) {
@@ -105,6 +105,7 @@ public class NfAFLTest {
         } finally {
 
             //instead of @After
+            Plugins.stop();
             Files.delete(Paths.get(filename));
 
         }
@@ -112,13 +113,14 @@ public class NfAFLTest {
     }
 
 
-
     public void clean() throws IOException {
+        // this is called before launcher is finished i afl
+
         System.out.println("+++++ CLEANING " + iteration + "+++++");
-        Plugins.stop();
-        Files.delete(Paths.get(System.getProperty("user.dir"), ".nextflow.log"));
+        //Plugins.stop();
+       // Files.delete(Paths.get(System.getProperty("user.dir"), ".nextflow.log"));
         //nextflow clean does not work?!
-        int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+        //int status = new Launcher().command(new String[]{"clean", "-f"}).run();
 
     }
 
