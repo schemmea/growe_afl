@@ -5,7 +5,6 @@ import de.schemmea.ma.utils.Args
 import edu.berkeley.cs.jqf.fuzz.junit.GuidedFuzzing
 import edu.berkeley.cs.jqf.fuzz.repro.ReproGuidance
 import groovy.io.FileType
-
 import java.util.stream.Collectors
 
 
@@ -23,10 +22,11 @@ class TestExecutor {
                 testInputFiles << it
             }
 
+
             String traceDirName = System.getProperty("jqf.repro.traceDir");
             File traceDir = traceDirName != null ? new File(traceDirName) : null;
 
-            ReproGuidance guidance = new ReproGuidance(testInputFiles, traceDir)
+            ReproGuidance guidance = new ReproGuidance( testInputFiles as File[] , traceDir)
 
             println "Repro $ARGS.reproDir"
 
