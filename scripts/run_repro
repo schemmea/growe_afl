@@ -32,17 +32,19 @@ cd $reprodir
 export JVM_OPTS="-Djqf.repro.traceDir=$errordir $JVM_OPTS"
 
 export JVM_OPTS="$JVM_OPTS -Djqf.repro.logUniqueBranches=true -Xmx6g"
+export JVM_OPTS="$JVM_OPTS -Djqf.tracing.MATCH_CALLEE_NAMES=true -Djqf.tracing.TRACE_GENERATORS=true"
+
 
 if [[ $@ == *"debug"* ]]; then
   export JVM_OPTS="$JVM_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005"
 fi
 echo "======= run repro cov-all ======="
-/usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -jar $JAR_PATH -g repro -r $corpus ${@: 2} | grep '^# Cov' | sort | uniq > ${errordir}/cov-all.log"
+/usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -jar $JAR_PATH -g repro -r $corpus ${@: 2} " #| grep '^# Cov' | sort | uniq > ${errordir}/cov-all.log"
 
 
 export JVM_OPTS="$JVM_OPTS -Djqf.repro.ignoreInvalidCoverage=true"
 echo "======= run repro cov-valid ======="
-/usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -jar $JAR_PATH -g repro -r $corpus ${@: 2} | grep '^# Cov' | sort | uniq > ${errordir}/cov-valid.log"
+#/usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -jar $JAR_PATH -g repro -r $corpus ${@: 2} | grep '^# Cov' | sort | uniq > ${errordir}/cov-valid.log"
 
 
 rm -r work/

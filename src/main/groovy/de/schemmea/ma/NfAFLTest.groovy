@@ -1,10 +1,13 @@
-package de.schemmea.ma;
+package de.schemmea.ma
 
+import com.pholser.junit.quickcheck.From;
 import edu.berkeley.cs.jqf.fuzz.Fuzz;
-import edu.berkeley.cs.jqf.fuzz.JQF;
+import edu.berkeley.cs.jqf.fuzz.JQF
+import edu.berkeley.cs.jqf.fuzz.junit.quickcheck.InputStreamGenerator;
 import nextflow.cli.CmdRun;
 import nextflow.cli.Launcher;
-import nextflow.plugin.Plugins;
+import nextflow.plugin.Plugins
+import org.junit.After;
 import org.junit.Assume;
 import org.junit.runner.RunWith;
 
@@ -32,7 +35,7 @@ public class NfAFLTest {
     }
 
     @Fuzz
-    public void testAFL(InputStream inputStream) throws IOException {
+    public void testAFL(@From(InputStreamGenerator.class) InputStream inputStream) throws IOException {
         /*
          * install afl
          * https://medium.com/@ayushpriya10/fuzzing-applications-with-american-fuzzy-lop-afl-54facc65d102
@@ -66,5 +69,11 @@ public class NfAFLTest {
             //nextflow clean -f does not work?!
             //  int status = new Launcher().command(new String[]{"clean", "-f"}).run();
         }
+    }
+
+    @After
+    public void cleanUp(){
+        Plugins.stop();
+
     }
 }
