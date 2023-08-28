@@ -4,6 +4,9 @@ import com.beust.jcommander.JCommander
 import de.schemmea.ma.utils.Args
 import edu.berkeley.cs.jqf.fuzz.junit.GuidedFuzzing
 import edu.berkeley.cs.jqf.fuzz.repro.ReproGuidance
+import groovy.io.FileType
+
+import java.util.stream.Collectors
 
 
 class TestExecutor {
@@ -15,7 +18,10 @@ class TestExecutor {
         Class testclass = NfAFLTest.class
 
         if (ARGS.guidance == "repro") {
-            File[] testInputFiles = new File(ARGS.reproDir).listFiles().sort();
+            File[] testInputFiles = []
+            new File(ARGS.reproDir).eachFile FileType.FILES, {
+                testInputFiles << it.name
+            }
 
             String traceDirName = System.getProperty("jqf.repro.traceDir");
             File traceDir = traceDirName != null ? new File(traceDirName) : null;
