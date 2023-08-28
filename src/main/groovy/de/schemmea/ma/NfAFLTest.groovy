@@ -67,7 +67,7 @@ public class NfAFLTest {
             Plugins.stop();
             Files.delete(Paths.get(filename));
             //nextflow clean -f does not work?!
-            //  int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+             int status = new Launcher().command(new String[]{"clean", "-f"}).run();
         }
     }
 
