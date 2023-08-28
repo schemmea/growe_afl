@@ -13,10 +13,16 @@ repositories {
 }
 
 dependencies {
+    implementation('ch.qos.logback:logback-classic:1.2.11')
+
     implementation('edu.berkeley.cs.jqf:jqf-fuzz:2.0')
 
     implementation('io.nextflow:nextflow:23.04.2')
-
+            {
+                // exclude group: 'org.slf4j', module: 'slf4j-api'
+                exclude group: 'ch.qos.logback', module: 'logback-classic'
+                exclude group: 'ch.qos.logback', module: 'logback-core'
+            }
 }
 
 sourceSets {
