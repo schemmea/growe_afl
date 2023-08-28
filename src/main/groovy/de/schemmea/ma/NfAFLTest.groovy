@@ -45,13 +45,15 @@ public class NfAFLTest {
             List<String> args2 = List.of(filename);
             String[] orig_args2 = new String[]{"run", filename};
 
-            Launcher launcher = new Launcher().command(orig_args2);//.run();
+            int launched = new Launcher().command(orig_args2).run();
 
-            CmdRun myRunner = new CmdRun();
-            myRunner.setArgs(args2);
-            myRunner.setLauncher(launcher);
+            Assume.assumeTrue(launched == 0);
 
-            myRunner.run();
+          //  CmdRun myRunner = new CmdRun();
+          //  myRunner.setArgs(args2);
+          //  myRunner.setLauncher(launcher);
+//
+          //  myRunner.run();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (Throwable t) {
