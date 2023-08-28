@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="fckng lineendings">
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+    <list default="true" id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="fckng lineendings 2">
+      <change afterPath="$PROJECT_DIR$/scripts/run_repro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Args.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Args.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,17 +46,33 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": -1
+}]]></component>
+  <component name="ProjectId" id="2Uc1yk3GDTI7VMrcjyI9CDMLeDK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "grooy__setup",
-    "last_opened_file_path": "/home/alena/source/ma_test2/src/main/resources",
+    "last_opened_file_path": "/home/alena/source/ma_test2/scripts",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils" />
       <recent name="$PROJECT_DIR$/src/main/groovy" />
@@ -176,31 +197,13 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="growe" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.ma_test2 [build]" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="setting up test with groovy.">
       <option name="closed" value="true" />
@@ -218,8 +221,27 @@
       <option name="project" value="LOCAL" />
       <updated>1693159014972</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fckng lineendings 2">
+      <option name="closed" value="true" />
+      <created>1693160132659</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1693160132659</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="fckng lineendings 2" />
+      <created>1693224313286</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1693224313286</updated>
+      <workItem from="1693224316702" duration="2339000" />
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -235,7 +257,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="setting up test with groovy." />
     <MESSAGE value="fckng lineendings" />
-    <option name="LAST_COMMIT_MESSAGE" value="fckng lineendings" />
+    <MESSAGE value="fckng lineendings 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="fckng lineendings 2" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

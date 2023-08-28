@@ -13,11 +13,11 @@ class Args {
         this.durationInSeconds = durationInSeconds
     }
 
-    int getIteration() {
-        return iteration
+    Long getIteration() {
+        return iteration > 0 ? iteration : null
     }
 
-    void setIteration(int iteration) {
+    void setIteration(Long iteration) {
         this.iteration = iteration
     }
 
@@ -45,12 +45,28 @@ class Args {
         this.useBaseline = useBaseline
     }
 
+    String getReproDir() {
+        return reproDir
+    }
+
+    void setReproDir(String reproDir) {
+        this.reproDir = reproDir
+    }
+
+    boolean getDebug() {
+        return debug
+    }
+
+    void setDebug(boolean debug) {
+        this.debug = debug
+    }
+
     @Parameter(names = ["--duration", "-d"], description = "How long should we run in maximum")
-    private int durationInSeconds = 360;
+    private int durationInSeconds = 3600;
 
 
     @Parameter(names = ["--iteration", "-i"], description = "How many tests should we perform")
-    private int iteration = 5;
+    private Long iteration = 0;
 
 
     @Parameter(names = ["--keepTestFile", "-k"], description = "Should keep testfile after run")
@@ -61,8 +77,16 @@ class Args {
     private boolean useBaseline = false;
 
 
-    @Parameter(names = ["--guidance", "-g"], description = "Use zest guidance or ei guidance")
+    @Parameter(names = ["--guidance", "-g"], description = "Use zest, ei, repro guidance")
     private String guidance = "zest";
+
+
+    @Parameter(names = ["--reproDir", "-r"], description = "path to jqfs errorDir/corpus")
+    private String reproDir = "";
+
+
+    @Parameter(names = ["-debug"], description = "debug")
+    private boolean debug = false;
 
 
 }
