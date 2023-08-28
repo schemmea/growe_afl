@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+
+print_usage() {
+  echo "Usage: $0 INPUT_FILE"
+}
+
+
+# Check arguments
+if [ $# -lt 1 ]; then
+  print_usage >&1
+  exit 1
+fi
+
+inputfile=$1
+
+parentdir="$(dirname "$(pwd)")"
+
+
+DRIVER_PATH="$parentdir/JQF/bin/jqf-afl-showmap"
+
+#/usr/bin/env bash -c "$parentdir/JQF/setup.sh"
+
+EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")-afl-showmap"
+
+
+classpath="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar:$(pwd)/build/classes/groovy/main"
+jqf_classpath="$($parentdir/JQF/scripts/examples_classpath.sh)"
+
+seeds="$(pwd)/build/resources/main/seeds/"
+dict="$(pwd)/build/resource/main/dictionaries/nextflow.dict"
+
+mkdir -p "$EXEC_DIR" || return 1
+cd "$EXEC_DIR" || return 1
+
+
+/usr/bin/env bash -c "$DRIVER_PATH -v -c $jqf_classpath -m 24800 de.schemmea.ma.NfAFLTest testAFL $inputfile"
+
+#remove nextflow generated shit
+rm -r work/
+rm -r .nextflow/
+rm .nextflow.log*
