@@ -18,9 +18,9 @@ class TestExecutor {
         Class testclass = NfAFLTest.class
 
         if (ARGS.guidance == "repro") {
-            File[] testInputFiles = []
+            def testInputFiles = []
             new File(ARGS.reproDir).eachFile FileType.FILES, {
-                testInputFiles << it
+                testInputFiles it
             }
 
             String traceDirName = System.getProperty("jqf.repro.traceDir");
