@@ -107,6 +107,7 @@ public class NfAFLTest {
             //instead of @After
             Plugins.stop();
             Files.delete(Paths.get(filename));
+            int status = new Launcher().command(new String[]{"clean", "-f"}).run();
 
         }
 
