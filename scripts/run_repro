@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+parentdir="$(dirname "$(pwd)")"
+
+DRIVER_PATH="$parentdir/JQF/scripts/jqf-driver.sh"
+JAR_PATH="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar"
+
+
+function log() {
+  echo "$1" | tee -a "$LOGFILE"
+}
+
+print_usage() {
+  echo "Usage: $0 INPUT_PATH"
+}
+
+# Check arguments
+if [ $# -lt 1 ]; then
+  print_usage >&1
+  exit 1
+fi
+
+corpus="$(pwd)/$1"
+#corpus="$(pwd)/$1/errorDir/corpus"
+#errordir="$(pwd)/$1/errorDir"
+#echo $errordir
+
+reprodir="$(pwd)/$1/repro"
+mkdir $reprodir
+echo $reprodir
+cd $reprodir
+
+errordir="$reprodir"
+
+
+export JVM_OPTS="-Djqf.repro.traceDir=$errordir $JVM_OPTS"
+
+export JVM_OPTS="$JVM_OPTS -Djqf.repro.logUniqueBranches=true -Djqf.logCoverage=true -Xmx6g"
+
+if [[ $@ == *"debug"* ]]; then
+  export JVM_OPTS="$JVM_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005"
+fi
+echo "======= run repro cov-all ======="
+/usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -jar $JAR_PATH -g repro -r $corpus ${@: 2} " #| grep '^# Cov' | sort | uniq > ${errordir}/cov-all.log"
+
+
+export JVM_OPTS="$JVM_OPTS -Djqf.repro.ignoreInvalidCoverage=true"
+echo "======= run repro cov-valid ======="
+/usr/bin/env bash -c "$DRIVER_PATH --illegal-access=permit -jar $JAR_PATH -g repro -r $corpus ${@: 2} " #| grep '^# Cov' | sort | uniq > ${errordir}/cov-valid.log"
+
+
+rm -r work/
+rm -r .nextflow/
+rm -r generatedflows/
+rm .nextflow.log*

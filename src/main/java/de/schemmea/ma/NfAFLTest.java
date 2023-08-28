@@ -1,7 +1,9 @@
 package de.schemmea.ma;
 
+import com.pholser.junit.quickcheck.From;
 import edu.berkeley.cs.jqf.fuzz.Fuzz;
 import edu.berkeley.cs.jqf.fuzz.JQF;
+import edu.berkeley.cs.jqf.fuzz.junit.quickcheck.InputStreamGenerator;
 import nextflow.cli.CmdRun;
 import nextflow.cli.Launcher;
 import nextflow.plugin.Plugins;
@@ -75,6 +77,40 @@ public class NfAFLTest {
         }
 
     }
+
+
+    @Fuzz
+    public void testAFLRepro(@From(InputStreamGenerator.class) InputStream inputStream) throws IOException {
+
+        System.out.println("+++++ ITERATION " + ++iteration + "+++++");
+        /*
+         * install afl
+         * https://medium.com/@ayushpriya10/fuzzing-applications-with-american-fuzzy-lop-afl-54facc65d102
+         * https://www.dannyvanheumen.nl/post/java-fuzzing-with-afl-and-jqf/
+         */
+        String filename = getFileName();
+        try {
+            serializeInputStream(inputStream, filename);
+
+            List<String> args2 = List.of(filename);
+            String[] orig_args2 = new String[]{"run", filename};
+
+            int launcher = new Launcher().command(orig_args2).run();
+
+            Assume.assumeTrue(launcher==0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Throwable t) {
+            Assume.assumeNoException(t);
+        } finally {
+
+            //instead of @After
+            Files.delete(Paths.get(filename));
+
+        }
+
+    }
+
 
 
     public void clean() throws IOException {
