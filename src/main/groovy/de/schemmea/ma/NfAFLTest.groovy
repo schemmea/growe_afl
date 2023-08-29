@@ -52,11 +52,11 @@ public class NfAFLTest {
 
             Assume.assumeTrue(launched == 0);
 
-          //  CmdRun myRunner = new CmdRun();
-          //  myRunner.setArgs(args2);
-          //  myRunner.setLauncher(launcher);
+            //  CmdRun myRunner = new CmdRun();
+            //  myRunner.setArgs(args2);
+            //  myRunner.setLauncher(launcher);
 //
-          //  myRunner.run();
+            //  myRunner.run();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (Throwable t) {
@@ -67,12 +67,13 @@ public class NfAFLTest {
             Plugins.stop();
             Files.delete(Paths.get(filename));
             //nextflow clean -f does not work?!
-             int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+            int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+            System.gc();
         }
     }
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         Plugins.stop();
 
     }
