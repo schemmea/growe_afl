@@ -19,7 +19,9 @@ dict="$(pwd)/build/resources/main/dictionaries/nextflow.dict"
 mkdir -p "$EXEC_DIR" || return 1
 cd "$EXEC_DIR" || return 1
 
-/usr/bin/env bash -c "$DRIVER_PATH -v -c $classpath de.schemmea.ma.NfAFLTest testAFL -i $seeds -x $dict"
+memlimit=8192 #24576
+
+/usr/bin/env bash -c "$DRIVER_PATH -v -m $memlimit -c $classpath de.schemmea.ma.NfAFLTest testAFL -i $seeds -x $dict"
 
 #remove nextflow generated shit
 #rm -r work/
