@@ -4,6 +4,7 @@ import com.pholser.junit.quickcheck.From;
 import edu.berkeley.cs.jqf.fuzz.Fuzz;
 import edu.berkeley.cs.jqf.fuzz.JQF;
 import edu.berkeley.cs.jqf.fuzz.junit.quickcheck.InputStreamGenerator;
+import nextflow.Global;
 import nextflow.cli.CmdRun;
 import nextflow.cli.Launcher;
 import nextflow.plugin.Plugins;
@@ -89,15 +90,16 @@ public class NfAFLTest {
          * https://www.dannyvanheumen.nl/post/java-fuzzing-with-afl-and-jqf/
          */
         String filename = getFileName();
+        Launcher launcher = new Launcher();
         try {
             serializeInputStream(inputStream, filename);
 
             List<String> args2 = List.of(filename);
-            String[] orig_args2 = new String[]{"run", filename};
+            String[] orig_args2 = new String[]{"run", filename, "-cache", "false"};
 
-            int launcher = new Launcher().command(orig_args2).run();
+            int launched = launcher.command(orig_args2).run();
 
-            Assume.assumeTrue(launcher == 0);
+            Assume.assumeTrue(launched == 0);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (Throwable t) {
@@ -107,9 +109,12 @@ public class NfAFLTest {
             //instead of @After
             Plugins.stop();
             Files.delete(Paths.get(filename));
-            int status = new Launcher().command(new String[]{"clean", "-f"}).run();
+            int status = launcher.command(new String[]{"clean", "-f"}).run();
 
-            System.gc();
+
+
+            //blocks execution
+           // System.gc();
         }
 
     }
