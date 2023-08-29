@@ -11,7 +11,7 @@ EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")-afl"
 
 
 classpath="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar:$(pwd)/build/classes/java/main"
-jqf_classpath="$($parentdir/JQF/examples_classpath.sh)"
+jqf_classpath="$($parentdir/JQF/scripts/examples_classpath.sh)"
 
 seeds="$(pwd)/build/resources/main/seeds/"
 dict="$(pwd)/build/resources/main/dictionaries/nextflow.dict"

@@ -109,6 +109,7 @@ public class NfAFLTest {
             Files.delete(Paths.get(filename));
             int status = new Launcher().command(new String[]{"clean", "-f"}).run();
 
+            System.gc();
         }
 
     }
