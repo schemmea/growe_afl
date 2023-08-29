@@ -42,8 +42,46 @@ public class NfAFLTest {
          * https://www.dannyvanheumen.nl/post/java-fuzzing-with-afl-and-jqf/
          */
         String filename = getFileName();
+        Launcher launcher =  new Launcher();
         try {
             serializeInputStream(inputStream, filename);
+
+            List<String> args2 = List.of(filename);
+            String[] orig_args2 = new String[]{"run", filename, "-cache", "false"};
+
+            int launched = launcher.command(orig_args2).run();
+
+            Assume.assumeTrue(launched == 0);
+
+            //  CmdRun myRunner = new CmdRun();
+            //  myRunner.setArgs(args2);
+            //  myRunner.setLauncher(launcher);
+//
+            //  myRunner.run();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Throwable t) {
+            Assume.assumeNoException(t);
+        } finally {
+
+            //instead of @After
+            Plugins.stop();
+            Files.delete(Paths.get(filename));
+            //nextflow clean -f does not work?!
+            int status = launcher.command(new String[]{"clean", "-f"}).run();
+            //System.gc();
+        }
+    }
+
+    @Fuzz
+    public void testDbug() throws IOException {
+        /*
+         * install afl
+         * https://medium.com/@ayushpriya10/fuzzing-applications-with-american-fuzzy-lop-afl-54facc65d102
+         * https://www.dannyvanheumen.nl/post/java-fuzzing-with-afl-and-jqf/
+         */
+        String filename = "/home/alena/source/ma_test2/build/resources/main/seeds/yesOrNo.nf";
+        try {
 
             List<String> args2 = List.of(filename);
             String[] orig_args2 = new String[]{"run", filename, "-cache", "false"};
@@ -65,12 +103,13 @@ public class NfAFLTest {
 
             //instead of @After
             Plugins.stop();
-            Files.delete(Paths.get(filename));
+            // Files.delete(Paths.get(filename));
             //nextflow clean -f does not work?!
             int status = new Launcher().command(new String[]{"clean", "-f"}).run();
-            System.gc();
+            // System.gc();
         }
     }
+
 
     @After
     public void cleanUp() {
