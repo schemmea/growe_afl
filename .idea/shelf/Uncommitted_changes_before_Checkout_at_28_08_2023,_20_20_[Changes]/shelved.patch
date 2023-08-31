@@ -1,0 +1,170 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40\" name=\"Changes\" comment=\"fckng lineendings 2\">\r\n      <change afterPath=\"$PROJECT_DIR$/scripts/run_repro\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/gradle.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/gradle.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Args.groovy\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Args.groovy\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand />\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"HARD\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\n  \"customColor\": \"\",\n  \"associatedIndex\": -1\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2Uc1yk3GDTI7VMrcjyI9CDMLeDK\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"git-widget-placeholder\": \"grooy__setup\",\n    \"last_opened_file_path\": \"/home/alena/source/ma_test2/scripts\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"settings.editor.selected.configurable\": \"reference.settingsdialog.project.gradle\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$/scripts\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/resources\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/groovy\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$/src/main/groovy/de/schemmea/ma\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"DjangoTestsConfigurationType\">\r\n      <module name=\"growe_afl\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"TARGET\" value=\"\" />\r\n      <option name=\"SETTINGS_FILE\" value=\"\" />\r\n      <option name=\"CUSTOM_SETTINGS\" value=\"false\" />\r\n      <option name=\"USE_OPTIONS\" value=\"false\" />\r\n      <option name=\"OPTIONS\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"ma_test2 [build]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"build\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <RunAsTest>false</RunAsTest>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"growe_afl\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"growe_afl\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"PyBehaveRunConfigurationType\" factoryName=\"Behave\">\r\n      <module name=\"growe_afl\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"ADDITIONAL_ARGS\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"PythonConfigurationType\" factoryName=\"Python\">\r\n      <module name=\"growe_afl\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"Python.FlaskServer\">\r\n      <module name=\"growe_afl\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"launchJavascriptDebuger\" value=\"false\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"Tox\" factoryName=\"Tox\">\r\n      <module name=\"growe_afl\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Gradle.ma_test2 [build]\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task id=\"LOCAL-00001\" summary=\"setting up test with groovy.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1693158918684</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1693158918684</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"fckng lineendings\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1693159014972</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1693159014972</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"fckng lineendings 2\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1693160132659</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1693160132659</updated>\r\n    </task>\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40\" name=\"Changes\" comment=\"fckng lineendings 2\" />\r\n      <created>1693224313286</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1693224313286</updated>\r\n      <workItem from=\"1693224316702\" duration=\"2339000\" />\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"setting up test with groovy.\" />\r\n    <MESSAGE value=\"fckng lineendings\" />\r\n    <MESSAGE value=\"fckng lineendings 2\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fckng lineendings 2\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <pin-to-top-manager>\r\n      <pinned-members>\r\n        <PinnedItemInfo parentTag=\"ch.qos.logback.classic.Logger\" memberName=\"loggerContext\" />\r\n      </pinned-members>\r\n    </pin-to-top-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d86d071f647fd3dc93e05d9cf4a00e2e9e35a54d)
++++ b/.idea/workspace.xml	(date 1693246790219)
+@@ -4,13 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="fckng lineendings 2">
+-      <change afterPath="$PROJECT_DIR$/scripts/run_repro" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++    <list default="true" id="cfa41119-b3bd-4b2b-b5e8-2abf0c78ca40" name="Changes" comment="dafuq">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/TestExecutor.groovy" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Args.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/utils/Args.groovy" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/scripts/run_repro" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_repro" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/NfAFLTest.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma/NfAFLTest.groovy" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -46,30 +43,30 @@
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+     <option name="RESET_MODE" value="HARD" />
+   </component>
+-  <component name="ProjectColorInfo"><![CDATA[{
+-  "customColor": "",
+-  "associatedIndex": -1
+-}]]></component>
++  <component name="ProjectColorInfo">{
++  &quot;customColor&quot;: &quot;&quot;,
++  &quot;associatedIndex&quot;: -1
++}</component>
+   <component name="ProjectId" id="2Uc1yk3GDTI7VMrcjyI9CDMLeDK" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "git-widget-placeholder": "grooy__setup",
+-    "last_opened_file_path": "/home/alena/source/ma_test2/scripts",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;grooy__setup&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/home/alena/source/ma_test2/scripts&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$/scripts" />
+@@ -81,7 +78,7 @@
+       <recent name="$PROJECT_DIR$/src/main/groovy/de/schemmea/ma" />
+     </key>
+   </component>
+-  <component name="RunManager">
++  <component name="RunManager" selected="Remote JVM Debug.Unnamed">
+     <configuration default="true" type="DjangoTestsConfigurationType">
+       <module name="growe_afl" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+@@ -107,7 +104,7 @@
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="externalSystemIdString" value="GRADLE" />
+-        <option name="scriptParameters" />
++        <option name="scriptParameters" value="" />
+         <option name="taskDescriptions">
+           <list />
+         </option>
+@@ -183,6 +180,19 @@
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+       <option name="launchJavascriptDebuger" value="false" />
++      <method v="2" />
++    </configuration>
++    <configuration name="Unnamed" type="Remote" nameIsGenerated="true">
++      <option name="USE_SOCKET_TRANSPORT" value="true" />
++      <option name="SERVER_MODE" value="false" />
++      <option name="SHMEM_ADDRESS" />
++      <option name="HOST" value="localhost" />
++      <option name="PORT" value="5005" />
++      <option name="AUTO_RESTART" value="false" />
++      <RunnerSettings RunnerId="Debug">
++        <option name="DEBUG_PORT" value="5005" />
++        <option name="LOCAL" value="false" />
++      </RunnerSettings>
+       <method v="2" />
+     </configuration>
+     <configuration default="true" type="Tox" factoryName="Tox">
+@@ -197,6 +207,29 @@
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+       <method v="2" />
+     </configuration>
++    <configuration default="true" type="tests" factoryName="Doctests">
++      <module name="growe_afl.main" />
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="" />
++      <option name="IS_MODULE_SDK" value="false" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
++      <option name="SCRIPT_NAME" value="" />
++      <option name="CLASS_NAME" value="" />
++      <option name="METHOD_NAME" value="" />
++      <option name="FOLDER_NAME" value="" />
++      <option name="TEST_TYPE" value="TEST_SCRIPT" />
++      <option name="PATTERN" value="" />
++      <option name="USE_PATTERN" value="false" />
++      <method v="2" />
++    </configuration>
++    <list>
++      <item itemvalue="Gradle.ma_test2 [build]" />
++      <item itemvalue="Remote JVM Debug.Unnamed" />
++    </list>
+     <recent_temporary>
+       <list>
+         <item itemvalue="Gradle.ma_test2 [build]" />
+@@ -237,7 +270,15 @@
+       <updated>1693224313286</updated>
+       <workItem from="1693224316702" duration="2339000" />
+     </task>
+-    <option name="localTasksCounter" value="4" />
++    <task id="LOCAL-00004" summary="dafuq">
++      <option name="closed" value="true" />
++      <created>1693246789774</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1693246789774</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -258,7 +299,8 @@
+     <MESSAGE value="setting up test with groovy." />
+     <MESSAGE value="fckng lineendings" />
+     <MESSAGE value="fckng lineendings 2" />
+-    <option name="LAST_COMMIT_MESSAGE" value="fckng lineendings 2" />
++    <MESSAGE value="dafuq" />
++    <option name="LAST_COMMIT_MESSAGE" value="dafuq" />
+   </component>
+   <component name="XDebuggerManager">
+     <pin-to-top-manager>

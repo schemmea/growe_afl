@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 ID-FROM ID-TO" 2>/dev/null
+  exit 1
+fi
+
+id1=$1
+id2=$2
+#time=$((10*60))
+time=$((3))
+
+timeouts=$((time + 3))
+#timeouts=$((time + 30))
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+for id in $(seq $id1 $id2); do
+
+  echo "repro-afl-$id timeout ${timeouts}s"
+  screen -S "repro-afl-$id" -dm -t "repro-afl-$id"
+  screen -S "repro-afl-$id" -p "repro-afl-$id" -X stuff "timeout ${timeouts}s $SCRIPT_DIR/run_repro nextflow-afl-$id -b ^M"
+
+  sleep $timeouts
+
+done
+

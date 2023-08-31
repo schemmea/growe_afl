@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-parentdir="$(dirname "$(pwd)")"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-DRIVER_PATH="$parentdir/JQF/scripts/jqf-driver.sh"
-JAR_PATH="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar"
+parentdir="$(dirname "$SCRIPT_DIR")"
+sourcedir="$(dirname "$parentdir")"
+
+
+DRIVER_PATH="$sourcedir/JQF/scripts/jqf-driver.sh"
+JAR_PATH="$parentdir/build/libs/growe_afl-1.0-SNAPSHOT-all.jar"
 
 
 function log() {
@@ -20,11 +24,18 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-corpus="$(pwd)/$1/fuzz-results/queue"
-errordir="$(pwd)/$1/fuzz-results"
+if [[ "${dir:0:1}" == / || "${dir:0:2}" == ~[/a-z] ]]
+then
+  path=$1
+else
+  path="$(pwd)/$1"
+fi
+
+corpus="$path/fuzz-results/queue"
+errordir="$path/fuzz-results"
 echo $errordir
 
-reprodir="$(pwd)/$1/repro"
+reprodir="$path/repro"
 mkdir $reprodir
 echo $reprodir
 cd $reprodir

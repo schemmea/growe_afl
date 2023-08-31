@@ -1,20 +1,30 @@
 #!/usr/bin/env bash
 
-parentdir="$(dirname "$(pwd)")"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+parentdir="$(dirname "$SCRIPT_DIR")"
+sourcedir="$(dirname "$parentdir")"
 
-DRIVER_PATH="$parentdir/JQF/bin/jqf-afl-fuzz"
+DRIVER_PATH="$sourcedir/JQF/bin/jqf-afl-fuzz"
 
 #/usr/bin/env bash -c "$parentdir/JQF/setup.sh"
 
-EXEC_DIR="$(date +"%Y-%m-%d_%H-%M-%S")-afl"
+print_usage() {
+  echo "Usage: $0 ITERATION got $@"
+}
 
+# Check arguments
+if [ $# -lt 1 ]; then
+  print_usage >&1
+  exit 1
+fi
 
-classpath="$(pwd)/build/libs/growe_afl-1.0-SNAPSHOT-all.jar:$(pwd)/build/classes/groovy/main"
-jqf_classpath="$($parentdir/JQF/scripts/examples_classpath.sh)"
+EXEC_DIR="nextflow-afl-$1"
 
-seeds="$(pwd)/build/resources/main/seeds/"
-dict="$(pwd)/build/resource/main/dictionaries/nextflow.dict"
+classpath="$parentdir/build/libs/growe_afl-1.0-SNAPSHOT-all.jar:$(pwd)/build/classes/groovy/main"
+
+seeds="$parentdir/build/resources/main/seeds/"
+dict="$parentdir/build/resource/main/dictionaries/nextflow.dict"
 
 mkdir -p "$EXEC_DIR" || return 1
 cd "$EXEC_DIR" || return 1
@@ -24,7 +34,7 @@ timeouts=$((60*60 + 30))
 
 /usr/bin/env bash -c "timeout ${timeouts}s $DRIVER_PATH -v -m $memlimit -c $classpath de.schemmea.ma.NfAFLTest testAFL -i $seeds -x $dict"
 
-#remove nextflow generated shit
-#rm -r work/
-#rm -r .nextflow/
-#rm .nextflow.log*
+remove nextflow generated shit
+rm -r work/
+rm -r .nextflow/
+rm .nextflow.log*
