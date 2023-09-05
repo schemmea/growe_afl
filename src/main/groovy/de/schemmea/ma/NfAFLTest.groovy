@@ -47,7 +47,7 @@ public class NfAFLTest {
             serializeInputStream(inputStream, filename);
 
             List<String> args2 = List.of(filename);
-            String[] orig_args2 = new String[]{"run", filename, "-cache", "false"};
+            String[] orig_args2 = new String[]{"run", filename, "-cache", "false", "-ps" , "1"};
 
             int launched = launcher.command(orig_args2).run();
 
