@@ -3,7 +3,9 @@ package de.schemmea.ma
 import com.pholser.junit.quickcheck.From;
 import edu.berkeley.cs.jqf.fuzz.Fuzz;
 import edu.berkeley.cs.jqf.fuzz.JQF
-import edu.berkeley.cs.jqf.fuzz.junit.quickcheck.InputStreamGenerator;
+import edu.berkeley.cs.jqf.fuzz.junit.quickcheck.InputStreamGenerator
+import nextflow.Global
+import nextflow.Session;
 import nextflow.cli.CmdRun;
 import nextflow.cli.Launcher;
 import nextflow.plugin.Plugins
@@ -46,18 +48,17 @@ public class NfAFLTest {
         try {
             serializeInputStream(inputStream, filename);
 
-            List<String> args2 = List.of(filename);
-            String[] orig_args2 = new String[]{"run", filename, "-cache", "false", "-ps" , "1"};
+            String[] args = new String[]{"run", filename, "-cache", "false", "-ps" , "1"};
 
-            int launched = launcher.command(orig_args2).run();
+           launcher = launcher.command(args) //.run();
 
-            Assume.assumeTrue(launched == 0);
+            //Assume.assumeTrue(launched == 0);
 
-            //  CmdRun myRunner = new CmdRun();
-            //  myRunner.setArgs(args2);
-            //  myRunner.setLauncher(launcher);
-//
-            //  myRunner.run();
+            CmdRun myRunner = new CmdRun();
+            myRunner.setArgs(args.tail().toList());
+            myRunner.setLauncher(launcher);
+
+             myRunner.run();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (Throwable t) {
@@ -67,9 +68,13 @@ public class NfAFLTest {
             //instead of @After
             Plugins.stop();
             Files.delete(Paths.get(filename));
-            //nextflow clean -f does not work?!
-            int status = launcher.command(new String[]{"clean", "-f"}).run();
-            //System.gc();
+
+            def sess = (Session) Global.getSession()
+            if (sess != null) {
+                sess.cleanup()
+                sess.destroy()
+            }
+            nextflow.Global.cleanUp()
         }
     }
 
@@ -111,7 +116,6 @@ public class NfAFLTest {
     }
 
 
-    @After
     public void cleanUp() {
         Plugins.stop();
 
