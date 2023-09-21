@@ -50,10 +50,7 @@ public class NfAFLTest {
 
             String[] args = new String[]{"run", filename, "-cache", "false", "-ps" , "1"};
 
-           launcher = launcher.command(args) //.run();
-
-            //Assume.assumeTrue(launched == 0);
-
+           launcher = launcher.command(args)
             CmdRun myRunner = new CmdRun();
             myRunner.setArgs(args.tail().toList());
             myRunner.setLauncher(launcher);
@@ -61,8 +58,8 @@ public class NfAFLTest {
              myRunner.run();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } catch (Throwable t) {
-            Assume.assumeNoException(t);
+        } catch (Exception e) {
+            Assume.assumeNoException(e);
         } finally {
 
             //instead of @After
@@ -116,8 +113,4 @@ public class NfAFLTest {
     }
 
 
-    public void cleanUp() {
-        Plugins.stop();
-
-    }
 }
