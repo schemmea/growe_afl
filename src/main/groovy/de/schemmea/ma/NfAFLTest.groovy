@@ -50,12 +50,8 @@ public class NfAFLTest {
 
             String[] args = new String[]{"run", filename, "-cache", "false", "-ps" , "1"};
 
-           launcher = launcher.command(args)
-            CmdRun myRunner = new CmdRun();
-            myRunner.setArgs(args.tail().toList());
-            myRunner.setLauncher(launcher);
-
-             myRunner.run();
+           int status = launcher.command(args).run();
+            Assume.assumeTrue(status == 0)
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (Exception e) {
