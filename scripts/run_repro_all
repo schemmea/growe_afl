@@ -7,11 +7,9 @@ fi
 
 id1=$1
 id2=$2
-#time=$((10*60))
-time=$((3))
+time=$((10*60))
 
 timeouts=$((time + 3))
-#timeouts=$((time + 30))
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
